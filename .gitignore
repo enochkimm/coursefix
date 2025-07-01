@@ -1,0 +1,21 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / Cache
+.cache/
+dist/
+
+# Scraped / generated files
+src/data/courseScraper/mergedCourses.json
