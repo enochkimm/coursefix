@@ -3,11 +3,25 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import path from 'path';
 
-// CHANGE THIS TO ANY BULLETIN URL YOU WANT
-const BULLETIN_URL = 'https://bulletins.nyu.edu/courses/ds_ua/';
+const urlsPath = path.join('./src/data/courseScraper', 'bulletin_links.json');
+const outputPath = path.join('./src/data/courseScraper', 'allCourses.json');
 
-async function scrapeBulletin() {
-  const { data } = await axios.get(BULLETIN_URL);
+// Load and convert grouped { school: [urls] } into flat array
+const rawLinks = JSON.parse(fs.readFileSync(urlsPath, 'utf-8'));
+const flatLinks = [];
+
+for (const [school, urls] of Object.entries(rawLinks)) {
+  for (const url of urls) {
+    flatLinks.push({ school, url });
+  }
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function scrapeCoursesFromURL(url) {
+  const { data } = await axios.get(url);
   const $ = cheerio.load(data);
   const courses = [];
 
@@ -20,11 +34,11 @@ async function scrapeBulletin() {
     const prereqs = [];
     const prereqLinks = $(el).find('.detail-prerequisites a');
     prereqLinks.each((_, elem) => {
-      let title = $(elem).attr('title');
+      const title = $(elem).attr('title');
       if (title) {
-        title = title.replace(/\xa0/g, ' ').trim();
-        if (/^[A-Z]{2,}-[A-Z]{2,} \d{3,4}$/.test(title)) {
-          prereqs.push(title);
+        const clean = title.replace(/\xa0/g, ' ').trim();
+        if (/^[A-Z]{2,}-[A-Z]{2,} \d{3,4}$/.test(clean)) {
+          prereqs.push(clean);
         }
       }
     });
@@ -38,12 +52,23 @@ async function scrapeBulletin() {
 }
 
 async function run() {
-  const courses = await scrapeBulletin();
+  const allCourses = [];
 
-  const outputPath = path.join('./src/data/courseScraper', 'courselist.json');
-  fs.writeFileSync(outputPath, JSON.stringify(courses, null, 2));
+  for (const { school, url } of flatLinks) {
+    console.log(`🔍 Scraping ${school}: ${url}`);
+    try {
+      const deptCourses = await scrapeCoursesFromURL(url);
+      allCourses.push(...deptCourses);
+      console.log(`✅ ${url.split('/').at(-2)}: ${deptCourses.length} courses`);
+    } catch (err) {
+      console.warn(`❌ Failed to scrape ${url}: ${err.message}`);
+    }
 
-  console.log(`✅ Scraped ${courses.length} courses from NYU Bulletin.`);
+    await delay(1000); // polite delay between departments
+  }
+
+  fs.writeFileSync(outputPath, JSON.stringify(allCourses, null, 2));
+  console.log(`🎉 Saved ${allCourses.length} total courses to allCourses.json`);
 }
 
 run();
