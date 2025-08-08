@@ -2513,13 +2513,13 @@
   {
     "code": "CLASS-UA 2",
     "name": "Intensive Elementary Latin",
-    "desc": "Open to students with no previous training in Latin and to others through assignment by placement test. Given every other year. Spring term only. 6 points. Completes the equivalent of a year?s elementary level in one semester.",
+    "desc": "Open to students with no previous training in Latin and to others through assignment by placement test. Given every other year. Spring term only. 6 points. Completes the equivalent of a year's elementary level in one semester.",
     "prereqs": []
   },
   {
     "code": "CLASS-UA 3",
     "name": "Elementary Latin I",
-    "desc": "Introduction to the essentials oIntroduction to the essentials of Latin, the language of Vergil, Caesar, and Seneca. Five hours of instruction weekly, with both oral and written drills and an emphasis on the ability to read Latin rather than merely translate it.",
+    "desc": "Introduction to the essentials of Latin, the language of Vergil, Caesar, and Seneca. Five hours of instruction weekly, with both oral and written drills and an emphasis on the ability to read Latin rather than merely translate it.",
     "prereqs": []
   },
   {
@@ -2591,7 +2591,7 @@
   {
     "code": "CLASS-UA 203",
     "name": "The Novel in Antiquity",
-    "desc": "Survey of Greek and Roman narrative fiction in antiquity, its origins and development as a literary genre, and its influence on the tradition of the novel in Western literature. Readings include Chariton?s Chaereas and Callirrhoe, Longus?s Daphnis and Chloe, Heliodorus?s Ethiopian Tale, Lucian?s True History, Petronius?s Satyricon, and Apuleius?s Golden Ass. Concludes with the Gesta Romanorum and the influence of this tradition on later prose, such as Elizabethan prose romance.",
+    "desc": "Survey of Greek and Roman narrative fiction in antiquity, its origins and development as a literary genre, and its influence on the tradition of the novel in Western literature. Readings include Chariton's Chaereas and Callirrhoe, Longus's Daphnis and Chloe, Heliodorus's Ethiopian Tale, Lucian's True History, Petronius's Satyricon, and Apuleius's Golden Ass. Concludes with the Gesta Romanorum and the influence of this tradition on later prose, such as Elizabethan prose romance.",
     "prereqs": []
   },
   {
@@ -2621,13 +2621,13 @@
   {
     "code": "CLASS-UA 243",
     "name": "The Greek World: Alexander to Augustus",
-    "desc": "Continuation of the history of ancient Greece from the age of Alexander the Great in the fourth century B.C. until Emperor Augustus consolidated the Roman hold over the eastern Mediterranean in the first century B.C. These three centuries saw the relationship between Rome and the Near East become most meaningful. Examines Alexander?s conquests, the states established by his successors (Ptolemies of Egypt and Seleucids of Syria), and the increasing intervention of Rome.",
+    "desc": "Continuation of the history of ancient Greece from the age of Alexander the Great in the fourth century B.C. until Emperor Augustus consolidated the Roman hold over the eastern Mediterranean in the first century B.C. These three centuries saw the relationship between Rome and the Near East become most meaningful. Examines Alexander's conquests, the states established by his successors (Ptolemies of Egypt and Seleucids of Syria), and the increasing intervention of Rome.",
     "prereqs": []
   },
   {
     "code": "CLASS-UA 267",
     "name": "History of Rome: The Republic",
-    "desc": "Identical to HIST-UA 205. In the sixth century B.C., Rome was an obscure village. By the end of the third century B.C., Rome was master of Italy, and within another 150 years, it dominated almost all of the Mediterranean world. Then followed a century of civil war involving some of the most famous events and men? Caesar, Pompey, and Cato in Western history. The course surveys this vital period with a modern research interpretation.",
+    "desc": "Identical to HIST-UA 205. In the sixth century B.C., Rome was an obscure village. By the end of the third century B.C., Rome was master of Italy, and within another 150 years, it dominated almost all of the Mediterranean world. Then followed a century of civil war involving some of the most famous events and men, Caesar, Pompey, and Cato, in Western history. The course surveys this vital period with a modern research interpretation.",
     "prereqs": []
   },
   {
@@ -2663,7 +2663,7 @@
   {
     "code": "CLASS-UA 296",
     "name": "Topics:",
-    "desc": "\"Topics and prerequisites vary by semester. For additional information see the departmental website: http://classics.as.nyu.edu/page/home.html\"",
+    "desc": "Topics vary by semester. For additional information see the departmental website: http://classics.as.nyu.edu/page/home.html\"",
     "prereqs": []
   },
   {
@@ -4310,7 +4310,12 @@
     "code": "CSCI-UA 474",
     "name": "Software Engineering",
     "desc": "An intense hands-on study of practical techniques and methods of software engineering. Topics include advanced object-oriented design, design patterns, refactoring, code optimization, universal modeling language, threading, user interface design, enterprise application development, and development tools. All topics are integrated and applied during the semester-long group project. The aim of the project is to prepare students for dynamics in a real workplace. Members of the group meet on a regular basis to discuss the project and to assign individual tasks. Students are judged primarily on the final project presentations.",
-    "prereqs": []
+    "prereqs": [
+      "CSCI-UA 201",
+      "CS-UH 2010",
+      "ENGR-UH 3511",
+      "CENG-SHU 202"
+    ]
   },
   {
     "code": "CSCI-UA 475",
@@ -4442,13 +4447,20 @@
     "code": "CSCI-UA 9102",
     "name": "Data Structures",
     "desc": "The use and design of data structures, which organize information in computer memory. Stacks, queues, linked lists, binary trees: how to implement them in a high level language, how to analyze their effect on algorithm efficiency, and how to modify them. Programming assignments.",
-    "prereqs": []
+    "prereqs": [
+      "CSCI-UA 101"
+    ]
   },
   {
     "code": "CSCI-UA 9201",
     "name": "Computer Systems Org",
     "desc": "This course covers the internal structure of computers, machine (assembly) language programming, and the use of pointers in high-level languages. Topics include the logical design of computers, computer architecture, the internal representation of data, instruction sets, and addressing logic, as well as pointers, structures, and other features of high-level languages that relate to assembly language. Programming assignments will be both in assembly language and other languages.",
-    "prereqs": []
+    "prereqs": [
+      "CSCI-UA 102",
+      "CSCI-SHU 210",
+      "CS-UH 1050",
+      "CS-UY 1134"
+    ]
   },
   {
     "code": "CSCI-UA 9467",
@@ -6949,7 +6961,9 @@
     "code": "ENVST-UA 485",
     "name": "Environmental Activism:",
     "desc": "This course examines how activists try to change the world. We examine popular movements, social movements, NGOs and networks to understand why they choose the issues they do, how they seek to effect change, and whether and why they are successful at doing so. The inquiry is grounded in several approaches to activism: international relations theories of non-state actors, sociological study of social movements, and various more radical approaches. We begin with a survey of these theoretical approaches, so that students can be conversant in the basic theory and vocabulary of activism. We then examine the growing role of activism in local and global politics amidst the broader trend of globalization. The course will examine four “big questions” with respect to environmental activism: 1) When do activists mobilize? 2) What tactics do they use? 3) What explains success and failure in advocacy? 4) What are the broader political implications of a global class of elite advocates?",
-    "prereqs": []
+    "prereqs": [
+      "ENVST-UA 101"
+    ]
   },
   {
     "code": "ENVST-UA 490",
@@ -12710,7 +12724,7 @@
   {
     "code": "LING-UA 102",
     "name": "Research Seminar",
-    "desc": "All technology involves language in some way. Whether it’s for processing human language or a coding language developed to write functions that a computer can process. Whether it’s language output from a Generative AI model or the labels assigned to the data to train image recognition software. It all involves language. And with each step comes the social biases that get passed on through language, biases about languages or language varieties, and even the biases embedded in the language we use. In this course, we will develop a way of critically engaging with technology and bias. How is technology talked about? Who influences that? Whose language does technology work better or worse for? What impacts does that have? How is technology developed? And how might different social and language systems in that development lead to different impacts?",
+    "desc": "This course is required for all students writing a Senior Honors Thesis in the Department in the 2025–2026 academic year. The course has three primary objectives: (a) provide a forum where students engage in intellectual discussion about the process of conducting independent research; (b) provide guidance and structure to students in the process of conducting their independent research projects; and (c) work with students on writing and submitting a DURF Grant Proposal for their thesis project. All honors students must have a research mentor and approved research project prior to registering for the course. This course does not replace the guidance provided by a student's primary research mentor.",
     "prereqs": []
   },
   {
@@ -15008,7 +15022,9 @@
     "code": "PHYS-UA 131",
     "name": "Electricity & Magnet I",
     "desc": "Introduction to Maxwell's equations with applications to physical problems. Topics include electrostatics, magnetostatics, the solution of the Laplace and Poisson equations, dielectrics and magnetic materials, electromagnetic waves and radiation, Fresnel equations, transmission lines, wave guides, and special relativity.",
-    "prereqs": []
+    "prereqs": [
+      "PHYS-UA 106"
+    ]
   },
   {
     "code": "PHYS-UA 132",
@@ -15031,7 +15047,9 @@
     "code": "PHYS-UA 136",
     "name": "Readings in Particle Physics",
     "desc": "Prerequisite: PHYS-UA 105 Classical and Quantum Waves. Particle physics is the study of the very fundamental constituents of matter and of the forces between them. By its nature it is microscopic, but it also connects with astrophysics and cosmology on the largest scales. This course introduces the most important advances in elementary particle physics. It centers on journal articles in which these advances were first published, with overview lectures, original reading, discussion, and student presentations. Topics include the discovery of elementary particles in cosmic rays, antimatter, symmetries found in nature, and the invention of the Quark model of elementary particles and its experimental verification.",
-    "prereqs": []
+    "prereqs": [
+      "PHYS-UA 106"
+    ]
   },
   {
     "code": "PHYS-UA 138",
@@ -15045,7 +15063,9 @@
     "code": "PHYS-UA 140",
     "name": "Thermal & Statistical Physics",
     "desc": "Topics include relation of entropy to probability and energy to temperature; the laws of thermodynamics; Maxwell-Boltzmann, Bose-Einstein, and Fermi-Dirac statistics; equations of state for simple gases and chemical and magnetic systems; and elementary theory of phase transitions.",
-    "prereqs": []
+    "prereqs": [
+      "PHYS-UA 106"
+    ]
   },
   {
     "code": "PHYS-UA 150",
@@ -15283,11 +15303,8 @@
   {
     "code": "POL-UA 382",
     "name": "Politics of Poverty & Welfare",
-    "desc": "Prerequisite: POL-UA 300. Offered in the spring. 4 points. Poverty and welfare problems in the United States and the controversies aroused by them. Concentrates on the causes of poverty and dependency among the controversial working-age poor, the history of programs and policies meant to help them, and the enormous impact these issues have had on national politics.",
-    "prereqs": [
-      "POL-UA 300",
-      "POLSC-UH 2412"
-    ]
+    "desc": "Poverty and welfare problems in the United States and the controversies aroused by them. Concentrates on the causes of poverty and dependency among the controversial working-age poor, the history of programs and policies meant to help them, and the enormous impact these issues have had on national politics.",
+    "prereqs": []
   },
   {
     "code": "POL-UA 395",
@@ -15422,7 +15439,9 @@
     "code": "POL-UA 741",
     "name": "War, Peace, and World Order",
     "desc": "Characteristics and conditions of war and peace and the transition from one to the other from the perspective of political and social science. Examines the role and use of coercion in global affairs, with emphasis on attempts to substitute negotiation, bargaining, market forces, politics, and law for the resort to massive violence in moderating disputes.",
-    "prereqs": []
+    "prereqs": [
+      "POL-UA 700"
+    ]
   },
   {
     "code": "POL-UA 742",
@@ -15443,7 +15462,9 @@
     "code": "POL-UA 770",
     "name": "International Relations of Asia",
     "desc": "Identical to V33.0770. Prerequisite: V53.0700. Offered every other year. 4 points. The relations of and between the principal Asian national actors (e.g., China, Japan, India) and the relationship of the Asian \"subsystem\" to the international system. Covers the traditional Asian concepts of transnational order, the impact of external interventions, the modern ideological conflict and technological revolution, the emergent multilateral balance beyond Vietnam, the changing patterns of relations in the Asian subsystem traced to the international evolution from bipolarity to multicentrism, and the U.S. role in Asia.",
-    "prereqs": []
+    "prereqs": [
+      "POL-UA 700"
+    ]
   },
   {
     "code": "POL-UA 775",
@@ -18363,12 +18384,6 @@
     "prereqs": []
   },
   {
-    "code": "BMS-UY 3514",
-    "name": "Advanced Physiology",
-    "desc": "Mechanism involved in functional processes of cells and multicellular organisms, including integration and control aspects. Membrane function, transport, excitation, conduction, contraction, luminescence. Lab fee required. | Prerequisite(s): BMS-UY 2004 or an approved equivalent, and CM-UY 1004 or CM-UY 1024. Corequisite(s): PH-UY 2023 .",
-    "prereqs": []
-  },
-  {
     "code": "BMS-UY 3611",
     "name": "Advanced Molecular Biology Laboratory",
     "desc": "This laboratory accompanies the lecture course BMS-UY 3613 Advanced Molecular Biology. It is required for BMS majors. | Prerequisites: BMS-UY 1003 and BMS-UY 1001; Co-requisites: BMS-UY 3613",
@@ -18496,18 +18511,6 @@
     ]
   },
   {
-    "code": "CAM-UY LV2XF",
-    "name": "CAM Level 2 Transfer",
-    "desc": "CAM Level 2 Transfer",
-    "prereqs": []
-  },
-  {
-    "code": "CAM-UY LV3XF",
-    "name": "CAM level 3 Transfer",
-    "desc": "CAM level 3 Transfer",
-    "prereqs": []
-  },
-  {
     "code": "CAM-UY 2012",
     "name": "Technology and Social Media: Identity and Development in Children and Young Adults",
     "desc": "Students will learn how technology impacts the development and changed the experiences of children and young adults. Students will respond critically and explore the relationship between children, young adults, and the environment they navigate and explore the relationship between social media and development in relation to advancing technology. Additionally, students will explore ethical theory in relation to society and innovation. Through readings, discussions and presentations, students will develop analyzed solutions for problems experienced via interactions with technology and social media. In this online learning collaborative course, students will create evidence - based solutions to solving society’s predicament with the evolution of social media.",
@@ -18521,7 +18524,7 @@
   },
   {
     "code": "CAM-UY 2014W",
-    "name": "Stem & Theater",
+    "name": "STEM & Theater",
     "desc": "This course investigates Science, Technology, Engineering, and Mathematics (STEM) as they are portrayed in the theater. Concepts such as scientific creativity and discovery; the relations among science, technology, religion, and the state; the social and ethical interactions between individual scientists and engineers that constitute the practices of science and engineering; and the role of mathematics as the language of science and engineering, will be considered from the points of view of various playwrights. STEM is a springboard to discuss moral or political issues and biographical concerns. | Prerequisite(s): Completion of first year writing requirements. Note: Satisfies an HuSS General Education requirement for Poly majors",
     "prereqs": []
   },
@@ -19220,7 +19223,10 @@
     "code": "CM-UY 2213",
     "name": "Organic Chemistry I",
     "desc": "This course covers chemistry of organic molecules: structure, nomenclature, properties and reactions of carbon compounds with emphasis on aliphatic compounds. It also introduces reaction mechanisms and stereochemistry. | Prerequisite: CM-UY 1003 or CM-UY 1023. Co-Requisite: EX-UY 1",
-    "prereqs": []
+    "prereqs": [
+      "CM-UY 1003",
+      "CM-UY 1023"
+    ]
   },
   {
     "code": "CM-UY 2221",
@@ -19419,7 +19425,9 @@
     "code": "CS-UY 1134G",
     "name": "Data Structures and Algorithms",
     "desc": "This course covers abstract data types and the implementation and use of standard data structures along with fundamental algorithms and the basics of algorithm analysis. Not open to students who have taken CS-UY 2134. | Prerequisite for Brooklyn Students: CS-UY 1114 or CS-UY 1121 (C- or better) | Prerequisite for Abu Dhabi Students: CS-UH 1001 or ENGR-UH 1000 | Prerequisite for Shanghai Students: CSCI-SHU 101 | Corequisite for all Students: EX-UY 1",
-    "prereqs": []
+    "prereqs": [
+      "CS-UY 1114"
+    ]
   },
   {
     "code": "CS-UY 2124",
@@ -19486,7 +19494,11 @@
     "code": "CS-UY 3224G",
     "name": "Intro to Operating Systm",
     "desc": "This course studies the fundamental concepts and principles of operating systems. Batch, spooling and multiprogramming systems are introduced. The parts of an operating system are described in terms of their functions, structure and implementation. Basic policies for allocating resources are discussed. | Prerequisites for Brooklyn Students: CS-UY 2214 AND (CS-UY 2134 or CS-UY 1134) AND (CS-UY 2124 or CS-UY 1124) (C- or better). | Prerequisite for Abu Dhabi Students: (ENGR-UH 3510 or CS-UH 1050) (C- or better) AND (CS-UH 2010 or ENGR-UH 3511) | Prerequisites for Shanghai Students: CSCI-SHU 210 (C- or better) AND CENG-SHU 202",
-    "prereqs": []
+    "prereqs": [
+      "CS-UY 2214",
+      "CS-UY 1134",
+      "CS-UY 2124"
+    ]
   },
   {
     "code": "CS-UY 3233",
@@ -19634,7 +19646,10 @@
     "code": "CS-UY 4793G",
     "name": "Computer Networking",
     "desc": "This course takes a top-down approach to computer networking. After an overview of computer networks and the Internet, the course covers the application layer, transport layer, network layer and link layers. Topics at the application layer include client-server architectures, P2P architectures, DNS and HTTP and Web applications. Topics at the transport layer include multiplexing, connectionless transport and UDP, principles or reliable data transfer, connection-oriented transport and TCP and TCP congestion control. Topics at the network layer include forwarding, router architecture, the IP protocol and routing protocols including OSPF and BGP. Topics at the link layer include multiple-access protocols, ALOHA, CSMA/CD, Ethernet, CSMA/CA, wireless 802.11 networks and link-layer switches. The course includes simple quantitative delay and throughput modeling, socket programming and network application development and Ethereal labs. | Prerequisite for Brooklyn Students: (CS-UY 2134 or CS-UY 1134) and (CS-UY 2124 or CS-UY 1124) (C- or better) | Prerequisite for Abu Dhabi Students: ENGR-UH 3510 or CS-UH 1050 (C- or better) | Prerequisite for Shanghai Students: CSCI-SHU 210 (C- or better)",
-    "prereqs": []
+    "prereqs": [
+      "CS-UY 1134",
+      "CS-UY 2124"
+    ]
   },
   {
     "code": "DM-UY 492X",
@@ -19780,6 +19795,7 @@
     "name": "Media in Game Design and Development",
     "desc": "This class continues from DM-UY 2153, moving into advanced technological implementations of 2D games. Taking designs from DM-UY 2153 and working in teams, students create a complete game. Students, based on abilities and individual goals, are assigned individually to work in production areas ranging from sprite creation, mapping and level design to engine coding and interaction scripting. Students are responsible for completing their assignments as if they were members of a professional game-development team. | Prerequisite: DM-UY 2153",
     "prereqs": [
+      "DM-UY 2153",
       "INTM-SHU 247"
     ]
   },
@@ -19787,7 +19803,10 @@
     "code": "DM-UY 3183",
     "name": "Photography and Words",
     "desc": "This course explores various image editing techniques and outputs, utilizing various styles of text, including fiction and non-fiction. The assignments foreground how text influences viewers’ perception of images, and how images can enrich a body of writing. Students will use a range of production skills to create work — using After Effects for animation, HTML/CSS for website creation, book and print design, and archival printing methods. All projects are accompanied by readings that provide historical and theoretical grounding to support the concepts explored through practice. An emphasis on refining technical and aesthetic photography skills are central throughout the semester. Prerequisites: DM-UY 2183 or DM-UY 2263",
-    "prereqs": []
+    "prereqs": [
+      "DM-UY 2183",
+      "DM-UY 2263"
+    ]
   },
   {
     "code": "DM-UY 3193",
@@ -19833,7 +19852,9 @@
     "code": "DM-UY 4133",
     "name": "3D for Interactive Applications",
     "desc": "In this course students will build form the skills they learned in 3D Modeling and 3D Animation to produce 3D for Interactive Applications. Projects may be geared to scientific, engineering or entertainment applications according to individual skills and professional aspirations. | Prerequisites: DM-UY 2133",
-    "prereqs": []
+    "prereqs": [
+      "DM-UY 2133"
+    ]
   },
   {
     "code": "DM-UY 4153",
@@ -20023,7 +20044,9 @@
     "code": "ECE-UY 4123",
     "name": "Senior Design in Electrical Power & Energy: Intro to Electric Power Systems",
     "desc": "The first course, EE DP1, is one of a number of specialty lab/project courses offered by the department in various subdisciplines such as electronics, machinery, robotics, imaging, communications, etc. (ECE-UY 4113-4183, below). DP1 provides significant background laboratory experience in the student’s area of concentration. Students begin independent projects by finding an adviser and initiating the project work, and exercising oral presentation and written communication skills. The course focuses on basic concepts in electric power systems. Topics include: three-phase circuits; component modeling (generators, transmission lines, transformers, etc.); per-unit system; symmetrical components; power flow; short circuit; transient stability; introduction to advanced topics: contingency analysis, optimum power flow, electromagnetic transients, geomagnetically induced currents, and harmonics. The course is complemented by laboratory experiments on synchronous and induction (wind) generators. ABET competencies: a, b, c, e, f, g, k. | Prerequisite: ECE-UY 3824",
-    "prereqs": []
+    "prereqs": [
+      "ECE-UY 3824"
+    ]
   },
   {
     "code": "ECE-UY 4133",
@@ -20241,7 +20264,7 @@
   },
   {
     "code": "EN-UY 3434W",
-    "name": "Machines made of Words II: Designing Poetry",
+    "name": "Machines Made of Words II: Designing Poetry",
     "desc": "In this seminar/workshop, students read a wide range of poetic forms or structures and practice making poems, focusing on the reading and composition of poems as forms of design. | Prerequisites: Completion of first year writing requirements.",
     "prereqs": []
   },
@@ -20313,12 +20336,6 @@
     ]
   },
   {
-    "code": "FL-UY 100X",
-    "name": "FOREIGN LANGUAGE TRANSFER",
-    "desc": "FOREIGN LANGUAGE TRANSFER",
-    "prereqs": []
-  },
-  {
     "code": "HI-UY 2514",
     "name": "Introduction to New York City History",
     "desc": "This course looks at New York City's development, and its relationship to the global history of capitalism from the Florentine navigator Giovanni da Verrazzano’s exploration in 1524 to the present. Major themes include the evolution of the city’s political economy, political and economic influences on land and space use, the evolution of urban technology, and ethnic and class conflict in the urban environment. | Prerequisites: Completion of first year writing requirements. Co-requisites: None. Notes: Satisfies a HuSS elective.",
@@ -20384,7 +20401,9 @@
     "code": "MA-UY 1124",
     "name": "Calculus II for Engineers",
     "desc": "This course covers techniques of integration, introduction to ordinary differential equations, improper integrals, numerical methods of integration, applications of integration, sequences, series, power series, approximations of functions via Taylor polynomials, Taylor series, functions of two variables, graphs of functions of two variables, contour diagrams, linear functions, functions of three variables. | Prerequisites: MA-UY 1024 or MA-UY 1324 | Corequisite: EX-UY 1.",
-    "prereqs": []
+    "prereqs": [
+      "MA-UY 1024"
+    ]
   },
   {
     "code": "MA-UY 1414",
@@ -20607,7 +20626,16 @@
     "code": "MA-UY 4204G",
     "name": "Ordinary Diff Equations",
     "desc": "A first course in ordinary differential equations, including analytical solution methods, elementary numerical methods, and modeling. Topics to be covered include: first-order equations including integrating factors; second-order equations including variation of parameters; series solutions; elementary numerical methods including Euler's methods, Runge-Kutta methods, and error analysis; Laplace transforms; systems of linear equations; boundary-value problems. Restricted to Tandon math majors and students with a permission code from the math department. Fulfills ordinary differential equations requirement for the BS Math degree. | Prerequisites: C or better in (MA-UY 2114 or MA-UY 2514 or MATH-UH 1020 or MATH-UH 1021 or MATH-SHU 151) and (MA-UY 1044 or MA-UY 3054 or MA-UY 3113 or MATH-UH 1022 or MATH-SHU 140 or MATH-SHU 141). Note: Not open to students who have taken or will take MA-UY 2034 or MA-UY 4254",
-    "prereqs": []
+    "prereqs": [
+      "MA-UY 2114",
+      "MA-UY 2514",
+      "MATH-SHU 151",
+      "MA-UY 1044",
+      "MA-UY 3054",
+      "MA-UY 3113",
+      "MATH-SHU 140",
+      "MATH-SHU 141"
+    ]
   },
   {
     "code": "MA-UY 4254",
@@ -20805,7 +20833,9 @@
     "code": "MD-UY 2314G",
     "name": "Interactive Narrative",
     "desc": "This course introduces students to the complex relationship between interactivity and storytelling. Students analyze how an interactive structure creates narrative. Works explored in this course range from nonlinear novels, experimental literature, audio narratives, theater/performance to film as narrative databases and games. The study of the structural properties of narratives that experiment with digression, multiple points of view, disruptions of time, space, and storyline is complemented by theoretical texts about authorship/readership, plot/story, and characteristics of interactive media. | Prerequisite: EXPOS-UA 2, EXPOS-UA 9, EXPOS-UA 22, ASPP-UT 2 or WRCI-UF 102. Note: Satisfies HuSS elective.",
-    "prereqs": []
+    "prereqs": [
+      "WRCI-UF 102"
+    ]
   },
   {
     "code": "ME-UY 498X",
@@ -21127,6 +21157,12 @@
     "prereqs": []
   },
   {
+    "code": "MG-UY 2004",
+    "name": "Management of Information Technology and Systems",
+    "desc": "This course provides a foundation to understand the role and potential contributions of information technologies and systems in business organizations–what they are, how they affect the organization and its employees, and how they can make businesses more competitive and efficient. The course focuses on the current state of IT in organizations; challenges and strategic use of IT; IT infrastructure and architecture; building, implementing and managing IT applications; and emerging issues such as intelligent systems, business-process reengineering, knowledge management and group-support systems.",
+    "prereqs": []
+  },
+  {
     "code": "MG-UY 2014",
     "name": "Operations Management",
     "desc": "A firm has the opportunity to create competitive advantage through proficient operations management. To do so, the firm first must recognize and establish the strategic role of its operations within the organization. Then, at the more detailed operational level, the firm must execute effectively and efficiently. This course examines the strategic role that the operations function can play and offers specific tools and techniques that a firm can use during implementation. | Prerequisite: (MA-UY 1024 or MA-UY 1054 or MA-UY 1324) and MA-UY 2224 or an approved equivalent.",
@@ -21405,7 +21441,10 @@
     "code": "PH-UY 2033G",
     "name": "Waves, Optics, & Thermodynamics",
     "desc": "This is the third course of a three-semester lecture sequence in general physics for science and engineering students. Water, sound and electromagnetic waves. Reflection, scattering and absorption. Standing waves and spectra. Superposition, diffraction and beats. Geometrical optics. Introduction to thermodynamics; temperature, heat, and entropy. (This class meets four hours per week for lectures and recitation.) | Prerequisites: PH-UY 2121 and PH-UY 2023. Co-requisites: EX-UY 1.",
-    "prereqs": []
+    "prereqs": [
+      "PH-UY 2121",
+      "PH-UY 2023"
+    ]
   },
   {
     "code": "PH-UY 2104",
@@ -21447,7 +21486,10 @@
     "code": "PH-UY 2131G",
     "name": "General Physics Laboratory II",
     "desc": "The second part of the introductory physics laboratory program. Fundamental laboratory experiments in E&M, waves, optics, and thermodynamics. Stresses experimental models and design, error and data analysis. This laboratory class meets for three hours on alternate weeks. | Prerequisites: PH-UY 2121 and PH-UY 2023. Co-requisite: PH-UY 2033",
-    "prereqs": []
+    "prereqs": [
+      "PH-UY 2121",
+      "PH-UY 2023"
+    ]
   },
   {
     "code": "PH-UY 2344",
@@ -21727,12 +21769,6 @@
     "prereqs": []
   },
   {
-    "code": "STS-UY LV2XF",
-    "name": "STS Level 2 Transfer",
-    "desc": "STS Level 2 Transfer",
-    "prereqs": []
-  },
-  {
     "code": "STS-UY 1002",
     "name": "Introduction to Science and Technology Studies",
     "desc": "This course introduces contemporary topics in Science and Technology Studies, emphasizing the relations among science, technology and society from philosophical, historical, and sociological points of view. This course is required for STS majors and satisfies an HuSS General Education Elective for all other majors.",
@@ -21890,13 +21926,13 @@
   },
   {
     "code": "STS-UY 3004",
-    "name": "Sem In Science & Tech Studies",
+    "name": "Sem in Science & Tech Studies",
     "desc": "This course considers the current state of the field of Science and Technology Studies. Students are exposed to the range and methods of STS as well as their own place within the field. The course is designed specifically to bring students with different academic backgrounds into contact with each other in a classroom setting. | Prerequisites: One Level 2 STS Cluster HuSS Elective. Corequisites: None. Notes: Satisfies a HuSS Elective.",
     "prereqs": []
   },
   {
     "code": "STS-UY 3004W",
-    "name": "Seminar In Science & Technology Studies",
+    "name": "Seminar in Science & Technology Studies",
     "desc": "This course considers the current state of the field of Science and Technology Studies. Students are exposed to the range and methods of STS as well as their own place within the field. The course is designed specifically to bring students with different academic backgrounds into contact with each other in a classroom setting. Satisfies an HuSS elective. | Prerequisite: One Level 2 STS Cluster HuSS Elective",
     "prereqs": []
   },
@@ -21952,8 +21988,8 @@
   },
   {
     "code": "STS-UY 3402",
-    "name": "INDEPENDENT STUDY IN STS",
-    "desc": "INDEPENDENT STUDY IN STS",
+    "name": "Independent Study in STS",
+    "desc": "Independent Study in STS",
     "prereqs": []
   },
   {
@@ -22034,12 +22070,6 @@
     ]
   },
   {
-    "code": "URB-UY LV2XF",
-    "name": "URB Level 2 Transfer",
-    "desc": "URB Level 2 Transfer",
-    "prereqs": []
-  },
-  {
     "code": "URB-UY 391X",
     "name": "Independent Study in SUE",
     "desc": "Independent study in Sustainable Urban Environments. Topics to be decided by the instructor. | Prerequisites: Instructor’s Permission.",
@@ -22053,7 +22083,7 @@
   },
   {
     "code": "URB-UY 2004",
-    "name": "GLOBAL PERSPECTIVES ON URBAN SUSTAINABILITY",
+    "name": "Global Perspectives on Urban Sustainability",
     "desc": "This course will give students a grounding in urban sustainability issues as they apply locally and globally, with an emphasis on case studies of problems and attempts at solutions in many different urban sites. The course materials address the broad range of social, cultural, technical, historical, political and technical issues that are part of urban sustainability.",
     "prereqs": []
   },
@@ -22137,7 +22167,7 @@
   },
   {
     "code": "URB-UY 3044W",
-    "name": "GREEN CITIES",
+    "name": "Green Cities",
     "desc": "This course will provide students with an understanding of different types of green spaces that exist in urban areas, such as parks, urban forestry and agriculture, and sustainable streetscapes. It will explore how the greening of cities may incorporate various green infrastructure designs and techniques, and will examine the benefits that green places in cities provide to urban inhabitants as well as the city itself. Although some focus will be on New York City places and policies, the course will also explore greening techniques, designs and policies in other cities in the United States and internationally. Students will learn about public policies that impact the implementation of greening initiatives and how the physical environment affects the quality of life for individuals and communities.",
     "prereqs": []
   },
@@ -23239,192 +23269,6 @@
     "code": "ARCS-GE 2913",
     "name": "Global Fashion Systems",
     "desc": "Examines dress and textiles as signifiers of cultural identity and expression, transmitters of design and tradition, and their centrality to the social and economic structure of a selection of cultures worldwide. Addresses the impact on dress of factors including religious/symbolic beliefs, ideas of gender, trade, and technology, with emphasis on the traditions of Asia, the Americas, and Africa and their global intersections.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2002",
-    "name": "Intro to The Galleries & Museums of New York",
-    "desc": "Survey a broad spectrum of visual art resources through guided lecture-tour visits to current exhibitions at leading museums, galleries and alternative art spaces located throughout New York City. Onsite meetings with art administrators affiliated with various organizations shed light on a wide range of career and management issues pertaining to the field and add to an understanding of the development and continued growth of New York's exciting art world.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2010",
-    "name": "Internship in Studio Art",
-    "desc": "Individual positions with major artists, notable museums, distinguished galleries, art publishers, & art organizations.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2085",
-    "name": "Art Money",
-    "desc": "This course explores different ways artists have interacted with money, in choosing a subject, dealing with the marketplace, and formulating life choices. The course combines theory and studio practice with lecture and discussion and includes art critiques with an active critical engagement. For each of the seven topic units, students may do art projects as well as present or write responses. Open to studio artists in any discipline, those interested in critical theory or art history, and those engaged in arts administration.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2102",
-    "name": "Artistic Activism as Radical Research",
-    "desc": "Artistic activism is a practice grounded in envisioning new ways of acting and thinking in our communities in order to create social change. It challenges the notion that art practice, research, and social activism are discrete entities. As a form of “militant” or radical research, this praxis based class focuses on a range of different forms of artistic activism as casestudies to understand how artists use creative research strategies to engage with communities, social movements, and cities. A major part of the class focuses on collaborative fieldwork in the public realm or in communities.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2181",
-    "name": "Projects in Painting",
-    "desc": "Focuses on particular subjects or techniques to allow students to broaden skills & expression. Projects are chosen as a result of both faculty & student interest.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2182",
-    "name": "Projects in Printmaking",
-    "desc": "Focuses on particular subjects or techniques to allow students to broaden skills & expression. Projects are chosen as a result of both faculty & student interest.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2191",
-    "name": "Advanced Projects in Painting",
-    "desc": "Projects selected by students to reflect their artistic preoccupation or to provide research in particular skills, subjects, or trends in painting.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2192",
-    "name": "Advanced Projects Printmaking",
-    "desc": "Projects selected by students to reflect their artistic preoccupation's or to provide research in particular skills, subjects, or trends in contemporary printmaking.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2314",
-    "name": "Photography",
-    "desc": "Emphasis is on the creation of a body of prints dealing with one subject or theme. Aesthetic decisions made by the individual in choice of subject matter & technique are considered. Lectures, technical demonstrations, & individual critiques are included. Readings on individual photographers, aesthetics, & darkroom techniques are assigned. Critiques by visiting photographers/artists are held.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2514",
-    "name": "Glass",
-    "desc": "This survey class is intended for students to experience a fuller range of techniques over two semesters. Each semester can be taken independently from the other. The first semester focuses on blowing, hot casting, stained glass, mosaic, and kiln casting (fusing and slumping). The second semester concentrates on coldworking, sandblasting, lampworking, and beadmaking.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2582",
-    "name": "Projects in Glass",
-    "desc": "Focus on particular subjects or techniques allows students to broaden the range of their skills & expression. Projects are chosen as a result of both faculty & student interest.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2584",
-    "name": "Projects in Ceramics",
-    "desc": "Focus on particular subjects or techniques allows students to broaden the range of their skills & expression. Projects are chosen as a result of both faculty & student interest. Aesthetic & technical experiences that will enable the student to advance their understanding of the limitless possibilities inherent in the ceramic medium. Emphasis will be placed upon a sculptural/nontraditional approach to making objects in clay & will encourage invention, creative risk, & a personal interoperation of subject matter.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2771",
-    "name": "Drawing I for Non Majors",
-    "desc": "Basic materials & methods of drawing. It combines perceptual learning with initial conceptual basics for drawing. This includes line usage, shape inventing, size differentiating, brightness contrast, location & overlap. Students will develop the skill to discuss their drawings as well as the drawings of others, & learn to observe & empathize with the genres of landscape, still-life, & figure. Individual & group critiques, slide lectures, & museum & gallery visits support studio activities",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2772",
-    "name": "Drawing II for Non Majors",
-    "desc": "Assignments, critiques & demonstrations for the more advanced drawing student. Combines perceptual learning with initial conceptual basics for drawing. This includes line usage, shape inventing, size differentiating, brightness contrast, location, & overlap. Students develop the skill to discuss their drawing as well as the drawing of others & learn to observe & empathize with the genres of landscape, still life, & figure. Individual & group critiques, slide lectures, & museum & gallery visits support studio activities.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2773",
-    "name": "Painting I for Non Majors",
-    "desc": "Basic technical & conceptual principles of painting through in-the-studio practice. The relationship between form & content (technique & concept) is informed by art history & theory. Such processes as palette orientation, paint manipulation, & canvas preparation are discussed as well as contemporary painting practices. Individual & group critiques, slide lectures, & museum & gallery visits support studio activities.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2774",
-    "name": "Painting II for Non Majors",
-    "desc": "Assignments, critiques & demonstrations through in-the-studio-practices for the more advanced painting student. The relationship between form & content (technique & concept) is informed by art history & theory. Such processes as palette orientation, paint manipulation, & canvas preparation are discussed as well as contemporary painting practices. Individual & group critiques support studio activities.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2777",
-    "name": "Sculpture I for Non Majors",
-    "desc": "Introduction to the rendering of the three-dimensional world in sculpture. The class moves through a variety of different materials using simple techniques such as woodcutting, plastering, welding, & sewing.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2780",
-    "name": "Digital Photography I for Non Majors",
-    "desc": "A hands-on introduction to the technical & creative uses of digital photography. The class will explore the use of digital technologies to compose, shoot, scan, alter, & print images, as well as considering the ways in which photographic meaning has been changed by the use of the computer. Student provides their own camera & paper.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2781",
-    "name": "Photography I for Non Majors",
-    "desc": "Introduction to the use of photography as a medium of documentation & expression. Assignments & critiques enhance the development of individual work while developing photographic skills & techniques. Students provide their own camera & paper. Enlargers & photographic chemicals are provided in class.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2785",
-    "name": "Design I for Non Majors",
-    "desc": "This course serves to familiarize the student with the fundamentals of typography. Typography forms the basis of our contemporary communication. Students will gain design abilities based on analogue techniques as well as digital software. The class explores letterform design & moves subsequently to typesetting exercises performed using the letterpress printer & computer. Compositions exploring typography as color, form, & image will be examined for visual impact as well as meaning. The history of typography is incorporated beginning with Guttenberg in the 1400’s through the classic designers of the 17th & 18th centuries, type-design through Russian Constructivism, the Bauhaus, & Modernism to contemporary digital type design.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2791",
-    "name": "Metalsmithing I for Non Majors",
-    "desc": "Beginning & traditional techniques for jewelry & metalsmithing. Through demonstrations & practice, students create individual projects in a variety of materials. Discussions & assignments consider preconceived notions about jewelry as well as structural design problems.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2793",
-    "name": "Ceramics I for Non Majors",
-    "desc": "An introduction to the technical problems of making, decorating, glazing, & firing ceramic forms, while providing opportunities for understanding & developing sensitivities to clay as an art for",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2919",
-    "name": "Interdisciplinary Proj: Autobiography",
-    "desc": "Picasso famously said: “Art is the lie that tells the truth.” Students will read & discuss texts exploring such topics as personal myth/legend & fictionalized confession. Questions of authenticity & personal revelation will be discussed as they relate to contemporary art practice. Students will complete three studio projects that reflect these & related issues. Because this is an interdisciplinary studio course, any medium, e.g., painting, photo, performance, installation, video, sculpture, drawing, digital, is acceptable as a means to explore class content. Regular visits to galleries are not only encouraged, they are expected.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2920",
-    "name": "Interdisciplinary Proj: Seeing and Making",
-    "desc": "This course examines the processes that inform how one makes the object and its connection to the visual. The goal of the course is to help the student sharpen his/her point-of-view and to develop constructive motivational tools. To aid in the process we will address the conflict between such binaries as: art and craft, art and ideas and the social and physical space of art. Our method will include individual studio meetings, group critiques, presentations and exhibitions of art. Readings and exhibitions will be assigned according to students’ particular research needs. They may include; Philip Fisher, \"Making and Effacing Art\"; Craig Owens, \"Beyond Recognition: Representation, Power and Culture” and James Hillman, \"The Dream and the Underworld\", as well as student suggested readings",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2972",
-    "name": "Interdisciplinary Projects: Art in Dialogue",
-    "desc": "This course explores art making using a variety of media and materials in relation to thematic and inquiry-driven methods.The conceptual focus for this interdisciplinary studio course is that all art is created in dialogue, referencing art history and process, and in response to specific societal, environmental or political issues. Students are involved in independent and collective artistic inquiry and participate in studio critique formats and discussions focused on relevant contemporary artists and select readings.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2987",
-    "name": "Interdisciplinary Projects: Articulating The Visual Arts",
-    "desc": "Articulating Visual Arts is designed to help students express & sharpen their thinking & writing about visual art. Topics will include how to write an artist’s statement, exhibit reviews as well as catalog essays. Additionally students will explore how artists apply creativity, in thinking & writing, as part of their practice in visual arts & other media. Readings include texts by contemporary & past visual arts masters such as Frieda Kahlo, Richard Prince, Robert Smithson, Andy Warhol, Barbara Kruger, among others.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2988",
-    "name": "Interdisciplinary Projects: Contemporary Art Practice",
-    "desc": "This course is constructed around the belief that artists are highly adaptable & flexible, & that their role in an arts community (& the community at large) is fundamental to their practice. To that end, this intensive MFA-only course will serve as a communal laboratory investigating the meaning of “contemporary practice.” The course will pose the question: how does a young artist find community in the art world? As a result, the course is cursory experiment in community building.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2990",
-    "name": "Graduate Studio",
-    "desc": "This course meets weekly & is intensely focused forum for critical dialogue & group discussion about each student’s work & ideas. Historical precedents & research into conceptual practices & working methods contextualize discussions.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2993",
-    "name": "Visiting Artist & Faculty Critiques",
-    "desc": "Individual studio visits with full-time & visiting faculty, visiting artists, curators, & writers are arranged by advance appointment for an in-depth discussion about the student’s work",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2996",
-    "name": "MFA Seminar",
-    "desc": "This elective course assists MFA candidates in the development of a substantial body of work in preparation for exhibitions. Issues addressed include the production, installation and display of work, artist statements, catalog essays, and other materials that might accompany an exhibition.",
-    "prereqs": []
-  },
-  {
-    "code": "ART-GE 2997",
-    "name": "Thesis Project",
-    "desc": "This course focuses on further developing a body of work for exhibition & a correlating written thesis. Students work closely with a leading artist, writer, or critic to develop a narrative context for their thesis & final exhibition.",
     "prereqs": []
   },
   {
@@ -25210,12 +25054,6 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2004",
-    "name": "Food Project Development",
-    "desc": "Course addresses market needs, research methods, trend projections, feasibility analysis, evaluation strategies, capital and operational budgets, and financing for development of food projects. These projects might include feasability studies, environmental impact studies, and design and construction plans.",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2006",
     "name": "Food Entrepreneurship",
     "desc": "Affirm the value of creativity in entrepreneurship; learn the specific processes needed to develop and open a new start up food business – product and/or retail; learn basic financial guidelines needed to open a new food business; understand unique attributes of food business financial styles and benchmarks; understand general steps to develop, manufacture and launch a food product; learn the logistic systems requirements and other resources for proper operation; and, understand the current labor challenges and issues.",
@@ -25288,18 +25126,6 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2025",
-    "name": "Wine and Spirits",
-    "desc": "Basic principles of winemaking, fermentation, tasting analysis, and grape/grain variety study with a practical overview of restaurant and retail beverage programming. Considers cultural, political, legal, and climate-related factors.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2026",
-    "name": "Food and Inequalities",
-    "desc": "This course examines the role of U.S. food and agricultural policy in perpetuating racial and economic inequality. Topics include agriculture, class and race; farm size and inequality; farm labor; low-wage workers in the food chain; food insecurity; and environmental inequality. The class covers both historical and contemporary social movements that respond to inequities within the food system. The course prepares students to effectively evaluate contemporary legal and policy responses to food systems inequality.",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2030",
     "name": "Introduction to Urban Agriculture",
     "desc": "This course provides a practical introduction to urban agriculture. Students learn horticultural skills at the NYU Urban Farm Lab. Students learn about biological processes and how they fit together in a system. Through visits to other sites around the city, students are exposed to various strategies for practicing urban horticulture. Additionally, we engage with greater themes found within urban agriculture such as entrepreneurship, food justice, individual and group sustenance, cultural enactments of identity, community building, and education.",
@@ -25336,18 +25162,6 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2100",
-    "name": "Food Legislation, Regulation & Enforcement",
-    "desc": "This course examines the legal and regulatory frameworks that underlie domestic food policy. Specific areas of emphasis are the jurisdictions of federal and state agencies, the role of the legislative bodies in creating policy, and the role of the judicial system in enforcing policies and regulations.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2103",
-    "name": "Food & Law in Action",
-    "desc": "We examine broad issues that currently shape our food system and explore ways to mobilize legal and policy tools in order to strategically respond to these issues. Topics include legal and policy underpinnings of the United States’ and global food systems, economic and social conditions, inequities of access to adequate healthy food, and public health and environmental crises. Students gain an understanding of the legal and policy pathways and develop effective actions to address the many complex issues that characterize—and threaten—our food system.",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2106",
     "name": "Social Entrepreneurship in Sustainable food Business",
     "desc": "This course introduces students to the concepts, frameworks & models to systematically build successful, socially-conscious businesses that are both sustainable & public health-driven. Topics will include how to 1) identify & analyze need-gaps, 2) develop a sustainable-food business concept, 3) identify a profitable niche in the global, social-justice oriented market, & 4) raise capital in innovative ways. The course will also provide access to domain-specific resources including key industry participants, industry experts & research partners.",
@@ -25357,12 +25171,6 @@
     "code": "FOOD-GE 2111",
     "name": "Organic Food Agriculture",
     "desc": "This course examines the organic food system from multiple angles, starting with the historical evolution of organic food and agriculture. Specific aspects studied may include how organic certification works, biodiversity in the organic system, organic’s potential for climate change mitigation, the political economy of the US organic regulation, and international trade of organic products. Students analyze current debates, such as how regenerative agriculture fits into the organic landscape and how to improve organic integrity along the supply chain.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2160",
-    "name": "Culinary Physics",
-    "desc": "This studio and seminar course explores the basic principles of food biochemistry, enzymology and food processing and how they relate to memory, the senses and the processing of information. Students learn the basic principles of molecular gastronomy and modernist cuisine as framing devices for understanding how food also functions in the context of bodily health, environmental health as well as cultural and political narratives. Assignments are based on the incorporation of food science into design and technology projects.",
     "prereqs": []
   },
   {
@@ -25450,12 +25258,6 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2234",
-    "name": "Field Trips in Food: Food Manufacturing",
-    "desc": "New York City has a long history in food manufacturing with recent years experiencing a resurgence of small-scale businesses. The field trips explore both newer and older food and beverage manufacturing/production facilities operating at a variety of scales in order to analyze the food manufacturing in New York City. How do they intersect with their surrounding communities and with the environment? What narratives are embedded within these businesses? How viable/sustainable are these businesses? What is the future of urban food manufacturing?",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2241",
     "name": "Food Provisioning",
     "desc": "Of the 8 billion people on the planet today, only about 2 billion rely on supermarkets and grocery stores for their food. The remaining 6 billion rely on street vendors, formal and informal food markets that take place on sidewalks, street corners, alleys, and parking lots. This course examines the cultural aspects and processes related to food provisioning, in a global context.",
@@ -25492,12 +25294,6 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2249",
-    "name": "Inquiries in Food Studies: Food Futures",
-    "desc": "Super storms, drought, abundant chemical and fertilizer overuse and misuse, ozone depletion, fossil fuel exploitation and a host of bad decisions have contributed the myriad causes of climate change and the shifting landscape of our food system. We have become accustomed to eating whatever we want whenever we want for more than 60 years; it’s been a very good culinary life for many. The bill for this reinforcing feedback loop of heavy dependency on petrochemical fertilizers, mono-cropping, shrinking land on which to farm, and the worldwide demand for cheap and abundant food has been proffered; and the truth is we have been writing checks our planet cannot cash and many of the foods we’re too fond of (coffee, chocolate, peanuts, almonds, berries) are becoming harder to grow and the predictions that these foods will either lose their flavor or disappear completely. This class will look at the future of food through the lenses of Design Thinking + Systems Thinking addressing these increasingly problematic issues in our food system and how we can dive and design more sustainable modes of operation, using sustainable materials and still have our food taste good. Students will work on small scale projects that tackles this concert at hat the local and global level.",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2251",
     "name": "Global Food Cultures: Madrid",
     "desc": "This course explores how food traditions and heritage are identified, supported, and promoted at national and global levels, and examines their role and functions in Spaniards’ everyday life. Through visits to markets, bakeries, wholesale and retail outlets, tapas and wine bars, restaurants, and menu del día eateries we examine how tradition and heritage are brought into the 21st century in public spaces that are also symbolic for local and national identities. Food professionals and experts, designers and scholars help us understand the dynamics of this unique country.",
@@ -25519,12 +25315,6 @@
     "code": "FOOD-GE 2259",
     "name": "Global Food Cultures: Los Angeles",
     "desc": "This course explores food systems and culture in the broader Southern California region, unpacking how issues of race, socioeconomic status, gender, and ethnicity intertwine with geography, politics, and economics to create the present-day global metropole facing a myriad of issues including climate change. Through guest lectures, student projects, and site visits to museums, markets, farms, cooperatives and restaurants, students gain a multi-faceted understanding and appreciation of this remarkable city and its people.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2261",
-    "name": "Sustainability On The East End of Long Island",
-    "desc": "We focus on sustainable food systems within their local communities in this experiential field trip-based course. Using Eastern Long Island, an area that has been successfully farmed for centuries as a case study, we explore issues surrounding sustainable agriculture. Includes visits to farms, wineries, scallop and oyster underwater farms, as well as lectures by pioneering land and sea preservationists, beekeepers, and others. We critically evaluate the meaning of sustainability as it applies to agriculture and aquaculture, and how it relates to the community.",
     "prereqs": []
   },
   {
@@ -25582,33 +25372,9 @@
     "prereqs": []
   },
   {
-    "code": "FOOD-GE 2282",
-    "name": "Adv Topics Food Systems: Organic Food & Agriculture",
-    "desc": "This course explores organic agriculture from multiple angles, starting with a historical exploration of organic & finishing with policy approaches to organic. Specific aspects studied include the environmental benefits of organic production systems, the political economy of the US organic regulation, health benefits of organic, & organic consumption and marketing.",
-    "prereqs": []
-  },
-  {
     "code": "FOOD-GE 2283",
-    "name": "Adv Topics Food Systems:  Agricultural Globalization",
+    "name": "Adv Topics Food Systems: Agricultural Globalization",
     "desc": "Course examines the process of agricultural globalization & its effects on the process of rural & agricultural development in the global south. Specifically, analyze the incorporation of agricultural producers & processors in developing countries into the supply chains of global food brands & retailers. The goal is to identify how globalization is shaping institutions that govern agricultural laborers in poor & middle income communities, who are the most vulnerable actors in the global economy",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2285",
-    "name": "Adv Topics Food Systems:  Gender",
-    "desc": "Course explores the intersection of gender, identity, culture & food. Students will analyze the influences of sexual identity, human sexuality, sexual orientation & gender on real & perceived cultural views of food & consumption. Topics will address how society assigns gender to food by investigating historical & contemporary texts. Employing advertisements, menus, recipes, cookbooks, television programs, films & packaging, students will critically analyze gendering practices. Theoretical frameworks will include queer theory, early feminist theory, Whiteness theory & emerging male studies & transgender studies.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2286",
-    "name": "Adv Topics Food Systems: Inequality & Food Systems",
-    "desc": "This course examines the role of U.S. food & agricultural policy in perpetuating racial & economic inequality. Topics include agriculture, class & race in the 19th century; farm size & inequality; farm labor; low-wage workers in the food chain; food insecurity; & environmental inequality. The class covers both historical & contemporary social movements that respond to inequities within the food system. By introducing students to historical documents, empirical research, & the academic literature on these & related topics, the course prepares students to effectively evaluate contemporary legal & policy responses to food systems inequality.",
-    "prereqs": []
-  },
-  {
-    "code": "FOOD-GE 2287",
-    "name": "Advanced Topics in Food Systems: Agriculture, Food Policy and the US Farm Bill",
-    "desc": "Agricultural policy and some food policy is regulated by The Farm Bill. This course covers the history of the farm bill, starting from its inception via the Agricultural Adjustment Act of 1933, up to contemporary farm bills. The course will analyze current proposals for agricultural policy, given the contemporary political, economic and agricultural climate.",
     "prereqs": []
   },
   {
@@ -27977,13 +27743,13 @@
   {
     "code": "MPAME-GE 2141",
     "name": "Student Teaching in Elementary Schools",
-    "desc": "Weekly cohort meetings to support student teacher as a reflective practitioner in elementary placements. Course serves to prepare student teacher for initial certification with completion of New York state licensure requirements for PK-12 music teaching, all grades, Assignments include relevant readings, discussions, standards-based lesson plan development and peer review.",
+    "desc": "Weekly cohort meetings to support student teacher as a reflective practitioner. Students participate in concurrent supervised student teaching fieldwork in elementary school settings. Course serves to prepare student teacher for initial certification with completion of New York state licensure requirements for PK-12 music teaching, all grades. Assignments include relevant readings, discussions, standards-based lesson plan development and peer review.",
     "prereqs": []
   },
   {
     "code": "MPAME-GE 2145",
     "name": "Student Teaching in Secondary Schools",
-    "desc": "Weekly cohort meetings to support student teacher as a reflective practitioner in secondary placements. Course serves to prepare student teacher for initial certification with completion of New York state licensure requirements for PK-12 music teaching, all grades, Assignments include relevant readings, discussions, standards-based lesson plan development and peer review.",
+    "desc": "Weekly cohort meetings to support student teacher as a reflective practitioner. Students participate in concurrent supervised student teaching fieldwork in secondary school settings. Course serves to prepare student teacher for initial certification with completion of New York state licensure requirements for PK-12 music teaching, all grades. Assignments include relevant readings, discussions, standards-based lesson plan development and peer review.",
     "prereqs": []
   },
   {
@@ -29524,13 +29290,13 @@
   {
     "code": "MPAVP-GE 2251",
     "name": "Contemporary Voice Workshop: Techniques I",
-    "desc": "This course combines the technical abilities a student has learned in the voice studio with the performance and practical skills needed to be a well-rounded performer. Focus on performance skills required for a hybrid singer, including but not limited to truthful communication, stage presence, movement, the ability to use the prosody of language/speech inflections to inform vocalism and psychological gesture, and appropriateness of style and genre.",
+    "desc": "This course offers an in-depth exploration of contemporary vocal styles with a strong emphasis on visual storytelling, music video production, and the creation of short-form performance content. Students will examine and perform material from a wide range of styles—including rock, pop, country, R&B, folk, disco, rap, and poetic/lyric-driven music—while learning to identify and embody the vocal traits that make each genre unique. The semester culminates in the creation of a personalized music video and short-form performance recordings suitable for social media or promotional materials.",
     "prereqs": []
   },
   {
     "code": "MPAVP-GE 2257",
     "name": "Contemporary Voice Workshop: Digital Media Performance Lab",
-    "desc": "This course provides a detailed exploration of the ways in which the modern classical singer, musical theatre performer, and pop singer must use their talents and intuition on social media to develop and market their brand, personal sensibility and point of view on the world. Vocals and live performance style techniques for the camera will be addressed in a laboratory environment, as well as techniques to target audiences on Tik-tok, Instagram, Facebook, websites, virtual auditions, and self-submissions.",
+    "desc": "This course focuses on the mastery of vocal performance across a range of contemporary genres, with a particular emphasis on stylistic integrity, performance adaptability, and vocal health. Through workshops, guided listening, and peer critique, students will perform material in multiple genres and create a curated Repertoire Book reflecting their vocal identity, strengths, and growth areas.",
     "prereqs": []
   },
   {
@@ -31574,6 +31340,174 @@
     "prereqs": []
   },
   {
+    "code": "ECON1-UC 301",
+    "name": "Intro to Macroeconomics",
+    "desc": "Macroeconomics is the study of the operation and performance of the entire economy, both nationally and internationally. In this course, the analytical tools and methodology of macroeconomic analysis since the Great Depression are introduced. Key variables of the economy such as gross domestic product (GDP), unemployment, inflation, interest rate, exchange rate, and international trade balance, as well as Monetary and fiscal policies adopted by the government are discussed in detail.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 302",
+    "name": "Intro to Microeconomics",
+    "desc": "Microeconomics is the study of decisions and choices made by people who are faced with scarcity of resources. It focuses on the decision making of the individuals, including individual consumer, individual firm and individual industry. In this course, analytical tools and methodology of microeconomic analysis are introduced. Both theory and real world applications are emphasized. Major topics such as the theories of consumers and profit-maximizing firms, perfect and imperfect market competition, and the role of government in maintaining an efficient and competitive market are discussed in detail.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 341",
+    "name": "Intermed Microeconomics",
+    "desc": "This course develops formal models of consumer and producer behavior, and stresses applications of theory to study the behavior of individuals and firms in markets. Strategic interactions among firms are studied using game theoretic models. The course concludes with a thorough study of information economics (agency problems, adverse selection) and decision making under uncertainty.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 342",
+    "name": "Intermed Macroeconomics",
+    "desc": "Study aggregate economic analysis, with particular attention to theories of the determination of the level of income, employment, and price inflation. The theories and policies associated with these topics are critically examined.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 344",
+    "name": "International Financial Markets & Trade",
+    "desc": "Study the dynamics and influences affecting international financial conditions, decisions, and change. Students cover the financial management of multinational corporations, exchange rates, rates of inflation, and various national and international financial markets. Readings and case studies are employed.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 348",
+    "name": "Sports Economics",
+    "desc": "This course explores the economic issues associated with professional sports teams and leagues. Topics include revenue sources for sports teams and leagues; governance of sports leagues; the economics of rival leagues and minor leagues; the economic impact of sports teams and facilities; financing mechanisms for sports facilities; labor relations; and salary determination in professional team sports.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 350",
+    "name": "Finance & Investments",
+    "desc": "This course offers an analysis of the structure and operation of financial markets and the instruments traded in those markets. Portfolio choice, including efficient diversification and asset allocation, is stressed. Theoretical foundations of asset pricing are developed, and empirical tests of these theories are reviewed.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 351",
+    "name": "Economics & Gender",
+    "desc": "This course first reviews how gender issues have been addressed by various economic schools of economic thoughts. It then explores questions regarding the roles and positions men and women occupy in the process of producing material wealth, such as gender-based division of economic thoughts. Finally the course discusses macroeconomic and global aspects of gender inequalities in different regions of the world.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 352",
+    "name": "Industrial Organization",
+    "desc": "A rigorous examination of market structures is provided in this course, with an emphasis on the strategic interaction of firms. Firm-level decisions such as market entry, research and development, product versioning, and advertising and pricing strategy are studied using theory and cases. The effect of information asymmetries on firm decisions and market structure and performance is considered in detail.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 353",
+    "name": "Mathematical Economics",
+    "desc": "This course develops the tool kit of quantitative skills necessary for upper-level coursework in economics. Concepts introduced include systems of equations, logarithmic and exponential functions, differentiation and optimization techniques, series and limits, and integration. Throughout the course, the application of mathematical concepts in economics is emphasized.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 354",
+    "name": "Statistical Methods in Economics",
+    "desc": "This course provides students with a wide spectrum of statistical methods required for economic studies, from descriptive statistics to inferential statistics, from regression method to time series method. In addition, economic indicator indexing, sampling methods, and popular non-parametric methods are also introduced. Application of computer software, such as EXCEL and SAS, along with each of these statistical methods is emphasized to enhance students’ capabilities to do real-world economic analyses.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 356",
+    "name": "Transition Economics",
+    "desc": "This course offers students a critical evaluation of the transformation of the economies of the former socialist Eastern Europe countries and the former Soviet Union from a multifaceted approach. Insights about development economics, especially the relationship between government and market outcomes, are discussed. The class analyzes the socialist economic blueprint, market liberalization reforms, and the current economic outlook. Topics of discussion include issues of limited industrial diversification; increasing financialization; healthcare and education reforms; and problems of poverty, inequality, and outward migration. Central are questions of state/private balance in social transformation and overall macroeconomic dynamics.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 360",
+    "name": "Law & Economics",
+    "desc": "Economic analysis of legal issues, including contracts, property rights, liability and torts, concepts are applied to a variety of cases.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 361",
+    "name": "Government Intervention in The Economy",
+    "desc": "The regulation of firms and industries is explored in this course. The regulatory process and the economic rationales for government regulation are studied, with an emphasis on the efficiency consequences of regulation. Recent trends in privatization and deregulation are examined critically.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 362",
+    "name": "Environmental Economics",
+    "desc": "Economic models of natural resource extraction and externalities are introduced and developed. Traditional regulatory responses to correct environment externalities are reviewed, and recent market-based regulations such as tradable permits are discussed in detail. Topics include: common property resources; the role of asymmetric information in formulating environmental policy; contingent valuation and travel cost models of valuing non traded resources; and the economics of species diversity.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 363",
+    "name": "Urban Economics",
+    "desc": "In this course student investigate the economic development of cities and urban areas as well as the attendant social problems accompanying urbanization. It addresses the growth of urban areas with a focus on firm location decisions, housing, and land use policies. The causes and consequences of urban problems, such as economic segregation, poverty and crime, are explored through the application of theoretical models to cases.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 364",
+    "name": "American Economic History",
+    "desc": "This course provides an economic analysis of American history from colonial settlements to World War II. The course emphasizes the role of technology in fostering growth and development, the central role of financial markets in economic growth, and the use of government policies to support westward expansion, using the development of the American West as a central theme.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 371",
+    "name": "Labor Economics",
+    "desc": "This course begins by developing theories of individual labor supply and the demand for labor across firms and industries. Theories of earnings determination are presented to explore the importance of experience, mobility, and human capital in explaining earnings growth. Income assistance programs and training initiatives are examined in detail. Additional topics include the cause and consequences of earnings inequality, theories of discrimination, immigration, and incentive-based compensation.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 372",
+    "name": "International Economics",
+    "desc": "This course provides an examination of theories of international trade and the performance of the global financial system that supports trade. Topics include: Ricardian and modern trade theories, balance of payments, economic stabilization through international fiscal and monetary policy, and the determination of exchange rate policy.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 373",
+    "name": "Comparative Economics",
+    "desc": "In this course, centrally planned socialist economic systems such as China and Cuba are contrasted with capitalist systems such as the United States, Japan, and Europe. The course also investigates other economic models, including the welfare states of Scandinavia and the mixed economies of developing nations.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 374",
+    "name": "Public Policy and Public Finance",
+    "desc": "This course examines the uses of fiscal policy at the federal government level. The economic analysis of market failures, such as externalities, public goods, and missing markets, is developed. It reviews government programs that redistribute income, particularly healthcare and social security. It applies optimal taxation theories to the design of federal tax policy.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 375",
+    "name": "Industrialization and Development in China",
+    "desc": "\"The emergence of China as a new global economic player is one of the most significant developments of the contemporary world. How do we understand this development trajectory in light of the general history of capitalist industrialization and, more specifically, economic development in the Asia-Pacific region? Is China’s economic rise sustainable? Will China be over whelmed by its economic, social, and ecological contradictions? What are the implications of the rise of China for the rest of the world and for the global system as a whole? This course discusses the economic interactions between China and the modern world system over the last several decades and evaluates the future trends. No prior background in economics is necessary since you will be introduced to some of the basic debates in economic development. \"",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 376",
+    "name": "Money & Banking",
+    "desc": "This course covers an examination of the banking system, determination of the money supply, the role of the Federal Reserve in influencing monetary aggregates, and contemporary issues involved in bank management, banking regulation, and the conduct of monetary policy.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 377",
+    "name": "Development Economics",
+    "desc": "This course focuses on problems of economic development in Africa, Asia, and Latin America. Poverty, unemployment, population growth, international trade, foreign assistance, economic policy, and the widening gap between developed and developing countries are covered.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 378",
+    "name": "Intro to Econometrics",
+    "desc": "This seminar focuses on the use of economic models and theories in addressing research questions in economics. Topics change each semester.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 390",
+    "name": "Sp Tpcs in Economics:",
+    "desc": "This seminar focuses on the use of economic models and theories in addressing research questions in economics. Topics change each semester.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 6607",
+    "name": "The Global Economy",
+    "desc": "From historical linkages among nations to the contemporary integration of national economies, this course explores the evolution of the global economy. It highlights the causes and consequences of the changing patterns of trade in goods and services, capital flows, and labor mobility.",
+    "prereqs": []
+  },
+  {
+    "code": "ECON1-UC 6608",
+    "name": "History of Economic Thought",
+    "desc": "This course in History of Economic Thought traces the development of economic theory, from pre- classical thought to modern economic views. In the study of the work of major economic thinkers such as Smith, Ricardo, Mill, Marx, Veblen, and Keynes, emphasis is put on the link between theory and policy. Another theme of this course is to link past economic ideas with recent ones in a critical perspective. The aim of this course is to provide a thorough appreciation of the history of economic ideas and to deepen students’ understanding of current economic thinking and debates.",
+    "prereqs": []
+  },
+  {
     "code": "EXPR1-UC 9801",
     "name": "Seminar in Experiential Learning",
     "desc": "This course offers a study of the history and theory of experiential learning. Students identify their own educational goals and analyze how their prior college-level learning fits into the curriculum of their overall degree plan. Students document, write, and edit their portfolios of prior learning. At the discretion of the instructor, students may use one additional semester to complete their portfolios without an additional fee. Students may not register for this course more than once.",
@@ -32319,7 +32253,7 @@
   },
   {
     "code": "MATH1-UC 1180",
-    "name": "Linear algebra",
+    "name": "Linear Algebra",
     "desc": "Linear algebra is, together with calculus, one of the most important fields of mathematics for computations and applications. For example, it is a major tool in data mining, the set of methods and processes to identify patterns in large sets of data. In many applications, the problem is formulated mathematically; it is then converted to a linear algebra problem; the linear algebra problem is solved, and the results are interpreted. In this course, students learn the theoretical concepts and some of the computational methods of linear algebra.",
     "prereqs": []
   },
@@ -34251,8 +34185,8 @@
   },
   {
     "code": "COART-UT 15",
-    "name": "Studio Art",
-    "desc": "In this studio-intensive course students engage in an investigation of subject matter, sources, and strategies for generating work. Experimentation is encouraged and there are frequent class critiques. This course encourages students to build an index of visual ideas through the development of a habitual and generative drawing practice. Students will experiment with both image and mark making and will look to historical and contemporary approaches as touchstones for their practices. Course will include group critiques, one- on-one meetings, visiting artists, lectures, and field trips.",
+    "name": "Material Time",
+    "desc": "Material Time introduces a wide range of material approaches drawn from contemporary studio and performance artists' practices. We'll use a variety of techniques and tools to work with both hard and soft materials such as sticks, wood, paper, cardboard, bamboo, glue, clay, fabric, papier-mâché, rubbish, hardware, and a whole arsenal of found odds and ends to expand our notions of what we can unlock with sculptural and performative gestures. Through sculptural experiments with building, assembling, moving, collaging, and arranging, students will gain experience with a variety of conceptual and practical techniques and processes. Working in two sections dedicated to topics such as scale, structure, shapes, balance, weight, and time, we will explore 3D making to develop spatial awareness, compositional fluency, and problem-solving skills. Material Time is structured into two seven-week sections, each led by a different instructor. Each section will culminate in a group show and presentation, bringing together students from both sections and shared with the Collaborative Arts community.",
     "prereqs": []
   },
   {
@@ -35538,7 +35472,9 @@
     "code": "FMTV-UT 1053",
     "name": "Advanced Production Workshop I",
     "desc": "This workshop is a year-long advanced-level production course exploring the short form, in which each class will produce up to twelve short films (maximum length per film is 15 minutes). All aspects of production are viewed as a creative extension and continuation of the film writing, directing and producing processes. Students intending to direct a film in this class must have completed an intermediate-level workshop class, and must present a final cut of their intermediate film with mixed sound before they can be considered for a film production allotment in this course. It is also recommended that students come into the class with a producer attached to the project. Students can also enroll and receive credit serving as producers, DPs, or other key crew positions. Students must be ready to present a completed script, in proper screenplay format, at the beginning of the semester. It does not have to be written by the director. Scripts will be discussed in class in a workshop environment. Selected projects will be chosen towards the end of the semester. Students wishing to direct are advised to speak with the instructor before registering for a particular section to ensure that he or she is prepared for the demands of this advanced course. Students interested in working as principal crew members (i.e, producers, cinematographers, editors, sound-mixers, production designers, etc.) are encouraged to enroll with their respective director(s). This is a year-long course; you must register for the second semester if you receive an allotment. NOTE: Films produced for Advanced Film Production Workshop will not be eligible for awards in the First Run Film Festival if they are longer than 15 minutes, including titles. All films produced in Advanced Production Workshop will be screened if entered in the First Run Film Festival, but films longer than 15 minutes will not be judged. Prerequisites: One course at the intermediate workshop level. This course allocates as a Production Core for Film & TV majors.",
-    "prereqs": []
+    "prereqs": [
+      "FMTV-UT 101"
+    ]
   },
   {
     "code": "FMTV-UT 1054",
@@ -35827,7 +35763,9 @@
     "code": "FMTV-UT 1147",
     "name": "Advanced Experimental Workshop Film",
     "desc": "​ This is an advanced-level course designed for students who have previously created work in experimental film or video. Seniors who wish to explore experimental possibilities will also be considered. In this workshop, students will challenge the cinematic conventions, narrative structure and industry standards of commercial entertainment products. This course is taught from both a formal and technical perspective herein students are given the opportunity to explore beyond previous assumed boundaries, allowing them to experiment with the unlimited possibilities of form, content, structure, style, technique and exhibition format. It is a forum for the exchange of innovative ideas, applications, attitudes and aesthetics involved in the personal filmmaking process. Artists seeking to direct a film in this class must be prepared to submit a script at the first class of the term, and are encouraged to submit a copy of their intermediate-level project for review. It is also recommended that they come into the class with a producer attached to the project. Ten allotments will be approved (maximum running time for each film is 15 minutes). The instructor will determine the recipients of these allotments with considerable input from the entire class. A list of those receiving allotments will be announced in the 2nd week. Students may also enter this workshop as an established crew, in partnership with another artist/writer, and can receive credit serving as a cinematographer, art director, producer or other key crew position. NOTE: Films produced for Advanced Experimental Workshop will not be eligible for awards in the First Run Film Festival if they are longer than 15 minutes, including titles. All films produced in Advanced Experimental Workshop will be screened if entered in the First Run Film Festival, but those longer than 15 minutes will not be judged. Prerequisites: Any intermediate level Core",
-    "prereqs": []
+    "prereqs": [
+      "FMTV-UT 101"
+    ]
   },
   {
     "code": "FMTV-UT 1152",
@@ -35886,7 +35824,7 @@
   {
     "code": "FMTV-UT 1171",
     "name": "The Art of Makeup for Film & Television",
-    "desc": "This introductory level, hands-on workshop explores the art of makeup for film and television as a key storytelling element. It is designed for students wishing to develop techniques that they can use on their productions, special effects makeup students seeking an overview of character/beauty makeup, and anyone who has an interest in learning more about the art of makeup. In this course, students will learn how to break down a script and how to research/design/execute makeup looks for film and television to create successful characters and aid in telling the director’s vision. Homework will include research, designing mood boards for characters and assigned viewings to analyze makeups and their role in storytelling. In class, projects will include how to properly color match skin tones, corrective makeup, historical/period makeup, Hollywood glamor, drag, aging effects, and more. Students will also learn how to achieve continuity and progression of storytelling through makeup. The University Bursar will assess a lab fee for this course and students will be supplied with their own specially designed makeup kit and additional class materials necessary to complete all class assignments. No artistic background required.",
+    "desc": "This introductory level, hands-on workshop explores the art of makeup for film and television as a key storytelling element. It is designed for students wishing to develop techniques that they can use on their productions, students seeking an overview of character/beauty makeup, and anyone who has an interest in learning more about the art of makeup. In this course, students will learn how to break down a script and how to research/design/execute makeup looks for film and television to create successful characters and aid in telling the directors vision. Homework will include research, designing mood boards for characters and assigned viewings to analyze makeups and their role in storytelling. In class, projects will include how to properly color match skin tones, corrective makeup, historical/period makeup, Hollywood glamor, drag, aging effects, and more. Students will also learn how to achieve continuity and progression of storytelling through makeup. The University Bursar will assess a lab fee for this course and students will be supplied with their own specially designed makeup kit and additional class materials necessary to complete all class assignments. No artistic background required.",
     "prereqs": []
   },
   {
@@ -36007,7 +35945,9 @@
     "code": "FMTV-UT 1245",
     "name": "Narrative Workshop",
     "desc": "This workshop is a practical course exploring the short form in which each class will produce up to ten short films (maximum length per film is 15 minutes). All aspects of production are viewed as a creative extension and continuation of the film writing, directing, and producing processes. Students interested in directing a film in this class must be prepared to submit a script at the first class of the term, and are required to submit a copy of their intermediate-level project for review. It is recommended that they come into the class with a producer attached to the project. Students can enroll and receive credit serving as producers, DPs, or other key crew positions. Note: Films produced for Narrative Workshop will not be eligible for awards in the First Run Film Festival if they are longer than 15 minutes, including titles. All films produced in Narrative will be screened if entered in the First Run Festival, but those films longer than 15 minutes will not be judged*. This course allocates as a Production Core for Film & TV majors.",
-    "prereqs": []
+    "prereqs": [
+      "FMTV-UT 101"
+    ]
   },
   {
     "code": "FMTV-UT 1246",
@@ -36091,7 +36031,9 @@
     "code": "FMTV-UT 1777",
     "name": "Advanced Television Production Workshop",
     "desc": "Course level: Advanced. Prerequisite: any intermediate level Core production course. 4 points. This course will give real world experience in the rigors of producing a single camera episodic television drama. Working under the supervision of a UGFTV faculty member these mini-pilots will be shot on a Sony HD camera package. The productions will take place in studio, on location and involve collaboration with actors from the Drama Department. Students in this class will produce two 21-minute dramatic pilots (developed in H56.1131 Writing for Advanced Television Production Workshop). COURSE SUBJECT TO DEPARTMENTAL FEES.",
-    "prereqs": []
+    "prereqs": [
+      "FMTV-UT 101"
+    ]
   },
   {
     "code": "GAMES-UT 101",
@@ -38811,13 +38753,13 @@
   {
     "code": "REMU-UT 1003",
     "name": "Producing The Record: Side A",
-    "desc": "This course provides students with the creative skills and theoretical information to work successfully with artists in the recording studio toward the conceptualization and completion of a short EP or full-length LP. By the end of the course, students have the necessary skills to communicate with and produce excellence from musical performers in the recording studio. To that end, this course instructs students in the selection of appropriate musical material, arrangement of the material, the construction of the sound in the studio, and the artistic ensemble of the recorded sound on the completed album. Working first in small groups and then individually, students gain practical experience by recording and mixing sound with professional artists in the studio, under careful supervision. In preparation for the third year, students are asked to consider possible distribution modes for the final product and a range of identifiable publics. This class also arms students with a working knowledge of the recording techniques of specific genres of popular music. We analyze the recorded repertoire of a diverse range of genres?such as rock, pop, R & B, hip-hop, jazz, blues, country, and electronica?as time permits and according to student needs. Students are asked to purchase a number of ?classic? albums in the genre in which they intend to pursue their work, and they deconstruct those albums for aural clues to imagine how they might have been put together in the studio. As time permits, we also visit creative producers in the recording studio to monitor how they work with artists and develop recorded material. Note: There is a lab fee for this class.",
+    "desc": "If you were to ask 10 people the simple question, “What does a record producer do?” odds are you would get 10 different answers - or perhaps 10 different confused, blank stares. The function and value of a record producer is indeed hard to define. One correct answer – my answer, in fact - could be, “making tangible, or real, what was once simply a musical idea, concept, or desire.” To that point in some languages the term \"realizer\" is used in place of record producer; in French, réalisateur. This realization can range from influencing the outcome of one song to an artist’s entire career. The act of music production may influence sound, performance, song selection, composition, arranging, budgeting, production logistics, engineering, mixing, etc. In short – a producer does (or finds professionals to do) whatever is needed, at any given point in the record making process, to best ensure reaching the elusive goal of artistic and/or commercial success. The purpose of Producing The Record is to teach technical proficiency, self-sufficiency, and creative methodology, in the area of studio-based music production - better stated as realization. Students are exposed to a variety of complimentary realization methods through case study, traditional lectures, and hands-on experiential training. The curricular approach is holistic and immersive, with lessons covering the entire range of disciplines involved in production: musicianship, technical and engineering skills, project management and logistics, historical reference, entrepreneurship, and ethical business and creative conduct.",
     "prereqs": []
   },
   {
     "code": "REMU-UT 1004",
     "name": "Producing The Record: Side B",
-    "desc": "The purpose of Producing The Record: Side B is to teach technical proficiency, business self-sufficiency, and creative methodology, in the area of studio music production - better stated as realization. Students are exposed to a variety of complimentary realization methodologies through case studies, traditional lectures, and hands-on exercises. The curricular approach is holistic; with lessons presenting pure music, technical and engineering skills, project management, and historical reference in equal parts. The course is complimented by +/- 40 hours of independent studio time for students (in pairs) to develop their skills as engineers, producers, and discoverers & developers of talent.",
+    "desc": "The purpose of Producing The Record Side B is to teach technical proficiency, self-sufficiency, and creative methodology in the area of studio-based music production (better stated as realization). Students are exposed to a variety of complimentary realization methods through case study, traditional lectures, and hands-on experiential training. The curricular approach is holistic and immersive, with lessons covering the entire range of disciplines involved in production; musicianship, technical and engineering skills, project management and logistics, historical reference, entrepreneurship, and ethical business and creative conduct.",
     "prereqs": []
   },
   {
@@ -38835,7 +38777,7 @@
   {
     "code": "REMU-UT 1010",
     "name": "Content Development for Performers, Producers, & Songwriters",
-    "desc": "This course provides artistic and technical guidance to students pursuing production based capstone projects and will assist students in creating a cohesive and comprehensive recording and production plan. It is through this course that production capstone seniors receive their studio allotment. Production mentors will advise and monitor your progress, and keep you focused on the task at hand: successful realization of your capstone studio production component.",
+    "desc": "This course provides artistic and technical guidance to students undertaking creative, content-based professional development projects at the Clive Davis Institute. Students will develop a cohesive recording and production plan while refining their ability to seek and receive constructive critique from peers and professional mentors. As part of this course, Senior professional development students will receive studio allotments and participate in mentorship sessions with industry professionals. The course instructor will provide support, monitor progress, and ensure students remain focused on successfully realizing the studio production components of their professional development projects.",
     "prereqs": []
   },
   {
@@ -38901,13 +38843,13 @@
   {
     "code": "REMU-UT 1052",
     "name": "Mix Intensive",
-    "desc": "As with literally every facet of music production, mixing audio had been hugely impacted by the paradigm shift created by digital technologies. That said, the architecture and function of virtually all digital software and hardware is based on the models developed through analog hardware and processing. The objective of this seven-week intensive course is - using the best and most appropriate of both the digital and analog tools - to refine our mixing skills and expand our repertory of techniques. This will include both digital in-the-box processing and analog processing ? console (via SSL and API) and outboard equipment, and combinations of the two.",
+    "desc": "Commonly referred to as a mystifying ‘Dark Art,’ mixing records involves composing a final assemblage and balancing of a song’s recorded elements, with the final goal of enabling a recording to deliver a clear and emotional intended message. Not easy. In this seven-week, intensive course, the instructor will provide a complete exposition of his mix methodology and technique in the state-of-the-art facilities of the Clive Davis Institute of Recorded Music. Specific topics will include the instructor’s personal approach to establishing balances, using compression, automation, enhancing dynamics and developing unique coloration through effects. The course aims to demystify some of the intangibles of this frequently misunderstood art. The instructor will discuss how technology, budgets and past experiences have shaped his approach to the ever-evolving challenges of the marketplace.",
     "prereqs": []
   },
   {
     "code": "REMU-UT 1061",
     "name": "Mastering the Record",
-    "desc": "Mastering is the last creative step of production and the first technical step of manufacturing, broadcast, or distribution. Artists, producers, and record labels demand proper mastering to insure that their product holds its own in the marketplace and insist that none but the most qualified ears master their music. Now, with the rise of music downloads, Internet radio, high-resolution discs, streaming and many other forms of distribution, a solid understanding of mastering techniques and new media is vital to the music professional. The course provides an in-depth exploration of the tools and techniques involved in professional mastering. The course will endeavor to illustrate the powers of mastering as well as its limitations. A wide range of processing techniques and advanced editing methods will be demonstrated and compared. Tools of the trade will be surveyed with emphasis on what distinguishes hardware and software as truly \"mastering grade.\" Critical listening and the psychoacoustics of decision-making will be explored. Students are taught how to better master their own productions, as well as to recognize when to turn to a mastering professional. Emphasis will be on listening and objective comparison in guiding the mastering approach and in judging its success. Ample real-world case studies will be used to demonstrate approaches and results. Students will do their own mastering on material supplied by the instructor, as well as on each other's music, for critiques and comparisons. Attention will be given to how to prepare for a professional mastering session and how to interact with the mastering engineer. Assignments are drawn from the instructor’s day-to-day work as a mastering engineer. For the final assignment, students will be grouped into two-person teams. Team members will trade positions as “client” and “mastering engineer,” each mastering the other’s production. Students will visit the instructor’s commercial mastering studio to hear their work and to observe the instructor’s approach to some of their productions.",
+    "desc": "Mastering is the crucial final stage of audio production where creativity, technical skill, and a keen ear for detail come together to polish and prepare recordings for mass distribution. This process not only ensures quality control but also has the potential to elevate a mix through subtle to transformative techniques, turning it into a finished record. Historically, mastering was done only in specialized studios. However, with today's technology, engineers with the right skills, a laptop DAW, and a modest investment in monitors can achieve professional results from an every day space. This class combines demonstrations, discussions of theory and process, and hands-on practice to equip students with the skills and intentionality required for audio mastering. In this course students will learn to recognize the power and limitations of mastering, while developing the ability to master their own productions and work effectively with mastering professionals providing valuable insights for future collaborations in the industry. Emphasis is placed on deep listening and objective comparisons. Ample case studies will demonstrate a range of tools and approaches. Students will gain experience by mastering songs drawn from the instructor’s on-going mastering practice as well as peer-produced material. All student masters are presented in class for critiques and discussions.",
     "prereqs": []
   },
   {
@@ -38920,6 +38862,14 @@
     "code": "REMU-UT 1084",
     "name": "Words Matter: Lyrics In History & Practice",
     "desc": "When you're happy, you enjoy the music but when you're sad, you understand the lyrics. – Frank Ocean This class will focus on the power of lyric both in our evolution as social beings and in our present-day practice as songwriters. We will come to understand the forms and functions of songwriting and lyric as a culmination of traditions that converge in the popular song. Students will explore the art and craft of lyric writing for popular music by combining historical analysis with hands-on practice. Students will examine the evolution of popular song lyrics from the Book of Psalms to early Tin Pan Alley compositions to contemporary chart-toppers, studying the cultural and artistic influences that have shaped songwriting trends. Through close analysis of influential lyricists across genres—such as blues, folk, rock, R&B, hip-hop, and country—students will develop a deeper understanding of structure, theme, rhyme, and storytelling in song. In the practical component of the course, students will apply their knowledge by writing original lyrics, experimenting with different styles, and receiving peer and instructor feedback. Weekly exercises will focus on imagery, metaphor, rhythm, and emotional resonance, culminating in a portfolio of original lyrics. No prior musical experience is required, though collaboration with musicians is encouraged. By the end of the course, students will have a strong foundation in both the historical context and creative techniques of lyric writing in popular music.",
+    "prereqs": [
+      "REMU-UT 1105"
+    ]
+  },
+  {
+    "code": "REMU-UT 1085",
+    "name": "Max Martin: The Musical Architecture of the Number Ones",
+    "desc": "Since 1998, Martin has written or co-written 27 Billboard Hot 100 number-one hit songs (most of which he has also produced or co-produced). Eight of these songs debuted at number one on the chart. This makes him the single most successful songwriter/producer in the history of popular music. Was it luck, skill, a combination of both or did he crack a social/cultural/artistic code and develop a language and set of formulae that went on to determine, predict and command the top of the charts? This course will investigate the harmonic, rhythmic, melodic, lyrical and sonic aesthetic choices that went into these 27 songs. Through weekly readings, listenings, transcriptions and creative assignments, students will present an argument for or against the “luck” theory and learn the inner workings of each of the 27 songs. Basic understanding of and access to a Digital Audio Workstation (Garage Band, ProTools, Logic, Ableton etc) is a requirement as students will be given access to recorded music stems in order to create their own sonic collages within the given parameters of each song or group of songs. Students will complete a library of their own works throughout the semester to accompany their argument and to be presented in a final project.",
     "prereqs": []
   },
   {
@@ -38967,7 +38917,7 @@
   {
     "code": "REMU-UT 1102",
     "name": "Critical Listening for the Recording Studio",
-    "desc": "In order for the budding producer to realize their potential in the studio, the ability to describe what is being heard and the skill to articulate possible audio issues is a necessity. Critical listening skills take years to develop and this course is designed to speed up the process of creating ?Golden Ears? and give the student a head start. Through listening exercises, students will develop critical listening skills. Using pink noise, students will learn to identify frequency ranges, boosts and cuts in the theoretical as well as in the practical using music. Weekly drill sets will include: A/B Drills, comparing original recordings with altered versions, identification of time delay, and the onset of reverberation. The course will use the David Moulton?s Golden Ears CD?s and The Producer as Composer ? Shaping the Sounds of Popular Music by Virgil Moorefield as texts. Note: There is a lab fee for this class.",
+    "desc": "In order for the aspiring music producer to realize their potential in the studio, the ability to accurately describe what is being heard, and the skill to articulate possible audio issues, is a crucial necessity. Critical listening skills can take years to develop and this course is designed to speed the process of creating a pair of “Golden Ears” and give the student a head start in developing their listening. Through theoretical and practical listening exercises, students will develop this expertise.",
     "prereqs": []
   },
   {
@@ -38979,13 +38929,13 @@
   {
     "code": "REMU-UT 1105",
     "name": "Writing The Hit Song",
-    "desc": "This course introduces students to the art of crafting hit songs. We study the ?great? writers of popular music, from Irving Berlin to Babyface, and we make practical applications of that knowledge as we craft songs both collaboratively and individually. Students gain a rudimentary knowledge of musicianship, as well as an overview of the pragmatic aspects of commercial songwriting, including copyrighting and publishing. Note: There is a lab fee for this class.",
+    "desc": "Music sits at the forefront of creative and technological revolutions, and songwriting remains the fundamental form of its expression. This course will focus on the creative process of songwriting, but will contextualize the art form within a fundamentally shifting industry. In this course, students will write, co-write, and analyze songs in order to establish and engage their own songwriting voice. Songwriting exercises, in-class critique, guest speakers from the worlds of art and business, and a final presentation of finished work will provide a holistic picture of what is created when a song is written. In addition, focus will be placed on what the song is from a business standpoint. Issues of publishing, copyright, mechanical royalties, licensing, and synchronization will be discussed via readings and guest speakers from music’s legal and administrative worlds.",
     "prereqs": []
   },
   {
     "code": "REMU-UT 1106",
     "name": "Musicianship:  Music Theory & Construction.",
-    "desc": "This course emphasizes a no-nonsense and demystifying presentation of the three elements of music — rhythm, melody, and harmony. You will review and analyze a variety of musical examples — written and recorded — to demonstrate these concepts with a focus on contemporary western music (everything from the Beatles and Stevie Wonder to Wilco, Radiohead, and Katy Perry). The second half of the course is a practical application of the tools. You will learn how to transcribe rhythms, hear chord progressions, and arrange and compose at a basic level. The goal of the course is to enable you to break down a song competently and have a fuller appreciation of what producers/arrangers/composers/songwriters do — skills you will undoubtedly need for a career in the music industry.",
+    "desc": "This course emphasizes a no-nonsense and demystifying presentation of the three elements of music: rhythm, melody, and harmony. You will review and analyze a variety of musical examples, written and recorded, to demonstrate these concepts with a focus on contemporary western music (everything from the Beatles and Stevie Wonder to Radiohead, Beyoncé and Kendrick Lamar). You will learn how to write a lead sheet, transcribe rhythms, hear chord progressions, and arrange and compose at a basic level. The goal of the course is to enable you to break down a song competently and have a fuller appreciation of what producers, arrangers, composers, and songwriters do, skills you will undoubtedly need for a career in the music industry.",
     "prereqs": []
   },
   {
@@ -39040,6 +38990,12 @@
     "code": "REMU-UT 1129",
     "name": "Topics:The Motown Legacy",
     "desc": "Started in 1959 in Detroit by songwriter and then budding entrepreneur Berry Gordy, Motown quickly became dubbed \"Hitsville USA,\" as it served as home to artists like The Supremes, The Temptations, Mary Wells, Smokey Robinson, Stevie Wonder, Martha and the Vandellas, Michael Jackson and the Four Tops, to name a few. Motown literally changed the concept of the record label and redefined the very idea of entrepreneurship in recorded music, serving as core inspiration to artists from The Beatles to Beyonce. Motown's incredible legacy of success served a crucial role in helping to integrate popular music and thereby helped to rewrite the narrative of race and class in America. One of the greatest examples of an artist expanding the boundaries of his art, of his company?s limitations, of the public?s expectations, and subsequently of what it meant to be a pop artist, is the album What?s Going On by Marvin Gaye, issued by Motown in spring 1971. As we narrow our focus to study this album its roots, its creation, the difficulty with its release, its astonishing success students will be introduced to the legacy of Motown Records. Readings, class lectures, guest speakers, video and audio clips will answer the questions, Who was Marvin Gaye? How did he get to a place where felt he needed to create this album? Why was it difficult for him to get the song and the album released? What was Motown doing politically the years before? What was company policy that created an issue around the album content? What did it mean to be an artist and a producer at Motown or not?",
+    "prereqs": []
+  },
+  {
+    "code": "REMU-UT 1139",
+    "name": "Topics in Recorded Music: Beastie Boys",
+    "desc": "Restless innovators and cultural iconoclasts, hip-hop group Beastie Boys have earned multiple platinum albums and Grammy awards, and they’ve been inducted into the Rock and Roll Hall of Fame. They also hold the sales crown as the top-selling hip-hop group of all time. Comprised of members Michael “Mike D” Diamond, Adam “Ad-Rock” Horovitz and Adam “MCA” Yauch (who passed away in 2012), Beastie Boys launched their early musical career in punk before releasing their 1986 hip-hop debut Licensed to Ill, anchored by anthemic hit “Fight For Your Right.” Beastie Boys’ landmark 1989 follow-up, Paul’s Boutique, pushed the envelope on sampling, collage and innovative sonics, inspiring generations of diverse artists to come from DJ Shadow to Devonté Hynes of Blood Orange. After Paul’s Boutique came a slate of critically acclaimed classic albums like Check Your Head, Ill Communication, Hello Nasty, To the 5 Boroughs, The Mix-Up, and Hot Sauce Committee Part Two. Beastie Boys’ unique hip-hop rock amalgam helped carve out space for a succession of hip-hop artists to come like like Eminem, Rage Against the Machine, Limp Bizkit, and Blur. Beyond music, Beastie Boys also found success as creative entrepreneurs: they’ve branched out as label owners, magazine publishers, filmmakers, book authors and political activists. Commemorating The Clive Davis Institute of Recorded Music’s collaboration with Beastie Boys’ Oscilloscope Studios (now housed at the Clive Davis Institute’ facilities in Brooklyn), this class takes students on an inspiring and informative romp through the eclectic world that made Beastie Boys—and the world that they helped make. The course is co-taught by Beastie Boys members Mike D and Ad-Rock in conjunction with noted journalist/writer Alan Light (who previously wrote The Skills to Pay the Bills: The Story of the Beastie Boys). Each class is divided into two parts. The first half of each session, spearheaded by instructor Alan Light, focuses on historical-critical studies that places Beastie Boys’ influences in context, and delves into the late 70s and 80s New York environment that provided the bed for the Boys’ creativity. While completing focused readings, and undertaking listening and viewing assignments, students investigate the social, cultural, musical and business aspects of the Beastie Boys in the 1980s and beyond, also they delve into the band’s unique techniques and aesthetics. The second half focuses on practical aspects of musicianship, performance, composition and production— meaning students, drawing on the band’s legendary sonic menus, techniques and aesthetics, will be using Oscilloscope to making their own music under the guidance of Mike D and Ad Rock. (The two halves will often overlap as the instructors weigh in on all aspects of the course.) Listening closely to playlists (in and out of class) and in completing writing assignments, students will work in pre-determined student groups, creating original music under careful mentorship, experimenting with compositional and studio choices, working collaboratively to produce, refine, and share their music.",
     "prereqs": []
   },
   {
@@ -39171,7 +39127,7 @@
   {
     "code": "REMU-UT 1175",
     "name": "Topics in Recorded Music: Indigenous Pop Around the World",
-    "desc": "In 2021, New Zealand pop star / singer-songwriter Lorde released a five-song EP of tracks from her Solar Power album, rerecorded in the indigenous Māori language. Five years prior, pop stars like Pharrell Williams, Dave Matthews, Radiohead, and Sia raised their voices at Standing Rock, North Dakota in support of the protests against the Dakota Access Pipeline—one of many increasing threats to the sovereignty of Indigenous Nations. Their celebrity presence was key to attracting mainstream media coverage. However, those artists were largely following the lead of Native hip-hoppers like Supaman, Snotty Nose Rez Kids, and Prolific, who’d already been at Standing Rock since the start of the protests, rallying their own communities. This course will engage students around the growing globalization of Indigenous Peoples movements that intersects culture, politics, and economics. These days, Indigenous musicians like Aboriginal Australian rapper Baker Boy and Canadian First Nations vocalist Jeremy Dutcher are gaining in visibility, topping critics’ year-end Best-Of lists and taking home awards. This “Creative Natives” wave is being felt far outside of music, too: Tzotzil fashion designer Alberto López Gomez from Chiapas, Mexico was featured in New York Fashion Week; Māori filmmaker Taika Waititi won an Oscar for JoJo Rabbit; influential art critics heralded White Mountain Apache music performance artist and film scorer Laura Ortman at the 2020 Whitney Biennial, and Seminole/Muscogee Creek showrunner Sterling Harjo’s Reservation Dogs is the new hit on FX/Hulu. Over the course of seven weeks, students will engage with a wide range of international Indigenous performers and music(s) they may have never heard before—from Māori metal to Saami yoik-rap, Quechua huanyo-pop, Inuit throatsinging, Maasai hip-hop, Hawaiian reggae, Tokelauan dance-pop, and even Tuareg rock. Meanwhile, they will discover how Indigenous artists have not only achieved national, even international, acclaim in popular mainstream music genres, they are increasingly “indigenizing” them with languages, instruments, and vocal techniques from their own cultural traditions. We will also look at some Indigenous stars who broke barriers to achieve mainstream fame as singular personalities and cultural ambassadors: artists like Yma Sumac, Buffy Sainte-Marie, Israel Kamakawiwo’ole, and more. And also, we’ll survey the impact of Indigenous artists and music on the both the mainstream recording industry, as well as the growth of Indigenous-directed business entities doing things on their own terms. Through readings, lectures, and class discussions, students will be introduced to important scholarship on Indigenous identity, (de-)colonization, cultural appropriation, aesthetics, and so on. Any student interested in socio-cultural movements, roots music trends, arts-centered activism, and the ways in which music introduces audiences to the messages within each of these—especially regarding themes like climate justice, human rights, social inclusion, and sovereignty issues—will benefit from taking this class. Students can also expect to leave the course with a greater awareness of, and hopefully appreciation for, the growing global presence and popularity of Indigenous sounds, voices, and views.",
+    "desc": "This 7-week course explores the global rise of Indigenous Peoples’ voices and presence in popular music genres, intersecting with and even influencing broader social, political, and creative movements in contemporary art, fashion, film, and beyond. Thanks to social media, Indigenous artists now reach international audiences, while increasingly “indigenizing” popular music with their own languages, instruments, vocal techniques, and other components from their distinct heritage traditions. Through class lectures, readings, listenings, and discussions, students will engage pertinent scholarship and a wide range of international Indigenous performers and genres—Native American powwow hip-hop to Māori metal, Andean Q-pop to Sámi yoik-rap, Maasai bongo flava, Inuit throat-singing, Papuan reggae, Tokelauan techno-pop, and Tuareg rock, for some examples. The course also makes special note of pioneering artists who have broken barriers and serve as cultural ambassadors, to consider their impact on the entertainment industry—including the rise of Indigenous-led entities therein. We will also be joined by some very special guests during the term, to speak to their own notable experiences in this movement.",
     "prereqs": []
   },
   {
@@ -39311,7 +39267,7 @@
   {
     "code": "REMU-UT 1207",
     "name": "Independent Project Management",
-    "desc": "This practicum course is for students to continue the development of projects as well as for live-testing marketing and launch plans and caters equally to aspiring executives, tech and social entrepreneurs, performers, producers, songwriters, and journalists. Utilizing project management techniques, students will be responsible for accomplishing weekly milestones that will move them towards product-market-fit and building an audience. Lessons from Creative Marketing and Incubation & Launch will move student projects from theoretical to applied, with the professor available to reiterate any difficult concepts and provide regular individualized guidance.",
+    "desc": "This course serves as a practicum for advancing student projects, inclusive of any industry areas, while offering an opportunity to live-test marketing strategies and business plans. Through applied project management techniques, students will be tasked with achieving regular milestones that support their long-term career objectives. Coursework from previous classes such as Music Marketing and Business Planning will be reviewed, revised and updated (if needed), and put into action and practice with the professor there for close coaching, oversight, and assistance with concepts and strategy.",
     "prereqs": []
   },
   {
@@ -39565,7 +39521,7 @@
   {
     "code": "REMU-UT 1331",
     "name": "Vocal Coaching: Private Instruction",
-    "desc": "As the music industry diversifies, many artists are developing a conceptual and layered stage performance to help magnify their work as artists and performers. There is a rich history of the collaboration between Music Performance and Fine Art that has defined musicians, visual artists and performance artists alike. This class will build on each student’s persona and conceptual stage performance through lessons related to the history of this indelible relationship between the performance arts and music. Each class will include a discussion based on critical reading and video selections of work that has combined musical performance with conceptual work. The conversation will cultivate an environment to workshop each performer’s conceptual vision for their work, and how to best embody those ideas through performance technique. At moments, the classes will focus on particular historical relationships and texts relating to the physical “body” and the “stage”. We will explore techniques and forms that ask: What is our performance of Politics? Community? Race? Sexuality? - and how can the answer to these questions inform our relationship to our own work and our individual personas? What is a “body” and how can the understanding of using your “body” to discuss your work define what you project to each “audience” and your relationship to a broader cultural experience.",
+    "desc": "Geared for contemporary artists and popular music, this one-on-one private vocal instruction will help students work to develop their singing voice for both the studio and the stage - to explore the geography of the human voice, the application of the how and why of technical exercises, and the development of the vocal instrument tailored to each individual student. Through various methods and means, tailored to each individual student's needs, the exercises used in the lessons are tried and true ways to develop various aspects of vocalism, enabling a deepened connection to the mind-body relationship within one’s self in regard to the singing voice. Students will delve in to the art of song interpretation from both a performance and production standpoint and will build performance instincts, allowing the student to make a piece of music blossom. The result should be a marked improvement of the overall relationship to the student’s vocal instrument, the understanding of the mechanics and physiology of the voice, the vocal registers and how to negotiate and connect them, an understanding of optimum breath control, body alignment, vocal and physical strength, stamina, timbre, range, general vocal health and overall freedom of vocal expression.",
     "prereqs": []
   },
   {
@@ -46101,8 +46057,8 @@
   },
   {
     "code": "IDSEM-UG 2217",
-    "name": "Trans/Queer Rhythms of Time and Temporality",
-    "desc": "This course explores trans/queer ways of approaching, practicing, experiencing, and theorizing time and temporality. We will start with foundational works that will allow us to create the foundations of our discussions. From E.E. Evans Pritchard to Nancy D. Munn, we will explore how anthropologists analyzed the everyday practices of time. We will collectively discuss questions such as What does it mean to be recognized as existing in time? What does it mean to recognize that time exist? What is the relation of history and the narration of the connections between the past, present, and future, to institutionalization of time and temporality? Drawing on these questions and our foundational work, we will start exploring trans/queer approaches to time, to form a critical approach to institutionalization of time, and limits of self-determination. While understanding gender and sexuality angle of the time and temporality of the everyday life, we will read scholars such as Mark Rifkin, Kadji Amin, and Heather Love, to explore the connections across trans/queer Indigenous, People of Color critiques of time and temporality.",
+    "name": "Time (and Gender and Sexuality)",
+    "desc": "From habit-tracking apps that promise to optimize our lives to the developmental life stages we’re expected to pass through, time often functions as a tool for regulating bodies and shaping everyday experience. Our relationship to time is deeply entangled with the politics of gender and sexuality—and vice versa. We’re told when to come of age, how to experience our bodies, when to “start a family,” or when to settle down. But what is the “right time”—and for whom? Who gets to be “on time”? And what role do gender and sexuality play in how time structures our lives? This course engages with these questions by examining the intersections of time, gender, and sexuality. Throughout the semester, we will explore how scholars, artists, and organizers have challenged cis-heteronormative understandings of time—whether tied to productivity, fixed definitions of childhood and development, or taken-for-granted notions of progress. We’ll read works by trans and queer theorists such as Judith Butler, Jack Halberstam, Sandy Stone, and Kadji Amin to explore and theorize alternative ways of being “on time.”",
     "prereqs": []
   },
   {
@@ -46847,6 +46803,12 @@
     "code": "INDIV-UG 9151",
     "name": "BUENOS AIRES: Great World Texts",
     "desc": "This tutorial connects NYU students with students at Lenguas Vivas, a vibrant public high school in Buenos Aires' Retiro neighborhood. NYU students will mentor high school seniors as they read, discuss and write about a well-known literary text. Conducted in English.",
+    "prereqs": []
+  },
+  {
+    "code": "INDIV-UG 9152",
+    "name": "BUENOS AIRES: Great World Texts",
+    "desc": "This tutorial connects NYU students with students at Lenguitas and Carlos Pellegrini public high schools in Buenos Aires. NYU students will mentor high school seniors as they read, discuss and write about a well-known literary text. Students are required to complete 10 hours of placement at one of the local schools over the semester. Conducted in English.",
     "prereqs": []
   },
   {

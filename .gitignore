@@ -1,6 +1,10 @@
 # Node.js dependencies
 node_modules/
 
+#json
+allCourses.json
+bulletin_links.json
+
 # Environment variables
 .env
 

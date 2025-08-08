@@ -1,3 +1,5 @@
+//main course scraper
+
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import fs from 'fs';
@@ -6,7 +8,6 @@ import path from 'path';
 const urlsPath = path.join('./src/data/courseScraper', 'bulletin_links.json');
 const outputPath = path.join('./src/data/courseScraper', 'allCourses.json');
 
-// Load and convert grouped { school: [urls] } into flat array
 const rawLinks = JSON.parse(fs.readFileSync(urlsPath, 'utf-8'));
 const flatLinks = [];
 
@@ -54,21 +55,27 @@ async function scrapeCoursesFromURL(url) {
 async function run() {
   const allCourses = [];
 
-  for (const { school, url } of flatLinks) {
-    console.log(`🔍 Scraping ${school}: ${url}`);
+  console.log(`\n📘 Starting course scraping from ${flatLinks.length} departments...\n`);
+
+  for (let i = 0; i < flatLinks.length; i++) {
+    const { school, url } = flatLinks[i];
+    const deptName = url.split('/').at(-2);
+
+    console.log(`🧾 [${i + 1}/${flatLinks.length}] ${school} → ${deptName}`);
+
     try {
       const deptCourses = await scrapeCoursesFromURL(url);
       allCourses.push(...deptCourses);
-      console.log(`✅ ${url.split('/').at(-2)}: ${deptCourses.length} courses`);
+      console.log(`   ✅ ${deptCourses.length} courses scraped\n`);
     } catch (err) {
-      console.warn(`❌ Failed to scrape ${url}: ${err.message}`);
+      console.warn(`   ❌ Failed to scrape: ${err.message}\n`);
     }
 
-    await delay(1000); // polite delay between departments
+    await delay(1000);
   }
 
   fs.writeFileSync(outputPath, JSON.stringify(allCourses, null, 2));
-  console.log(`🎉 Saved ${allCourses.length} total courses to allCourses.json`);
+  console.log(`\n🎉 Done! Total courses saved: ${allCourses.length}\n📁 Output: ${outputPath}\n`);
 }
 
 run();

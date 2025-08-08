@@ -1,0 +1,1 @@
+run courseScraper.js to scrape courses
