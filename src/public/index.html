@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Transcript</title>
+</head>
+<body>
+  <h1>Upload Your NYU Transcript (PDF)</h1>
+  <form id="uploadForm">
+    <input type="file" id="transcript" name="transcript" accept=".pdf" required />
+    <br><br>
+    <button type="submit">Upload</button>
+  </form>
+
+  <pre id="response" style="margin-top: 2em; white-space: pre-wrap;"></pre>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const fileInput = document.getElementById('transcript');
+    const responseBox = document.getElementById('response');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const file = fileInput.files[0];
+      if (!file) return alert("Please upload a PDF.");
+
+      const formData = new FormData();
+      formData.append('transcript', file);
+
+      responseBox.textContent = 'Uploading...';
+
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+        responseBox.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        responseBox.textContent = '❌ Upload failed.';
+      }
+    });
+  </script>
+</body>
+</html>

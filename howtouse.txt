@@ -1,1 +1,4 @@
-run courseScraper.js to scrape courses
+1. Course Scraping 
+    run bulletinsLinkScraper.js to scrape bulletin links
+    run courseScraper.js to scrape courses
+2. 
