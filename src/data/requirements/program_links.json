@@ -1,5 +1,5 @@
 {
-  "arts-science": [
+  "CAS": [
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/advanced-mathematical-methods-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/africana-studies-ba/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/africana-studies-minor/#curriculumtext",
@@ -166,17 +166,17 @@
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/web-programming-applications-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/programs.pdf#curriculumtext"
   ],
-  "dentistry": [
+  "Dentistry": [
     "https://bulletins.nyu.edu/undergraduate/dentistry/programs/dental-hygiene-associate-applied-science/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/dentistry/programs/dental-hygiene-bachelor-science/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/dentistry/programs/programs.pdf#curriculumtext"
   ],
-  "individualized-study": [
+  "Gallatin": [
     "https://bulletins.nyu.edu/undergraduate/individualized-study/programs/individualized-major-ba/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/individualized-study/programs/psychoanalysis-humanities-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/individualized-study/programs/programs.pdf#curriculumtext"
   ],
-  "business": [
+  "Stern": [
     "https://bulletins.nyu.edu/undergraduate/business/programs/business-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/business/programs/accounting-bs-ms/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/business/programs/business-political-economy-bs/#curriculumtext",
@@ -187,7 +187,7 @@
     "https://bulletins.nyu.edu/undergraduate/public-service/programs/social-entrepreneurship-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/business/programs/programs.pdf#curriculumtext"
   ],
-  "liberal-studies": [
+  "Liberal Studies": [
     "https://bulletins.nyu.edu/undergraduate/liberal-studies/programs/global-liberal-studies-ba/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/liberal-studies/programs/global-liberal-studies-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/liberal-studies/programs/global-liberal-studies-public-health-ba/#curriculumtext",
@@ -195,7 +195,7 @@
     "https://bulletins.nyu.edu/undergraduate/liberal-studies/programs/translation-studies-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/liberal-studies/programs/programs.pdf#curriculumtext"
   ],
-  "abu-dhabi": [
+  "NYU Abu Dhabi": [
     "https://bulletins.nyu.edu/undergraduate/abu-dhabi/programs/african-studies-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/abu-dhabi/programs/ancient-world-studies-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/abu-dhabi/programs/anthropology-minor/#curriculumtext",
@@ -257,7 +257,7 @@
     "https://bulletins.nyu.edu/undergraduate/abu-dhabi/programs/urbanization-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/abu-dhabi/programs/programs.pdf#curriculumtext"
   ],
-  "shanghai": [
+  "NYU Shanghai": [
     "https://bulletins.nyu.edu/undergraduate/shanghai/programs/biology-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/shanghai/programs/biology-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/shanghai/programs/business-minor/#curriculumtext",
@@ -302,7 +302,7 @@
     "https://bulletins.nyu.edu/undergraduate/shanghai/programs/social-science-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/shanghai/programs/programs.pdf#curriculumtext"
   ],
-  "public-service": [
+  "Wagner": [
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/leadership-spirituality-social-innovation-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/public-policy-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/public-service/programs/public-policy-management-minor/#curriculumtext",
@@ -310,18 +310,18 @@
     "https://bulletins.nyu.edu/undergraduate/arts-science/programs/public-policy-ba/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/public-service/programs/programs.pdf#curriculumtext"
   ],
-  "nursing": [
+  "Rory Meyers College of Nursing": [
     "https://bulletins.nyu.edu/undergraduate/nursing/programs/nursing-accelerated-15-month-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/nursing/programs/nursing-traditional-4-year-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/nursing/programs/global-public-health-nursing-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/nursing/programs/programs.pdf#curriculumtext"
   ],
-  "global-public-health": [
+  "Global Public Health": [
     "https://bulletins.nyu.edu/undergraduate/global-public-health/programs/bioethics-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/global-public-health/programs/public-health-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/global-public-health/programs/programs.pdf#curriculumtext"
   ],
-  "professional-studies": [
+  "SPS": [
     "https://bulletins.nyu.edu/undergraduate/professional-studies/programs/applied-data-analytics-visualization-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/professional-studies/programs/applied-general-studies-ba/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/professional-studies/programs/business-aas/#curriculumtext",
@@ -345,7 +345,7 @@
     "https://bulletins.nyu.edu/undergraduate/professional-studies/programs/travel-hospitality-tourism-management-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/professional-studies/programs/programs.pdf#curriculumtext"
   ],
-  "social-work": [
+  "Silver": [
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/global-public-health-social-work-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/inequality-studies-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/leadership-spirituality-social-innovation-minor/#curriculumtext",
@@ -353,7 +353,7 @@
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/social-work-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/social-work/programs/programs.pdf#curriculumtext"
   ],
-  "culture-education-human-development": [
+  "Steinhardt": [
     "https://bulletins.nyu.edu/undergraduate/culture-education-human-development/programs/american-sign-language-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/culture-education-human-development/programs/applied-psychology-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/culture-education-human-development/programs/child-development-social-intervention-minor/#curriculumtext",
@@ -409,7 +409,7 @@
     "https://bulletins.nyu.edu/undergraduate/culture-education-human-development/programs/vocal-performance-bm/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/culture-education-human-development/programs/programs.pdf#curriculumtext"
   ],
-  "engineering": [
+  "Tandon": [
     "https://bulletins.nyu.edu/undergraduate/engineering/programs/aerospace-engineering-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/engineering/programs/applied-physics-bs/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/engineering/programs/applied-physics-minor/#curriculumtext",
@@ -450,7 +450,7 @@
     "https://bulletins.nyu.edu/undergraduate/engineering/programs/transportation-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/engineering/programs/programs.pdf#curriculumtext"
   ],
-  "arts": [
+  "Tisch": [
     "https://bulletins.nyu.edu/undergraduate/arts/programs/applied-theatre-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts/programs/art-public-policy-minor/#curriculumtext",
     "https://bulletins.nyu.edu/undergraduate/arts/programs/asian-film-media-minor/#curriculumtext",
