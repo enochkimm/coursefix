@@ -1,5 +1,4 @@
-// src/data/requirements/tisch_scraper.js
-// Scrapes Tisch program pages and emits credit-aware rules JSON (no GPT)
+// Scrapes ALL schools listed in program_links.json and emits credit-aware rules JSON (no GPT)
 
 import puppeteer from "puppeteer";
 import fs from "fs";
@@ -12,7 +11,7 @@ import {
 
 // -------- Paths --------
 const LINKS_PATH = path.join("./src/data/requirements", "program_links.json");
-const OUT_PATH   = path.join("./src/data/requirements", "tisch_requirements.json");
+const OUT_PATH   = path.join("./src/data/requirements", "curriculums.json");
 
 // Optional: course catalog for credit backfill (safe if missing)
 const COURSE_CATALOG_PATH = "./src/data/courseScraper/allCourses.json";
@@ -20,6 +19,16 @@ const COURSE_CATALOG_PATH = "./src/data/courseScraper/allCourses.json";
 // --- tiny helpers ---
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 const last  = (a) => a[a.length - 1];
+
+function stripFragment(u) {
+  try {
+    const url = new URL(u);
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return String(u).split("#")[0];
+  }
+}
 
 /**
  * Parse a Program Requirements text block into structured sections.
@@ -159,20 +168,12 @@ async function extractProgramRequirements(page) {
 }
 
 async function run() {
-  // load links
+  // load links (ALL schools)
   if (!fs.existsSync(LINKS_PATH)) {
     console.error(`❌ Missing ${LINKS_PATH}`);
     process.exit(1);
   }
   const linksJson = JSON.parse(fs.readFileSync(LINKS_PATH, "utf-8"));
-  const tischLinks = (linksJson["Tisch"] || []).filter(u => !/programs\.pdf/i.test(u));
-  if (tischLinks.length === 0) {
-    console.error("❌ No Tisch curriculum links found in program_links.json");
-    process.exit(1);
-  }
-
-  // normalize: strip fragments so we’re not dependent on old anchors
-  const normalized = Array.from(new Set(tischLinks.map(u => u.split("#")[0])));
 
   // Optional catalog (for credit backfill). Safe if missing.
   const catalogIndex = loadCourseCatalog(COURSE_CATALOG_PATH);
@@ -181,56 +182,73 @@ async function run() {
 
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
-  await page.setUserAgent("coursefix/1.0 (+tisch-scraper; puppeteer)");
+  await page.setUserAgent("coursefix/1.0 (+nyu-scraper; puppeteer)");
   await page.setViewport({ width: 1280, height: 900 });
 
-  const results = { Tisch: {} };
+  const results = {}; // { School: { ProgramTitle: {...} } }
 
-  console.log(`🎭 Scraping ${normalized.length} Tisch programs…`);
-  for (const url of normalized) {
-    const slug = last(url.replace(/\/$/, "").split("/")); // e.g. interactive-media-arts-bfa
-    console.log(`  • ${slug}`);
+  const schoolNames = Object.keys(linksJson).filter(k => k && linksJson[k] && Array.isArray(linksJson[k]));
+  console.log(`🏫 Schools found: ${schoolNames.length}`);
 
-    try {
-      await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
+  for (const school of schoolNames) {
+    const allLinksRaw = linksJson[school] || [];
+    // drop PDFs, strip fragments, dedupe
+    const links = Array.from(new Set(
+      allLinksRaw
+        .filter(u => !/programs\.pdf/i.test(u))
+        .map(stripFragment)
+    ));
 
-      // Wait a breath for any JS that hydrates the tab content
-      await sleep(300);
+    if (links.length === 0) {
+      console.log(`  • ${school}: (no curriculum links)`);
+      continue;
+    }
 
-      const title = await page.$eval("h1", el => (el.textContent || "").trim()).catch(() => slug);
+    results[school] = {};
+    console.log(`  • ${school}: scraping ${links.length} programs…`);
 
-      const reqText = await extractProgramRequirements(page);
-      if (!reqText) {
-        console.log("    ↳ ⚠️ Program Requirements block not found");
-        continue;
+    for (const url of links) {
+      const slug = last(url.replace(/\/$/, "").split("/"));
+      process.stdout.write(`    - ${slug} … `);
+
+      try {
+        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 25000 });
+        await sleep(350); // allow tab hydration
+
+        const title = await page.$eval("h1", el => (el.textContent || "").trim()).catch(() => slug);
+
+        const reqText = await extractProgramRequirements(page);
+        if (!reqText) {
+          console.log("⚠️ no requirements block");
+          continue;
+        }
+
+        // First pass: sectionize lines
+        const parsedSections = parseRequirementsBlock(reqText);
+
+        // Second pass: convert to credit-aware rules (with inference + GROUP_SELECT→4 fallback)
+        const rules = buildRulesFromSections(parsedSections, lookup);
+        const summary = summarizeRules(rules);
+
+        results[school][title] = {
+          url,
+          double_counting_default: "none",
+          rules,
+          raw_excerpt: reqText.slice(0, 600),
+          _summary: summary
+        };
+
+        console.log(`ok (rules:${rules.length} unknowns:${summary.unknowns})`);
+      } catch (e) {
+        console.log(`❌ ${e.message}`);
       }
-
-      // First pass: sectionize lines
-      const parsedSections = parseRequirementsBlock(reqText);
-
-      // Second pass: convert to credit-aware rules (with inference baked in)
-      const rules = buildRulesFromSections(parsedSections, lookup);
-      const summary = summarizeRules(rules);
-
-      results.Tisch[title] = {
-        url,
-        double_counting_default: "none",
-        rules,
-        raw_excerpt: reqText.slice(0, 600),
-        _summary: summary
-      };
-
-      console.log(
-        `    ↳ ✅ rules: ${rules.length} | unknown credits: ${summary.unknowns} | totals seen: ${summary.totals.join(", ") || "none"}`
-      );
-    } catch (e) {
-      console.log(`    ↳ ❌ ${e.message}`);
     }
   }
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(results, null, 2));
   console.log(`\n✅ Saved → ${OUT_PATH}`);
+
   await browser.close();
 }
 
