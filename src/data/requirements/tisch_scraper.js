@@ -1,20 +1,29 @@
+// src/data/requirements/tisch_scraper.js
+// Scrapes Tisch program pages and emits credit-aware rules JSON.
+
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
+import {
+  loadCourseCatalog,
+  buildRulesFromSections,
+  summarizeRules
+} from "./credits_rules.js";
 
-const LINKS_PATH  = path.join("./src/data/requirements", "program_links.json");
-const OUT_PATH    = path.join("./src/data/requirements", "tisch_requirements.json");
+// -------- Paths --------
+const LINKS_PATH = path.join("./src/data/requirements", "program_links.json");
+const OUT_PATH   = path.join("./src/data/requirements", "tisch_requirements.json");
+
+// Optional: course catalog for credit backfill (safe if missing)
+const COURSE_CATALOG_PATH = "./src/data/courseScraper/allCourses.json";
 
 // --- tiny helpers ---
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-const last   = (a) => a[a.length - 1];
+const last  = (a) => a[a.length - 1];
 
 /**
  * Parse a Program Requirements text block into structured sections.
- * Works for Tisch pages that show lines like:
- *   IMNY-UT 101 Creative Computing 4
- *   General Education Requirements
- *   Expository Writing (two courses...) 8
+ * Keeps the text-only approach; headings + requirement-like lines.
  */
 function parseRequirementsBlock(text) {
   const lines = text
@@ -29,7 +38,6 @@ function parseRequirementsBlock(text) {
   const creditLineRx = /(\d+)\s*$/;
 
   // course-like: CODE TITLE CREDITS (code optional; we keep the whole line)
-  // Accept things like "IMNY-UT 101", "CSCI-UA 102", etc.
   const courseCodeRx = /\b[A-Z]{2,}-[A-Z]{2,}\s?\d+[A-Z-]*\b/;
 
   const sections = {};
@@ -57,7 +65,7 @@ function parseRequirementsBlock(text) {
       continue;
     }
 
-    // Likely requirement row if it ends with a number (credits),
+    // Likely requirement row if ends with a number,
     // or looks like a course code + title, or a bullet/choice statement.
     if (creditLineRx.test(line) || courseCodeRx.test(line) || /^Select\b/i.test(line) || /^Choose\b/i.test(line)) {
       if (!sections[current]) sections[current] = [];
@@ -65,7 +73,7 @@ function parseRequirementsBlock(text) {
       continue;
     }
 
-    // If we are in a known requirement section and it's a short label line, keep it.
+    // If in a known section and it's a short label line, keep it.
     if (sections[current] && /^(Group|Track|Option|Capstone|Thesis|Minor|Concentration)\b/i.test(line)) {
       sections[current].push(line);
       continue;
@@ -86,10 +94,9 @@ function parseRequirementsBlock(text) {
 async function extractProgramRequirements(page) {
   // 1) Click the "Curriculum" tab if present
   const tabSel = 'a[href*="#"]';
-  const tabs = await page.$$eval(tabSel, as => as.map(a => ({ href: a.getAttribute("href") || "", text: (a.textContent || "").trim() })));
+  const tabs = await page.$$eval(tabSel, as => as.map(a => ({ href: a.getAttribute("href") || "", text: (a.textContent || "").trim() }))).catch(() => []);
   const curriculumTab = tabs.find(t => /curriculum/i.test(t.text));
   if (curriculumTab && curriculumTab.href.startsWith("#")) {
-    // click by text match to avoid anchor rewrites
     await page.evaluate((txt) => {
       const a = Array.from(document.querySelectorAll('a[href*="#"]')).find(x => (x.textContent || "").trim().match(new RegExp(txt, "i")));
       if (a) a.click();
@@ -98,7 +105,6 @@ async function extractProgramRequirements(page) {
   }
 
   // 2) Wait for something that usually contains requirements
-  // Try common containers in priority order
   const candidates = [
     "#curriculumtext",
     "#curriculum",
@@ -112,16 +118,19 @@ async function extractProgramRequirements(page) {
   for (const sel of candidates) {
     try {
       await page.waitForSelector(sel, { timeout: 2500 });
-      // Confirm it actually contains "Program Requirements" or a course list
-      const hasReq = await page.$eval(sel, el => /Program Requirements|Course List|General Education Requirements/i.test(el.innerText));
+      const hasReq = await page.$eval(sel, el =>
+        /Program Requirements|Course List|General Education Requirements/i.test(el.innerText || "")
+      );
       if (hasReq) {
         containerHandle = sel;
         break;
       }
-    } catch {}
+    } catch {
+      // ignore and try next
+    }
   }
 
-  // 3) If not found yet, fall back: locate the heading node by text and take its nearest section
+  // 3) Fallback: locate heading node by text and take its nearest section
   if (!containerHandle) {
     const ok = await page.evaluate(() => {
       const findHeading = (textRx) => {
@@ -165,6 +174,11 @@ async function run() {
   // normalize: strip fragments so we’re not dependent on old anchors
   const normalized = Array.from(new Set(tischLinks.map(u => u.split("#")[0])));
 
+  // Optional catalog (for credit backfill). Safe if missing.
+  const catalogIndex = loadCourseCatalog(COURSE_CATALOG_PATH);
+  console.log(`📚 Catalog entries loaded: ${catalogIndex.size}`);
+  const lookup = (code) => catalogIndex.get(code) || null;
+
   const browser = await puppeteer.launch({ headless: "new" });
   const page = await browser.newPage();
   await page.setUserAgent("coursefix/1.0 (+tisch-scraper; puppeteer)");
@@ -191,16 +205,24 @@ async function run() {
         continue;
       }
 
-      const parsed = parseRequirementsBlock(reqText);
+      // First pass: sectionize lines
+      const parsedSections = parseRequirementsBlock(reqText);
+
+      // Second pass: convert to credit-aware rules
+      const rules = buildRulesFromSections(parsedSections, lookup);
+      const summary = summarizeRules(rules);
 
       results.Tisch[title] = {
         url,
-        parsed,
-        // keep a small raw excerpt for debugging (first 600 chars)
-        raw_excerpt: reqText.slice(0, 600)
+        double_counting_default: "none",
+        rules,
+        raw_excerpt: reqText.slice(0, 600),
+        _summary: summary
       };
 
-      console.log(`    ↳ ✅ parsed sections: ${Object.keys(parsed).join(", ") || "none"}`);
+      console.log(
+        `    ↳ ✅ rules: ${rules.length} | unknown credits: ${summary.unknowns} | totals seen: ${summary.totals.join(", ") || "none"}`
+      );
     } catch (e) {
       console.log(`    ↳ ❌ ${e.message}`);
     }
