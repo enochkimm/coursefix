@@ -13,18 +13,14 @@ function cleanText(s) {
     .trim();
 }
 
-// Return the last standalone integer (defaults to 1..30 as reasonable credit range)
+// Return the last standalone integer (safeguard to 1..30)
 function lastInteger(s, max = 30) {
   const m = [...String(s ?? "").matchAll(/(\d+)(?!.*\d)/g)].pop();
   if (!m) return null;
   const v = parseInt(m[1], 10);
-  if (Number.isNaN(v)) return null;
-  if (v < 0 || v > max) return null;
+  if (Number.isNaN(v) || v < 0 || v > max) return null;
   return v;
 }
-
-// Default per-option credits for GROUP_SELECT when still unknown
-const DEFAULT_GROUP_OPTION_CREDITS = 4;
 
 /** ---------------- Credits + course parsing ---------------- **/
 
@@ -45,7 +41,7 @@ export function parseCreditExpr(s) {
   return null;
 }
 
-// Join rows like: ["CINE-UT 10", "Intro to Cinema Studies", "4"] → "CINE-UT 10 Intro to Cinema Studies 4"
+// Reassemble table-ish rows: ["ARTH-UA 1", "Intro", "4"] → "ARTH-UA 1 Intro 4"
 function reassembleRows(lines) {
   const out = [];
   const codeRx = /\b[A-Z]{2,}-[A-Z]{2,}\s?\d+[A-Z-]*\b/;
@@ -55,10 +51,8 @@ function reassembleRows(lines) {
     if (!l0) continue;
 
     // Already looks like a full row (has code + any digit)
-    const looksFull = codeRx.test(l0) && /\d/.test(l0);
-    if (looksFull) { out.push(l0); continue; }
+    if (codeRx.test(l0) && /\d/.test(l0)) { out.push(l0); continue; }
 
-    // Try to stitch with next 1–2 lines (table → innerText)
     const l1 = cleanText(lines[i + 1] || "");
     const l2 = cleanText(lines[i + 2] || "");
 
@@ -76,26 +70,23 @@ function reassembleRows(lines) {
         continue;
       }
 
-      // No explicit credit; still merge to help parser
       out.push(cleanText(`${l0} ${l1}`));
       i += 1;
       continue;
     }
 
-    // Fallback: push as-is
     out.push(l0);
   }
   return out;
 }
 
-// Return { code, title, credits } (credits may be null)
+// Return { code, title, credits }
 export function parseCourseLine(line) {
   const cleaned = cleanText(line);
   const codeRx = /\b[A-Z]{2,}-[A-Z]{2,}\s?\d+[A-Z-]*\b/;
   const codeMatch = cleaned.match(codeRx);
   const code = codeMatch ? codeMatch[0].replace(/\s+/g, " ") : null;
 
-  // Search only in the "rest" (after code)
   const rest = code ? cleaned.slice(cleaned.indexOf(code) + code.length) : cleaned;
 
   // Prefer ranges and alternatives anywhere in rest
@@ -110,16 +101,21 @@ export function parseCourseLine(line) {
     const a = +alt[1], b = +alt[2];
     credits = { min: Math.min(a, b), max: Math.max(a, b) };
   } else if (word) {
-    const v = +word[1]; credits = { min: v, max: v };
+    credits = { min: +word[1], max: +word[1] };
   } else {
     const v = lastInteger(rest);
     if (v != null) credits = { min: v, max: v };
   }
 
-  // Title from remainder
+  // Title from remainder; strip leading separators
   let title = cleaned;
   if (code) title = title.slice(title.indexOf(code) + code.length).trim();
-  title = title.replace(/^[\-\–:•\s]+/, ""); // strip leading separators
+  title = title.replace(/^[\-\–:•\s]+/, "");
+
+  // Title cleanup: drop trailing numeric debris like "1 4", "2 3", etc.
+  if (credits) {
+    title = title.replace(/\s+\d+(?:\s+\d+)*\s*$/, "").trim();
+  }
 
   return { code, title: title || null, credits };
 }
@@ -133,15 +129,15 @@ export function isDirectiveStart(line) {
 
 export function parseDirective(line) {
   const cleaned = cleanText(line);
-
   const constraints = {};
+
   const minCred = cleaned.match(/(?:at least\s*)?(\d+)\s*(?:credits?|points?)\b/i);
   if (minCred) constraints.min_credits = +minCred[1];
 
   const minCourses = cleaned.match(/(?:select|choose)\s+(\d+)\s+(?:course|courses)\b/i);
   if (minCourses) constraints.min_courses = +minCourses[1];
 
-  // Fallback: use bare trailing integer as min_credits if nothing else found
+  // Fallback: bare trailing integer → min_credits
   if (!constraints.min_credits && !constraints.min_courses) {
     const v = lastInteger(cleaned);
     if (v != null) constraints.min_credits = v;
@@ -152,7 +148,6 @@ export function parseDirective(line) {
 
 /** ---------------- Course catalog lookup (optional) ---------------- **/
 
-// Try to read your allCourses.json and index by code → {title?, credits?}
 export function loadCourseCatalog(catalogPath) {
   try {
     const raw = fs.readFileSync(catalogPath, "utf-8");
@@ -160,14 +155,13 @@ export function loadCourseCatalog(catalogPath) {
     const index = new Map();
 
     const add = (c) => {
-      if (!c) return;
-      const code = c.code || c.courseCode || c.course_id || null;
+      const code = c?.code || c?.courseCode || c?.course_id;
       if (!code) return;
-      // normalize credits from multiple shapes
+
       let credits = null;
-      const min = c.minCredits ?? c.min_credit ?? c.min ?? c.creditsMin ?? null;
-      const max = c.maxCredits ?? c.max_credit ?? c.max ?? c.creditsMax ?? null;
-      const fixed = c.credits ?? c.points ?? c.units ?? null;
+      const min = c.minCredits ?? c.min_credit ?? c.min ?? c.creditsMin;
+      const max = c.maxCredits ?? c.max_credit ?? c.max ?? c.creditsMax;
+      const fixed = c.credits ?? c.points ?? c.units;
 
       if (fixed != null) credits = { min: +fixed, max: +fixed };
       else if (min != null && max != null) credits = { min: +min, max: +max };
@@ -179,12 +173,9 @@ export function loadCourseCatalog(catalogPath) {
       });
     };
 
-    if (Array.isArray(data)) {
-      data.forEach(add);
-    } else if (data && typeof data === "object") {
-      for (const v of Object.values(data)) {
-        if (Array.isArray(v)) v.forEach(add);
-      }
+    if (Array.isArray(data)) data.forEach(add);
+    else if (data && typeof data === "object") {
+      for (const v of Object.values(data)) if (Array.isArray(v)) v.forEach(add);
     }
     return index;
   } catch {
@@ -192,7 +183,55 @@ export function loadCourseCatalog(catalogPath) {
   }
 }
 
+/** ---------------- Defaults & helpers ---------------- **/
+
+// Conservative per-prefix defaults (common undergrad patterns)
+const PREFIX_DEFAULTS = [
+  { rx: /-[Uu][Aa]\b/, credits: 4 },  // CAS "UA" (e.g., ARTH-UA)
+  { rx: /-[Uu][Tt]\b/, credits: 4 },  // Tisch "UT"
+  { rx: /-[Uu][Ee]\b/, credits: 4 },  // Steinhardt "UE"
+  { rx: /-[Ss][Hh][Uu]\b/, credits: 4 }, // Shanghai "SHU"
+  { rx: /-[Uu][Yy]\b/, credits: 4 },  // Tandon "UY" (often 4)
+];
+
+function applyPrefixDefault(courseObj) {
+  if (!courseObj || courseObj.credits || !courseObj.code) return false;
+  for (const { rx, credits } of PREFIX_DEFAULTS) {
+    if (rx.test(courseObj.code)) {
+      courseObj.credits = { min: credits, max: credits };
+      courseObj.credits_inferred = courseObj.credits_inferred || "prefix_default";
+      return true;
+    }
+  }
+  return false;
+}
+
+// Default per-option credits for GROUP_SELECT when still unknown
+const DEFAULT_GROUP_OPTION_CREDITS = 4;
+
 /** ---------------- Section → rules post-processor ---------------- **/
+
+// Fold a trailing "or CODE ..." into the previous REQUIRE as a group
+function convertLastRequireToGroup(rules, altItem) {
+  for (let i = rules.length - 1; i >= 0; i--) {
+    const r = rules[i];
+    if (r?.type === "REQUIRE" && r.course) {
+      const base = r.course;
+      // pick a safe min_credits for the group constraint (usually 4)
+      const inferred = Math.max(base.credits?.min ?? 0, altItem.credits?.min ?? 0) || 4;
+      const group = {
+        type: "GROUP_SELECT",
+        label: "Select one of the following:",
+        constraints: { min_credits: inferred },
+        options: [base, altItem],
+        raw_line: `Auto-converted: alternate for ${base.code || base.title || "course"}`
+      };
+      rules.splice(i, 1, group);
+      return true;
+    }
+  }
+  return false;
+}
 
 // Core inference for groups, incl. default 4 credits for GROUP_SELECT options
 function inferOptionCreditsInGroup(group) {
@@ -203,11 +242,10 @@ function inferOptionCreditsInGroup(group) {
 
   const opts = Array.isArray(group.options) ? group.options : [];
 
-  // Pull constraints from group
+  // Pull constraints from group / label
   const mc  = group.constraints?.min_courses;
   const mcr = group.constraints?.min_credits;
 
-  // If label had something like "... 2 8" but constraints are missing, try to parse again
   if ((mc == null || mcr == null) && typeof group.label === "string") {
     const s = group.label;
     const pair = s.match(/(\d+)\s+(\d+)\s*$/);
@@ -216,7 +254,6 @@ function inferOptionCreditsInGroup(group) {
       if (mc  == null) group.constraints.min_courses  = parseInt(pair[1], 10);
       if (mcr == null) group.constraints.min_credits = parseInt(pair[2], 10);
     } else {
-      // single trailing number → total credits
       const v = lastInteger(s);
       if (v != null) {
         if (!group.constraints) group.constraints = {};
@@ -249,7 +286,7 @@ function inferOptionCreditsInGroup(group) {
     modeVal = [...cnt.entries()].sort((a, b) => b[1] - a[1])[0][0];
   }
 
-  // Fill missing option credits
+  // Fill missing option credits (group → mode → default → prefix)
   for (const o of opts) {
     if (o && o.credits == null) {
       if (perOption) {
@@ -259,9 +296,10 @@ function inferOptionCreditsInGroup(group) {
         o.credits = { min: modeVal, max: modeVal };
         o.credits_inferred = "mode";
       } else if (isGroupSelect) {
-        // FINAL FALLBACK: default to 4 credits for GROUP_SELECT options
         o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
         o.credits_inferred = "default_group_option";
+      } else {
+        applyPrefixDefault(o);
       }
     }
   }
@@ -270,15 +308,16 @@ function inferOptionCreditsInGroup(group) {
 }
 
 export function postProcessSectionLines(lines, courseLookup) {
-  // Clean & reassemble multi-line table rows first
+  // 1) Clean & reassemble multi-line table rows
   const prepped = reassembleRows(lines).map(cleanText);
 
   const rules = [];
   let openGroup = null;
 
+  const courseLikeRx = /\b[A-Z]{2,}-[A-Z]{2,}\s?\d+[A-Z-]*\b/;
+
   const finishGroup = () => {
     if (!openGroup) return;
-    // Finalize group and run inference for its options
     const finalized = inferOptionCreditsInGroup(openGroup);
     rules.push({
       type: finalized.minCoursesOnly ? "GROUP_CHOOSE_N_COURSES" : "GROUP_SELECT",
@@ -290,12 +329,28 @@ export function postProcessSectionLines(lines, courseLookup) {
     openGroup = null;
   };
 
-  const courseLikeRx = /\b[A-Z]{2,}-[A-Z]{2,}\s?\d+[A-Z-]*\b/;
-
   for (const raw of prepped) {
     const line = raw;
     if (!line) continue;
 
+    // 2) Handle "or CODE ..." as alternative
+    const orLine = line.match(/^or\s+(.+)$/i);
+    if (orLine) {
+      const altParsed = parseCourseLine(orLine[1]);
+      if (!altParsed.credits && altParsed.code && courseLookup) {
+        const hit = courseLookup(altParsed.code);
+        if (hit?.credits) altParsed.credits = hit.credits;
+        if (!altParsed.title && hit?.title) altParsed.title = hit.title;
+      }
+      if (openGroup) {
+        openGroup.options.push(altParsed);
+      } else {
+        convertLastRequireToGroup(rules, altParsed);
+      }
+      continue;
+    }
+
+    // 3) Start of directive group
     if (isDirectiveStart(line)) {
       finishGroup();
       const { label, constraints } = parseDirective(line);
@@ -309,7 +364,7 @@ export function postProcessSectionLines(lines, courseLookup) {
       continue;
     }
 
-    // Inside a group: accumulate likely course options
+    // 4) Inside a group: push course-like options
     if (openGroup) {
       if (courseLikeRx.test(line) || /^[•\-–]/.test(line) || /^[A-Z]/.test(line)) {
         const item = parseCourseLine(line);
@@ -318,6 +373,8 @@ export function postProcessSectionLines(lines, courseLookup) {
           if (hit?.credits) item.credits = hit.credits;
           if (!item.title && hit?.title) item.title = hit.title;
         }
+        // Prefix default as last resort inside group (non-select)
+        if (!item.credits) applyPrefixDefault(item);
         openGroup.options.push(item);
         continue;
       } else {
@@ -325,7 +382,7 @@ export function postProcessSectionLines(lines, courseLookup) {
       }
     }
 
-    // Outside a group: TOTAL / caps / free electives / single requires
+    // 5) Outside group: TOTAL / caps / free electives / single requires
     const total = line.match(/^Total\s+Credits?\s*[:\-]?\s*(.+)$/i);
     if (total) {
       const v = parseCreditExpr(total[1]) ?? (lastInteger(line) != null ? { min: lastInteger(line), max: lastInteger(line) } : null);
@@ -353,7 +410,7 @@ export function postProcessSectionLines(lines, courseLookup) {
         type: "FREE_ELECTIVES",
         label: line,
         credits: c ?? null,
-        allowed_tags: ["liberal_arts", "ima", "open"],
+        allowed_tags: ["liberal_arts", "open"],
         raw_line: line,
       });
       continue;
@@ -366,6 +423,8 @@ export function postProcessSectionLines(lines, courseLookup) {
         if (hit?.credits) item.credits = hit.credits;
         if (!item.title && hit?.title) item.title = hit.title;
       }
+      if (!item.credits) applyPrefixDefault(item);
+
       rules.push({
         type: "REQUIRE",
         label: item.title ? `Require: ${item.title}` : "Require: course",
@@ -382,16 +441,31 @@ export function postProcessSectionLines(lines, courseLookup) {
 
 /** ---------------- Whole-program builder ---------------- **/
 
-// Final hardening pass: force GROUP_SELECT option credits to default if still null
+// Final hardening pass: ensure any remaining nulls get reasonable defaults
 function finalizeRules(rules) {
   for (const r of rules) {
-    if (r && r.type === "GROUP_SELECT" && Array.isArray(r.options)) {
+    if (!r) continue;
+
+    if (r.type === "GROUP_SELECT" && Array.isArray(r.options)) {
       for (const o of r.options) {
-        if (o && (o.credits == null)) {
-          o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
-          o.credits_inferred = o.credits_inferred || "default_group_option";
+        if (o && o.credits == null) {
+          // Prefer prefix default; otherwise fallback to 4
+          if (!applyPrefixDefault(o)) {
+            o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
+            o.credits_inferred = o.credits_inferred || "default_group_option";
+          }
         }
       }
+    }
+
+    if (r.type && r.type.startsWith("GROUP_") && r.type !== "GROUP_SELECT" && Array.isArray(r.options)) {
+      for (const o of r.options) {
+        if (o && o.credits == null) applyPrefixDefault(o);
+      }
+    }
+
+    if (r.type === "REQUIRE" && r.course && r.course.credits == null) {
+      applyPrefixDefault(r.course);
     }
   }
   return rules;
@@ -418,7 +492,6 @@ export function buildRulesFromSections(sections, courseLookupFn) {
     rules.push(...rs);
   }
 
-  // **Hard fallback pass** to guarantee GROUP_SELECT options have credits
   return finalizeRules(rules);
 }
 
@@ -442,7 +515,7 @@ export function summarizeRules(rules) {
 
     // count unknown credit-bearing items
     if (r.type === "REQUIRE" && !r.course?.credits) out.unknowns++;
-    if ((r.type === "GROUP_SELECT" || r.type === "GROUP_CHOOSE_N_COURSES") && Array.isArray(r.options)) {
+    if ((r.type?.startsWith("GROUP_")) && Array.isArray(r.options)) {
       for (const o of r.options) if (!o.credits) out.unknowns++;
     }
   }
