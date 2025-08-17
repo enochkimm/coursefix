@@ -114,27 +114,47 @@
             {
               "code": "CINE-UT 10",
               "title": "Intro to Cinema Studies",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CORE-UA 750",
               "title": "Expressive Culture: Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 4",
               "title": "The Language of Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MCC-UE 1",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MCC-UE 1007",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CINE-UT 112",
@@ -147,7 +167,11 @@
             {
               "code": "CINE-UT 450",
               "title": "Asian Film History/Historiography",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -162,47 +186,83 @@
             {
               "code": "CINE-UT 105",
               "title": "Indian Cinemas",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CINE-UT 134",
               "title": "Korean Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CINE-UT 227",
               "title": "Topics in Chinese Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CINE-UT 232",
               "title": "Topics in Korean Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "EAST-UA 540",
               "title": "Chinese Film and Society",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "EAST-UA 613",
               "title": "Japanese Cinema: Theory & History",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "EAST-UA 617",
               "title": "Topics in East Asian Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "EAST-UA 618",
               "title": "Approaches to Chinese Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "EAST-UA 708",
               "title": "Japanese Animation & New Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select two of the following: 2 8"
@@ -224,7 +284,7 @@
         "totals": [
           16
         ],
-        "unknowns": 15
+        "unknowns": 0
       }
     },
     "Cinema Studies (BA)": {
@@ -301,22 +361,38 @@
             {
               "code": "CORE-UA 105",
               "title": "Quantitative Reasoning: Elementary Statistics",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CORE-UA 107",
               "title": "Quantitative Reasoning: Prob,Stats & Decisn-Mkng",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CORE-UA 109",
               "title": "Quantitative Reasoning: Math & Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "CORE-UA 110",
               "title": "Quantitative Reasoning: Great Ideas in Mathematics",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -441,7 +517,7 @@
         "totals": [
           128
         ],
-        "unknowns": 4
+        "unknowns": 0
       }
     },
     "Cinema Studies (Minor)": {
@@ -458,7 +534,11 @@
             {
               "code": "CORE-UA 750",
               "title": "Expressive Culture: Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -471,7 +551,11 @@
             {
               "code": "CINE-UT 10",
               "title": "Intro to Cinema Studies",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -484,7 +568,11 @@
             {
               "code": "FMTV-UT 4",
               "title": "The Language of Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -541,7 +629,7 @@
         "totals": [
           16
         ],
-        "unknowns": 3
+        "unknowns": 0
       }
     },
     "Collaborative Arts (BFA)": {
@@ -1244,12 +1332,20 @@
             {
               "code": "OART-UT 701",
               "title": "World Dance Cultures",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 703",
               "title": "Why Dance Matters: Politics, Race, Class",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -1264,102 +1360,182 @@
             {
               "code": "OART-UT 806",
               "title": "Ballet",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 811",
               "title": "Ballet II",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 706",
               "title": "Bodies in Cultural Landscapes",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 805",
               "title": "Choreography",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 707",
               "title": "The Dancing Body in Practice and Theory",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 813",
               "title": "Iconic Dances",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 804",
               "title": "Modern Dance: Mind-Body Knowledge and Expression",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 812",
               "title": "Modern Dance II: Mind-Body Integration",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 708",
               "title": "Performing Anatomy: Body Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 810",
               "title": "Site­ Specific to Immersive Dance Theater: Choreographing/Unconventional formats",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 800",
               "title": "Steps Rhythm Movement: African Dance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 808",
               "title": "Steps Rhythm Movement: Hip Hop Dance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 703",
               "title": "Why Dance Matters: Politics, Race, Class",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 701",
               "title": "World Dance Cultures",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 230",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 340",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 225A",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 246",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 243",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "ART-SHU 242",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select remaining credits from the following: 12"
@@ -1381,7 +1557,7 @@
         "totals": [
           16
         ],
-        "unknowns": 22
+        "unknowns": 0
       }
     },
     "Documentary (Minor)": {
@@ -1424,97 +1600,173 @@
             {
               "code": "OART-UT 1930",
               "title": "The Art of the Interview",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1708",
               "title": "Bridging Fact and Fiction",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1093",
               "title": "Creative Fundraising",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1207",
               "title": "Documentary Fictions",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1032",
               "title": "Documentary Traditions",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1034",
               "title": "Documentary Traditions II",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 40",
               "title": "Entertainment & Media Industries",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 580",
               "title": "Fundamentals of Documentary Filmmaking I: Making a Short Observation",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 581",
               "title": "Fundamentals of Documentary Filmmaking II: Documentary Discovery -\nDirecting & Producing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 560",
               "title": "Fundamentals of Filmmaking I: The Art of Visual Storytelling",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1004",
               "title": "Impact Producing: Making Social, Political, & Cultural Change Through Documentary",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MCC-UE 1",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "JOUR-UA 502",
               "title": "Journalism Ethics & First Amendment Law",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "JOUR-UA 503",
               "title": "Journalism and Society:",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MCC-UE 1016",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1039",
               "title": "Media Internship",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 829",
               "title": "Poetics of Witnessing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1118",
               "title": "Research & Writing for Documentary",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 80",
               "title": "Sight & Sound: Documentary",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select remaining credits from the following: 8"
@@ -1536,7 +1788,7 @@
         "totals": [
           16
         ],
-        "unknowns": 19
+        "unknowns": 0
       }
     },
     "Dramatic Writing (BFA)": {
@@ -1605,17 +1857,29 @@
             {
               "code": "DWPG-UT 1040",
               "title": "Playwriting II",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1045",
               "title": "Screenwriting II",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1048",
               "title": "Episodic/TV Writing II: The One-Hour",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select two of the following: 6"
@@ -1630,17 +1894,29 @@
             {
               "code": "DWPG-UT 1050",
               "title": "Advanced Playwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1055",
               "title": "Advanced Screenwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1150",
               "title": "Advanced Episodic/TV Writing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 3"
@@ -1655,17 +1931,29 @@
             {
               "code": "DWPG-UT 1060",
               "title": "BFA Capstone Project in Playwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1065",
               "title": "BFA Capstone Project in Screenwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1070",
               "title": "BFA Capstone in Episodic/TV Writing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1103",
@@ -1837,7 +2125,7 @@
         "totals": [
           128
         ],
-        "unknowns": 9
+        "unknowns": 0
       }
     },
     "Dramaturgy (Minor)": {
@@ -1854,22 +2142,38 @@
             {
               "code": "THEA-UT 636",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 650",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 801",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 444",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4-8"
@@ -1884,67 +2188,119 @@
             {
               "code": "THEA-UT 731",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 632",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 618",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 605",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 801",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 661",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 732",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 625",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 126",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 608",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 638",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 623",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 624",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select remaining credits by advisement. Potential courses are: 12"
@@ -1966,7 +2322,7 @@
         "totals": [
           16
         ],
-        "unknowns": 17
+        "unknowns": 0
       }
     },
     "Film (Minor)": {
@@ -1983,22 +2339,38 @@
             {
               "code": "OART-UT 35",
               "title": "Intro to Screenwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 36",
               "title": "Intermediate Screenwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1045",
               "title": "Writing the TV Sitcom",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1044",
               "title": "Collaborative Screenwriting: The Writers' Room",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -2013,32 +2385,56 @@
             {
               "code": "OART-UT 560",
               "title": "Fundamentals of Filmmaking I: The Art of Visual Storytelling",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 561",
               "title": "Fundamentals of Filmmaking II: Narrative Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 580",
               "title": "Fundamentals of Documentary Filmmaking I: Making a Short Observation",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 581",
               "title": "Fundamentals of Documentary Filmmaking II: Documentary Discovery -\nDirecting & Producing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 582",
               "title": "Queer Cinema",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 571",
               "title": "Professional Lighting & Camera Techniques",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -2069,7 +2465,7 @@
         "totals": [
           16
         ],
-        "unknowns": 10
+        "unknowns": 0
       }
     },
     "Film and Television (BFA)": {
@@ -2480,27 +2876,47 @@
             {
               "code": "GAMES-UT 180",
               "title": "Intro to Programming for Games",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "GAMES-UT 120",
               "title": "Intro to Game Development",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "GAMES-UT 201",
               "title": "Intro to Visual Communication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "GAMES-UT 101",
               "title": "Games 101",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
               "title": "Games 101",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select at least one of the following: 4"
@@ -2531,7 +2947,7 @@
         "totals": [
           16
         ],
-        "unknowns": 6
+        "unknowns": 1
       }
     },
     "Interactive Media Arts (BFA)": {
@@ -2608,37 +3024,65 @@
             {
               "code": "IMNY-UT 220",
               "title": "Topics in Computation and Data",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 221",
               "title": "Reading and Writing Electronic Text",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 222",
               "title": "The Code of Music",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 223",
               "title": "Networked Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 224",
               "title": "Introduction to Machine Learning for the Arts",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 231",
               "title": "Pixel by Pixel",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2651,22 +3095,38 @@
             {
               "code": "IMNY-UT 243",
               "title": "Designing Interfaces for Live Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 245",
               "title": "Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 249",
               "title": "Interaction as Art Medium",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 240",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2679,22 +3139,38 @@
             {
               "code": "IMNY-UT 288",
               "title": "Animation: Methods of Motion",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 282",
               "title": "Immersive Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 297",
               "title": "Alter Egos",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2707,27 +3183,47 @@
             {
               "code": "IMNY-UT 203",
               "title": "Big Ideas in the History and Future of Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 272",
               "title": "Useless Machines",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2740,17 +3236,29 @@
             {
               "code": "IMNY-UT 261",
               "title": "Design Fundamentals",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 262",
               "title": "User Experience Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 252",
               "title": "Introduction to Digital Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2763,22 +3271,38 @@
             {
               "code": "IMNY-UT 205",
               "title": "Creative Approaches to Emerging Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 206",
               "title": "Critical Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -2791,247 +3315,443 @@
             {
               "code": "IMNY-UT 201",
               "title": "Internet Famous",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 220",
               "title": "Topics in Computation and Data",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 224",
               "title": "Introduction to Machine Learning for the Arts",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 225",
               "title": "Collective Play",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 228",
               "title": "Front-End Web",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 232",
               "title": "Experimental Photography",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 233",
               "title": "Chatbots for Art's Sake",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 240",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 240",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 240",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 241",
               "title": "Introduction to Assistive Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 242",
               "title": "Introduction to Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 244",
               "title": "Introduction to 3D Printing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 248",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 250",
               "title": "Topics in Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 250",
               "title": "Topics in Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 251",
               "title": "Topics in Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 251",
               "title": "Topics in Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 263",
               "title": "Information Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 270",
               "title": "Topics in Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 271",
               "title": "Topics in Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 281",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 285",
               "title": "Real-Time Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 286",
               "title": "Collective Narrative",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 290",
               "title": "Playful Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 291",
               "title": "Non-Linear Storytelling Structures",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 9001",
               "title": "Augmenting the Gallery",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one course in each of the following groups for a total of 24 credits (sample courses are included under each group):"
@@ -3071,7 +3791,7 @@
         "totals": [
           128
         ],
-        "unknowns": 76
+        "unknowns": 0
       }
     },
     "Interactive Media Arts (Minor)": {
@@ -3088,17 +3808,29 @@
             {
               "code": "IMNY-UT 102",
               "title": "Communications Lab",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "INTM-SHU 120",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IM-UH 1011",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -3113,22 +3845,38 @@
             {
               "code": "IMNY-UT 101",
               "title": "Creative Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "INTM-SHU 101",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "INTM-SHU 103",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IM-UH 1010",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -3143,227 +3891,407 @@
             {
               "code": "IMNY-UT 203",
               "title": "Big Ideas in the History and Future of Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 222",
               "title": "The Code of Music",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 243",
               "title": "Designing Interfaces for Live Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 283",
               "title": "Fairy Tales for the 21st Century",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 282",
               "title": "Immersive Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 241",
               "title": "Introduction to Assistive Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 242",
               "title": "Introduction to Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 232",
               "title": "Experimental Photography",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 249",
               "title": "Interaction as Art Medium",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 201",
               "title": "Internet Famous",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 205",
               "title": "Creative Approaches to Emerging Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 206",
               "title": "Critical Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 224",
               "title": "Introduction to Machine Learning for the Arts",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 225",
               "title": "Collective Play",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 226",
               "title": "Big Spaces",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 228",
               "title": "Front-End Web",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 233",
               "title": "Chatbots for Art's Sake",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 240",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 252",
               "title": "Introduction to Digital Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 253",
               "title": "Interaction as Art Medium",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 248",
               "title": "Topics in Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 250",
               "title": "Topics in Fabrication",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 260",
               "title": "Topics in Media Art",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 263",
               "title": "Information Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 264",
               "title": "User Experience Design Fundamentals",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 270",
               "title": "Topics in Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 273",
               "title": "Communications and Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 285",
               "title": "Real-Time Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 286",
               "title": "Collective Narrative",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 289",
               "title": "Electronic Rituals, Oracles and Fortune-Telling",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 291",
               "title": "Non-Linear Storytelling Structures",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 295",
               "title": "The Nature of Code",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 296",
               "title": "Politics of Code",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 297",
               "title": "Alter Egos",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 9001",
               "title": "Augmenting the Gallery",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 262",
               "title": "User Experience Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 272",
               "title": "Useless Machines",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 290",
               "title": "Playful Experiences",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 288",
               "title": "Animation: Methods of Motion",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 261",
               "title": "Design Fundamentals",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 245",
               "title": "Physical Computing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 244",
               "title": "Introduction to 3D Printing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 223",
               "title": "Networked Media",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IMNY-UT 221",
               "title": "Reading and Writing Electronic Text",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DM-UY 3104G",
               "title": "Surveillance and the City",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select 8 credits of any IMNY-UT and/or ITPG-GT courses. We can count any INTM-SHU (except Capstone Studio 1 and 2) and any IM-UH course (with the exception of Capstone seminar and project). Below are examples of courses that may count toward the minor. 8"
@@ -3385,7 +4313,7 @@
         "totals": [
           16
         ],
-        "unknowns": 52
+        "unknowns": 0
       }
     },
     "Performance Studies (BA)": {
@@ -3506,47 +4434,83 @@
             {
               "code": "PERF-UT 204",
               "title": "Performative Writing Workshop",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 205",
               "title": "Performance Histories",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 206",
               "title": "The Performance of Everyday Life",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 302",
               "title": "Queer Politics and Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 303",
               "title": "Theories of Movement",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 304",
               "title": "Performance and Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 305",
               "title": "Topics in Performance Studies",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 306",
               "title": "Race and Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 307",
               "title": "Performance Studies Supervised Internship Course",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select four of the following: 16"
@@ -3586,7 +4550,7 @@
         "totals": [
           128
         ],
-        "unknowns": 9
+        "unknowns": 0
       }
     },
     "Performance Studies (Minor)": {
@@ -3603,12 +4567,20 @@
             {
               "code": "PERF-UT 101",
               "title": "Introduction to Performance Studies",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 200",
               "title": "Performance Studies: An Introduction with Richard Schechner",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select one of the following: 4"
@@ -3623,47 +4595,83 @@
             {
               "code": "PERF-UT 306",
               "title": "Race and Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 305",
               "title": "Topics in Performance Studies",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 201",
               "title": "Performance Composition",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 9103",
               "title": "Performance of the City:",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 102",
               "title": "Performance Theory",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 104",
               "title": "Performance and Politics",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 304",
               "title": "Performance and Technology",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 204",
               "title": "Performative Writing Workshop",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "PERF-UT 302",
               "title": "Queer Politics and Performance",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select remaining credits from any PERF-UT courses, such as: 12"
@@ -3685,7 +4693,7 @@
         "totals": [
           16
         ],
-        "unknowns": 11
+        "unknowns": 0
       }
     },
     "Photography and Imaging (BFA)": {
@@ -3817,7 +4825,11 @@
             {
               "code": null,
               "title": "Area III: Liberal Arts Courses 1 44",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": null,
@@ -3903,7 +4915,7 @@
         "totals": [
           128
         ],
-        "unknowns": 1
+        "unknowns": 0
       }
     },
     "Producing (Minor)": {
@@ -3946,187 +4958,335 @@
             {
               "code": "OART-UT 563",
               "title": "The Art of Adaptation",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 20",
               "title": "Business of Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 49",
               "title": "Business of Producing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1926",
               "title": "Casting and Auditioning",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1093",
               "title": "Creative Fundraising",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 570",
               "title": "Crowdfunding Video Production",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1100",
               "title": "Developing the Screenplay",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 40",
               "title": "Entertainment & Media Industries",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "DWPG-UT 1105",
               "title": "Film Story Analysis:",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1010",
               "title": "Film Development: The Tools of Creative Movie Producing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "REMU-UT 1226",
               "title": "Funding Your Music Venture",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 46",
               "title": "Globalization of The Entertainment Industry",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1004",
               "title": "Impact Producing: Making Social, Political, & Cultural Change Through Documentary",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1123",
               "title": "Internet Design",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 490",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 35",
               "title": "Intro to Screenwriting",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 1",
               "title": "Intro to Marketing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "JOUR-UA 502",
               "title": "Journalism Ethics & First Amendment Law",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "JOUR-UA 503",
               "title": "Journalism and Society:",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 685",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1195",
               "title": "Legal Aspects of The Entertainment Industry",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1093",
               "title": "Marketing & Distribution for Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1039",
               "title": "Media Internship",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 22",
               "title": "Movie Marketing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 678",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1196",
               "title": "Producing for Animation",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1095",
               "title": "Producing for Film",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "OART-UT 1923",
               "title": "Producing Off-Broadway",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1028",
               "title": "Producing for TV",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1023",
               "title": "Producing the Short Screenplay",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1296",
               "title": "Production Management: Boards and Budgets",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1084",
               "title": "Script Analysis",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1092",
               "title": "Strategies for Independent Producing",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "MKTG-UB 44",
               "title": "Television Management: Network, Cable/Satellite",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "THEA-UT 662",
               "title": null,
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "IFMTV-UT 81",
               "title": "Tisch Goes Hollywood",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             },
             {
               "code": "FMTV-UT 1086",
               "title": "TV Nation: Inside and Out of The Box",
-              "credits": null
+              "credits": {
+                "min": 4,
+                "max": 4
+              },
+              "credits_inferred": "default_group_option"
             }
           ],
           "raw_line": "Select 8 credits from the following: 8"
@@ -4148,7 +5308,7 @@
         "totals": [
           16
         ],
-        "unknowns": 37
+        "unknowns": 0
       }
     },
     "Recorded Music (BFA)": {

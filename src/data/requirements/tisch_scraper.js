@@ -1,5 +1,5 @@
 // src/data/requirements/tisch_scraper.js
-// Scrapes Tisch program pages and emits credit-aware rules JSON.
+// Scrapes Tisch program pages and emits credit-aware rules JSON (no GPT)
 
 import puppeteer from "puppeteer";
 import fs from "fs";
@@ -208,7 +208,7 @@ async function run() {
       // First pass: sectionize lines
       const parsedSections = parseRequirementsBlock(reqText);
 
-      // Second pass: convert to credit-aware rules
+      // Second pass: convert to credit-aware rules (with inference baked in)
       const rules = buildRulesFromSections(parsedSections, lookup);
       const summary = summarizeRules(rules);
 

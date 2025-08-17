@@ -1,29 +1,30 @@
 // src/data/requirements/credits_rules.js
-// Deterministic credits/rules parser for curriculum text blocks (no GPT).
+// Deterministic, credit-aware parsing + inference (no GPT)
 
 import fs from "fs";
 
 /** ---------------- Utilities ---------------- **/
 
-// Whitespace & artifact cleanup (tabs, non-breaking spaces, multiple spaces, trailing junk)
 function cleanText(s) {
   return String(s ?? "")
     .replace(/\u00A0/g, " ")
     .replace(/\t+/g, " ")
     .replace(/\s{2,}/g, " ")
-    .replace(/[^\S\r\n]+$/g, ""); // trim only trailing spaces (keep leading if needed)
+    .trim();
 }
 
 // Return the last standalone integer (defaults to 1..30 as reasonable credit range)
 function lastInteger(s, max = 30) {
-  const str = String(s ?? "");
-  const m = [...str.matchAll(/(\d+)(?!.*\d)/g)].pop();
+  const m = [...String(s ?? "").matchAll(/(\d+)(?!.*\d)/g)].pop();
   if (!m) return null;
   const v = parseInt(m[1], 10);
   if (Number.isNaN(v)) return null;
   if (v < 0 || v > max) return null;
   return v;
 }
+
+// Default per-option credits for GROUP_SELECT when still unknown
+const DEFAULT_GROUP_OPTION_CREDITS = 4;
 
 /** ---------------- Credits + course parsing ---------------- **/
 
@@ -53,18 +54,14 @@ function reassembleRows(lines) {
     let l0 = cleanText(lines[i]);
     if (!l0) continue;
 
-    // Already looks like a full row (has code and some digits somewhere)
+    // Already looks like a full row (has code + any digit)
     const looksFull = codeRx.test(l0) && /\d/.test(l0);
-    if (looksFull) {
-      out.push(l0);
-      continue;
-    }
+    if (looksFull) { out.push(l0); continue; }
 
-    // Try to stitch with next 1–2 lines (common for table → innerText)
+    // Try to stitch with next 1–2 lines (table → innerText)
     const l1 = cleanText(lines[i + 1] || "");
     const l2 = cleanText(lines[i + 2] || "");
 
-    // Pattern: code on l0, title on l1, credits on l1 or l2
     if (codeRx.test(l0) && l1 && !codeRx.test(l1)) {
       const creditChunk =
         (l1.match(/(\d+\s*(?:credits?|points?)\b|\d+\s*(?:-|–|to)\s*\d+|\d+\s*or\s*\d+)/i)?.[0]) ||
@@ -74,7 +71,6 @@ function reassembleRows(lines) {
 
       if (creditChunk) {
         out.push(cleanText(`${l0} ${l1} ${creditChunk}`));
-        // If we consumed l2 (credits there), skip 2; else skip 1
         const consumedL2 = l2 && creditChunk && l2.includes(creditChunk);
         i += consumedL2 ? 2 : 1;
         continue;
@@ -86,7 +82,7 @@ function reassembleRows(lines) {
       continue;
     }
 
-    // Fallback: just push cleaned line
+    // Fallback: push as-is
     out.push(l0);
   }
   return out;
@@ -99,7 +95,7 @@ export function parseCourseLine(line) {
   const codeMatch = cleaned.match(codeRx);
   const code = codeMatch ? codeMatch[0].replace(/\s+/g, " ") : null;
 
-  // Search in the "rest" (after code) so digits inside code don't confuse us
+  // Search only in the "rest" (after code)
   const rest = code ? cleaned.slice(cleaned.indexOf(code) + code.length) : cleaned;
 
   // Prefer ranges and alternatives anywhere in rest
@@ -114,15 +110,13 @@ export function parseCourseLine(line) {
     const a = +alt[1], b = +alt[2];
     credits = { min: Math.min(a, b), max: Math.max(a, b) };
   } else if (word) {
-    const v = +word[1];
-    credits = { min: v, max: v };
+    const v = +word[1]; credits = { min: v, max: v };
   } else {
-    // Last resort: last integer in rest (handles tab-separated columns & footnotes)
     const v = lastInteger(rest);
     if (v != null) credits = { min: v, max: v };
   }
 
-  // Title: remaining text after code
+  // Title from remainder
   let title = cleaned;
   if (code) title = title.slice(title.indexOf(code) + code.length).trim();
   title = title.replace(/^[\-\–:•\s]+/, ""); // strip leading separators
@@ -134,20 +128,20 @@ export function parseCourseLine(line) {
 
 const directiveStartRx = /^(Select|Choose)\b/i;
 export function isDirectiveStart(line) {
-  return directiveStartRx.test(line);
+  return directiveStartRx.test(cleanText(line));
 }
 
 export function parseDirective(line) {
   const cleaned = cleanText(line);
 
-  const minCred = cleaned.match(/(?:at least\s*)?(\d+)\s*(?:credits?|points?)\b/i);
-  const minCourses = cleaned.match(/(?:at least\s*)?(\d+)\s*(?:courses?)\b/i);
-
   const constraints = {};
+  const minCred = cleaned.match(/(?:at least\s*)?(\d+)\s*(?:credits?|points?)\b/i);
   if (minCred) constraints.min_credits = +minCred[1];
+
+  const minCourses = cleaned.match(/(?:select|choose)\s+(\d+)\s+(?:course|courses)\b/i);
   if (minCourses) constraints.min_courses = +minCourses[1];
 
-  // If neither matched, but there is a bare trailing integer, treat it as min_credits.
+  // Fallback: use bare trailing integer as min_credits if nothing else found
   if (!constraints.min_credits && !constraints.min_courses) {
     const v = lastInteger(cleaned);
     if (v != null) constraints.min_credits = v;
@@ -169,7 +163,6 @@ export function loadCourseCatalog(catalogPath) {
       if (!c) return;
       const code = c.code || c.courseCode || c.course_id || null;
       if (!code) return;
-
       // normalize credits from multiple shapes
       let credits = null;
       const min = c.minCredits ?? c.min_credit ?? c.min ?? c.creditsMin ?? null;
@@ -201,6 +194,81 @@ export function loadCourseCatalog(catalogPath) {
 
 /** ---------------- Section → rules post-processor ---------------- **/
 
+// Core inference for groups, incl. default 4 credits for GROUP_SELECT options
+function inferOptionCreditsInGroup(group) {
+  if (!group || !group.type) return group;
+  const isGroup = group.type.startsWith("GROUP_");
+  const isGroupSelect = group.type === "GROUP_SELECT";
+  if (!isGroup) return group;
+
+  const opts = Array.isArray(group.options) ? group.options : [];
+
+  // Pull constraints from group
+  const mc  = group.constraints?.min_courses;
+  const mcr = group.constraints?.min_credits;
+
+  // If label had something like "... 2 8" but constraints are missing, try to parse again
+  if ((mc == null || mcr == null) && typeof group.label === "string") {
+    const s = group.label;
+    const pair = s.match(/(\d+)\s+(\d+)\s*$/);
+    if (pair) {
+      if (!group.constraints) group.constraints = {};
+      if (mc  == null) group.constraints.min_courses  = parseInt(pair[1], 10);
+      if (mcr == null) group.constraints.min_credits = parseInt(pair[2], 10);
+    } else {
+      // single trailing number → total credits
+      const v = lastInteger(s);
+      if (v != null) {
+        if (!group.constraints) group.constraints = {};
+        if (group.constraints.min_credits == null) group.constraints.min_credits = v;
+      }
+    }
+  }
+
+  const min_courses  = group.constraints?.min_courses;
+  const min_credits  = group.constraints?.min_credits;
+
+  // Per-option from constraints (e.g., 8 ÷ 2 = 4) when clean integer 1..6
+  let perOption = null;
+  if (min_courses && min_credits) {
+    const each = min_credits / min_courses;
+    if (Number.isInteger(each) && each > 0 && each <= 6) perOption = each;
+  } else if (min_credits && !min_courses) {
+    // Common case: "Select one of the following: 4"
+    perOption = min_credits; // assume one course
+  }
+
+  // Mode of known option credits
+  const known = opts
+    .map(o => (o && o.credits && Number.isFinite(o.credits.min) ? o.credits.min : null))
+    .filter(v => v != null);
+  let modeVal = null;
+  if (known.length) {
+    const cnt = new Map();
+    for (const v of known) cnt.set(v, (cnt.get(v) || 0) + 1);
+    modeVal = [...cnt.entries()].sort((a, b) => b[1] - a[1])[0][0];
+  }
+
+  // Fill missing option credits
+  for (const o of opts) {
+    if (o && o.credits == null) {
+      if (perOption) {
+        o.credits = { min: perOption, max: perOption };
+        o.credits_inferred = "group";
+      } else if (modeVal) {
+        o.credits = { min: modeVal, max: modeVal };
+        o.credits_inferred = "mode";
+      } else if (isGroupSelect) {
+        // FINAL FALLBACK: default to 4 credits for GROUP_SELECT options
+        o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
+        o.credits_inferred = "default_group_option";
+      }
+    }
+  }
+
+  return group;
+}
+
 export function postProcessSectionLines(lines, courseLookup) {
   // Clean & reassemble multi-line table rows first
   const prepped = reassembleRows(lines).map(cleanText);
@@ -210,12 +278,14 @@ export function postProcessSectionLines(lines, courseLookup) {
 
   const finishGroup = () => {
     if (!openGroup) return;
+    // Finalize group and run inference for its options
+    const finalized = inferOptionCreditsInGroup(openGroup);
     rules.push({
-      type: openGroup.minCoursesOnly ? "GROUP_CHOOSE_N_COURSES" : "GROUP_SELECT",
-      label: openGroup.label,
-      constraints: openGroup.constraints,
-      options: openGroup.options,
-      raw_line: openGroup.raw_line,
+      type: finalized.minCoursesOnly ? "GROUP_CHOOSE_N_COURSES" : "GROUP_SELECT",
+      label: finalized.label,
+      constraints: finalized.constraints,
+      options: finalized.options,
+      raw_line: finalized.raw_line,
     });
     openGroup = null;
   };
@@ -258,7 +328,6 @@ export function postProcessSectionLines(lines, courseLookup) {
     // Outside a group: TOTAL / caps / free electives / single requires
     const total = line.match(/^Total\s+Credits?\s*[:\-]?\s*(.+)$/i);
     if (total) {
-      // accept bare numbers too
       const v = parseCreditExpr(total[1]) ?? (lastInteger(line) != null ? { min: lastInteger(line), max: lastInteger(line) } : null);
       if (v) {
         rules.push({ type: "TOTAL", label: "Total credits required to graduate", credits: v, raw_line: line });
@@ -313,6 +382,21 @@ export function postProcessSectionLines(lines, courseLookup) {
 
 /** ---------------- Whole-program builder ---------------- **/
 
+// Final hardening pass: force GROUP_SELECT option credits to default if still null
+function finalizeRules(rules) {
+  for (const r of rules) {
+    if (r && r.type === "GROUP_SELECT" && Array.isArray(r.options)) {
+      for (const o of r.options) {
+        if (o && (o.credits == null)) {
+          o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
+          o.credits_inferred = o.credits_inferred || "default_group_option";
+        }
+      }
+    }
+  }
+  return rules;
+}
+
 export function buildRulesFromSections(sections, courseLookupFn) {
   const rules = [];
   const headings = Object.keys(sections);
@@ -333,7 +417,9 @@ export function buildRulesFromSections(sections, courseLookupFn) {
     const rs = postProcessSectionLines(lines, courseLookupFn);
     rules.push(...rs);
   }
-  return rules;
+
+  // **Hard fallback pass** to guarantee GROUP_SELECT options have credits
+  return finalizeRules(rules);
 }
 
 /** ---------------- Lightweight validator (optional) ---------------- **/
