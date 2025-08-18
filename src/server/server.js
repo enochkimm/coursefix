@@ -5,28 +5,33 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import uploadHandler from './uploadHandler.js';
 
-// ESM __dirname fix
+// 🟢 ESM __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🟢 point to src/public, not root-level public
-const publicPath = path.join(__dirname, '../public');
+// ⚠️ CHANGE THIS if your index.html is not in src/public
+// Example: if it's in src/frontend, use '../frontend'
+const publicPath = path.join(__dirname, '../frontend');
 
 const app = express();
-app.use(express.json());
 
-// ✅ serve static files from src/public
+// ✅ Allow larger payloads if needed (transcripts, PDFs, etc.)
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// ✅ Serve static files (JS, CSS, images, index.html, etc.)
 app.use(express.static(publicPath));
 
-// ✅ explicitly serve index.html at /
+// ✅ Explicitly serve index.html at root
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-// ✅ upload route
+// ✅ API routes (all /api/* handled by uploadHandler router)
 app.use('/api', uploadHandler);
 
-// start server
-app.listen(3000, () => {
-  console.log('✅ Server running at http://localhost:3000');
+// ✅ Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });

@@ -1,8 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import { extractTextFromPDF } from '../utils/pdfToText.js';
-import { parseTranscriptText } from '../data/transcriptReader/index.js';
-import { matchTranscriptToCatalog } from '../data/transcriptReader/matcher.js';
+import { parseTranscriptText } from '../transcriptReader/index.js';
+import { matchTranscriptToCatalog } from '../transcriptReader/matcher.js';
 
 const router = express.Router();
 const upload = multer();
