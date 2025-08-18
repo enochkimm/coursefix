@@ -50,7 +50,6 @@ function reassembleRows(lines) {
     let l0 = cleanText(lines[i]);
     if (!l0) continue;
 
-    // Already looks like a full row (has code + any digit)
     if (codeRx.test(l0) && /\d/.test(l0)) { out.push(l0); continue; }
 
     const l1 = cleanText(lines[i + 1] || "");
@@ -87,7 +86,11 @@ export function parseCourseLine(line) {
   const codeMatch = cleaned.match(codeRx);
   const code = codeMatch ? codeMatch[0].replace(/\s+/g, " ") : null;
 
-  const rest = code ? cleaned.slice(cleaned.indexOf(code) + code.length) : cleaned;
+  // "rest" after code
+  let rest = code ? cleaned.slice(cleaned.indexOf(code) + code.length) : cleaned;
+
+  // Ignore hour counts in credit parsing (e.g., "4–5 hours per week")
+  rest = rest.replace(/\b\d+\s*(?:hours?|hrs?)\b(?:[^0-9]|$)/gi, " ");
 
   // Prefer ranges and alternatives anywhere in rest
   const range = [...rest.matchAll(/(\d+)\s*(?:-|–|to)\s*(\d+)/gi)].pop();
@@ -107,17 +110,18 @@ export function parseCourseLine(line) {
     if (v != null) credits = { min: v, max: v };
   }
 
-  // Title from remainder; strip leading separators
+  // Title from remainder; strip leading separators, parentheticals, and trailing debris
   let title = cleaned;
   if (code) title = title.slice(title.indexOf(code) + code.length).trim();
   title = title.replace(/^[\-\–:•\s]+/, "");
-
-  // Title cleanup: drop trailing numeric debris like "1 4", "2 3", etc.
+  // drop parenthetical blocks like "(Formerly …)" and leftover parens
+  title = title.replace(/\([^)]*\)/g, " ").replace(/\s{2,}/g, " ").trim();
   if (credits) {
     title = title.replace(/\s+\d+(?:\s+\d+)*\s*$/, "").trim();
   }
+  if (!title || /^[()]+$/.test(title)) title = null;
 
-  return { code, title: title || null, credits };
+  return { code, title, credits };
 }
 
 /** ---------------- Group / directive parsing ---------------- **/
@@ -137,7 +141,6 @@ export function parseDirective(line) {
   const minCourses = cleaned.match(/(?:select|choose)\s+(\d+)\s+(?:course|courses)\b/i);
   if (minCourses) constraints.min_courses = +minCourses[1];
 
-  // Fallback: bare trailing integer → min_credits
   if (!constraints.min_credits && !constraints.min_courses) {
     const v = lastInteger(cleaned);
     if (v != null) constraints.min_credits = v;
@@ -187,7 +190,7 @@ export function loadCourseCatalog(catalogPath) {
 
 // Conservative per-prefix defaults (common undergrad patterns)
 const PREFIX_DEFAULTS = [
-  { rx: /-[Uu][Aa]\b/, credits: 4 },  // CAS "UA" (e.g., ARTH-UA)
+  { rx: /-[Uu][Aa]\b/, credits: 4 },  // CAS "UA"
   { rx: /-[Uu][Tt]\b/, credits: 4 },  // Tisch "UT"
   { rx: /-[Uu][Ee]\b/, credits: 4 },  // Steinhardt "UE"
   { rx: /-[Ss][Hh][Uu]\b/, credits: 4 }, // Shanghai "SHU"
@@ -217,7 +220,6 @@ function convertLastRequireToGroup(rules, altItem) {
     const r = rules[i];
     if (r?.type === "REQUIRE" && r.course) {
       const base = r.course;
-      // pick a safe min_credits for the group constraint (usually 4)
       const inferred = Math.max(base.credits?.min ?? 0, altItem.credits?.min ?? 0) || 4;
       const group = {
         type: "GROUP_SELECT",
@@ -265,13 +267,12 @@ function inferOptionCreditsInGroup(group) {
   const min_courses  = group.constraints?.min_courses;
   const min_credits  = group.constraints?.min_credits;
 
-  // Per-option from constraints (e.g., 8 ÷ 2 = 4) when clean integer 1..6
+  // Per-option from constraints (e.g., 8 ÷ 2 = 4)
   let perOption = null;
   if (min_courses && min_credits) {
     const each = min_credits / min_courses;
     if (Number.isInteger(each) && each > 0 && each <= 6) perOption = each;
   } else if (min_credits && !min_courses) {
-    // Common case: "Select one of the following: 4"
     perOption = min_credits; // assume one course
   }
 
@@ -302,6 +303,26 @@ function inferOptionCreditsInGroup(group) {
         applyPrefixDefault(o);
       }
     }
+  }
+
+  // Dedupe options by code; drop items with no code & no title
+  const byCode = new Map();
+  const dedup = [];
+  for (const o of opts) {
+    if (!o) continue;
+    if (!o.code && !o.title) continue;
+    if (o.code) {
+      const key = o.code;
+      if (byCode.has(key)) continue;
+      byCode.set(key, 1);
+    }
+    dedup.push(o);
+  }
+  group.options = dedup;
+
+  // Normalize directive label (strip trailing numbers like "1 4")
+  if (typeof group.label === "string") {
+    group.label = group.label.replace(/\s+\d+(?:\s+\d+)?\s*$/, "").trim();
   }
 
   return group;
@@ -343,7 +364,7 @@ export function postProcessSectionLines(lines, courseLookup) {
         if (!altParsed.title && hit?.title) altParsed.title = hit.title;
       }
       if (openGroup) {
-        openGroup.options.push(altParsed);
+        if (altParsed.code || altParsed.title) openGroup.options.push(altParsed);
       } else {
         convertLastRequireToGroup(rules, altParsed);
       }
@@ -373,9 +394,8 @@ export function postProcessSectionLines(lines, courseLookup) {
           if (hit?.credits) item.credits = hit.credits;
           if (!item.title && hit?.title) item.title = hit.title;
         }
-        // Prefix default as last resort inside group (non-select)
         if (!item.credits) applyPrefixDefault(item);
-        openGroup.options.push(item);
+        if (item.code || item.title) openGroup.options.push(item);
         continue;
       } else {
         finishGroup();
@@ -408,7 +428,7 @@ export function postProcessSectionLines(lines, courseLookup) {
       const c = parseCreditExpr(line);
       rules.push({
         type: "FREE_ELECTIVES",
-        label: line,
+        label: line.replace(/\([^)]*\)/g, "").trim(),
         credits: c ?? null,
         allowed_tags: ["liberal_arts", "open"],
         raw_line: line,
@@ -424,6 +444,9 @@ export function postProcessSectionLines(lines, courseLookup) {
         if (!item.title && hit?.title) item.title = hit.title;
       }
       if (!item.credits) applyPrefixDefault(item);
+
+      // Skip totally empty row
+      if (!item.code && !item.title) continue;
 
       rules.push({
         type: "REQUIRE",
@@ -441,27 +464,45 @@ export function postProcessSectionLines(lines, courseLookup) {
 
 /** ---------------- Whole-program builder ---------------- **/
 
-// Final hardening pass: ensure any remaining nulls get reasonable defaults
 function finalizeRules(rules) {
   for (const r of rules) {
     if (!r) continue;
 
     if (r.type === "GROUP_SELECT" && Array.isArray(r.options)) {
+      const dedupByCode = new Map();
+      const newOpts = [];
       for (const o of r.options) {
-        if (o && o.credits == null) {
-          // Prefer prefix default; otherwise fallback to 4
-          if (!applyPrefixDefault(o)) {
-            o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
-            o.credits_inferred = o.credits_inferred || "default_group_option";
-          }
+        if (!o) continue;
+        if (o.credits == null && !applyPrefixDefault(o)) {
+          o.credits = { min: DEFAULT_GROUP_OPTION_CREDITS, max: DEFAULT_GROUP_OPTION_CREDITS };
+          o.credits_inferred = o.credits_inferred || "default_group_option";
         }
+        if (!o.code && !o.title) continue;
+        if (o.code) {
+          if (dedupByCode.has(o.code)) continue;
+          dedupByCode.set(o.code, 1);
+        }
+        newOpts.push(o);
       }
+      r.options = newOpts;
+      if (typeof r.label === "string") r.label = r.label.replace(/\s+\d+(?:\s+\d+)?\s*$/, "").trim();
     }
 
     if (r.type && r.type.startsWith("GROUP_") && r.type !== "GROUP_SELECT" && Array.isArray(r.options)) {
+      const dedupByCode = new Map();
+      const newOpts = [];
       for (const o of r.options) {
-        if (o && o.credits == null) applyPrefixDefault(o);
+        if (!o) continue;
+        if (o.credits == null) applyPrefixDefault(o);
+        if (!o.code && !o.title) continue;
+        if (o.code) {
+          if (dedupByCode.has(o.code)) continue;
+          dedupByCode.set(o.code, 1);
+        }
+        newOpts.push(o);
       }
+      r.options = newOpts;
+      if (typeof r.label === "string") r.label = r.label.replace(/\s+\d+(?:\s+\d+)?\s*$/, "").trim();
     }
 
     if (r.type === "REQUIRE" && r.course && r.course.credits == null) {
@@ -476,7 +517,6 @@ export function buildRulesFromSections(sections, courseLookupFn) {
   const headings = Object.keys(sections);
 
   for (const h of headings) {
-    // If a section is just a number for total credits, handle separately
     if (h.toLowerCase().includes("total") && Number.isInteger(sections[h])) {
       rules.push({
         type: "TOTAL",
