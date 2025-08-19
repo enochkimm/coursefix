@@ -1,5 +1,6 @@
 // src/ai/planner.js
 // Greedy planner: turns gaps into concrete picks under simple constraints.
+// Supports optional constraints.top_up_prefixes: string[] of code prefixes to use as extra candidates.
 
 const norm = (s) => String(s || "").replace(/\s+/g, " ").trim().toUpperCase();
 
@@ -24,7 +25,7 @@ function pickCredits(defaultCredits, explicit) {
  * @param {Object} args
  * @param {Array} args.gaps - from computeProgress (each: {kind,label,needCredits,eligible[]})
  * @param {Array} args.alreadyTaken - [{code}] list to avoid duplicates
- * @param {Object} args.constraints - { campus?: ['nyc'], credit_load?: {target,min,max} }
+ * @param {Object} args.constraints - { campus?: ['nyc'], credit_load?: {target,min,max}, top_up_prefixes?: string[] }
  * @returns {Object} { picks: [{code, label, credits, fulfills}], totalCredits, notes }
  */
 export function buildPlan({ gaps = [], alreadyTaken = [], constraints = {} } = {}) {
@@ -37,16 +38,20 @@ export function buildPlan({ gaps = [], alreadyTaken = [], constraints = {} } = {
   const creditMin    = constraints.credit_load?.min ?? Math.max(12, Math.min(creditTarget, 16));
   const creditMax    = constraints.credit_load?.max ?? Math.max(creditTarget, 18);
 
+  const topUpPrefixes = Array.isArray(constraints.top_up_prefixes)
+    ? constraints.top_up_prefixes.map(norm)
+    : [];
+
   const picks = [];
   let totalCredits = 0;
   const notes = [];
 
-  // Flatten eligible options per gap, filter, then greedily add until each gap's need is met
+  // 1) Satisfy each gap greedily
   for (const gap of gaps) {
     let remaining = gap.needCredits ?? 0;
     if (remaining <= 0) continue;
 
-    // Build filtered candidate list
+    // Build filtered candidate list from gap.eligible
     let candidates = Array.isArray(gap.eligible) ? gap.eligible.slice() : [];
     candidates = candidates
       .filter(c => c && c.code)
@@ -58,17 +63,14 @@ export function buildPlan({ gaps = [], alreadyTaken = [], constraints = {} } = {
       }))
       .filter(c => !takenSet.has(c.code))
       .filter(c => (allowedCampus ? allowedCampus.has(c.campus || "") : true))
-      // de-dup by code
       .filter((c, i, arr) => arr.findIndex(x => x.code === c.code) === i);
 
-    // greedy: add until we satisfy this gap's credits
+    // Greedy add until we satisfy this gap's credits
     for (const cand of candidates) {
       if (remaining <= 0) break;
       if (picks.find(p => p.code === cand.code)) continue;
-
-      // If adding would exceed hard creditMax too early, delay unless we still need this gap.
-      if (totalCredits + cand.credits > creditMax && remaining <= 0) continue;
-
+      // If adding would exceed hard creditMax too early, skip (only for top-offs, not gaps).
+      // Here we prioritize fulfilling the gap even if it pushes toward creditMax.
       picks.push({
         code: cand.code,
         title: cand.title,
@@ -85,9 +87,14 @@ export function buildPlan({ gaps = [], alreadyTaken = [], constraints = {} } = {
     }
   }
 
-  // If we’re under target, optionally top up from any leftover eligible items across gaps
+  // 2) If we’re under target, optionally top up
   if (totalCredits < creditTarget) {
-    const pool = [];
+    // Build a pool from:
+    //   a) leftover eligible items across gaps
+    //   b) top_up_prefixes (if provided)
+    const poolMap = new Map();
+
+    // a) from gaps
     for (const g of gaps) {
       for (const c of g.eligible || []) {
         const code = norm(c.code);
@@ -95,11 +102,39 @@ export function buildPlan({ gaps = [], alreadyTaken = [], constraints = {} } = {
         const credits = pickCredits(4, c.credits);
         const campus  = campusOf(code);
         if (allowedCampus && !allowedCampus.has(campus || "")) continue;
-        pool.push({ code, title: c.title || null, credits, source: g.label || g.kind });
+        if (!poolMap.has(code)) {
+          poolMap.set(code, {
+            code, title: c.title || null, credits,
+            source: g.label || g.kind
+          });
+        }
       }
     }
-    // Prefer 4-credit courses to hit common targets neatly
-    pool.sort((a, b) => Math.abs(b.credits - 4) - Math.abs(a.credits - 4));
+
+    // b) from top_up_prefixes (synthetic candidates)
+    if (topUpPrefixes.length) {
+      // We don't have a full global catalog here, so we can only “suggest”
+      // additional picks if they already appeared in rules as options.
+      // (If you want to open this up to *any* catalog course, we need a course list by prefix.)
+      for (const g of gaps) {
+        for (const c of g.eligible || []) {
+          const code = norm(c.code);
+          if (!code) continue;
+          if (topUpPrefixes.some(pref => code.startsWith(pref))) {
+            if (!poolMap.has(code) && !takenSet.has(code) && !picks.find(p => p.code === code)) {
+              const credits = pickCredits(4, c.credits);
+              const campus  = campusOf(code);
+              if (allowedCampus && !allowedCampus.has(campus || "")) continue;
+              poolMap.set(code, { code, title: c.title || null, credits, source: 'top-up(prefix)' });
+            }
+          }
+        }
+      }
+    }
+
+    const pool = [...poolMap.values()];
+    // Prefer 4-credit courses to hit targets neatly
+    pool.sort((a, b) => Math.abs(a.credits - 4) - Math.abs(b.credits - 4));
 
     for (const cand of pool) {
       if (totalCredits >= creditTarget) break;
