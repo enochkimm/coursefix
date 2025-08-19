@@ -1,46 +1,142 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Upload Transcript</title>
+  <meta charset="utf-8" />
+  <title>CourseFix — Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <h1>Upload Your NYU Transcript (PDF)</h1>
-  <form id="uploadForm">
-    <input type="file" id="transcript" name="transcript" accept=".pdf" required />
-    <br><br>
-    <button type="submit">Upload</button>
-  </form>
+  <header class="site-header">
+    <div class="container row between center">
+      <h1>CourseFix</h1>
+      <nav class="tagline">NYU Planner (alpha)</nav>
+    </div>
+  </header>
 
-  <pre id="response" style="margin-top: 2em; white-space: pre-wrap;"></pre>
+  <main class="container">
+    <!-- Upload + Controls -->
+    <section class="card">
+      <h2>Upload Transcript & Plan</h2>
+      <form id="uploadForm" class="form-grid">
+        <div class="form-control">
+          <label class="label">Transcript (PDF)</label>
+          <input id="fileInput" type="file" accept="application/pdf" required />
+        </div>
 
-  <script>
-    const form = document.getElementById('uploadForm');
-    const fileInput = document.getElementById('transcript');
-    const responseBox = document.getElementById('response');
+        <div class="form-control">
+          <label class="label">Program</label>
+          <select id="programSelect">
+            <option disabled selected>Loading programs…</option>
+          </select>
+          <small class="hint">Pick your degree program. (We’ll auto-suggest later.)</small>
+        </div>
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        <div class="form-control">
+          <label class="label">Campus</label>
+          <select id="campusSelect" multiple>
+            <option value="nyc" selected>NYC</option>
+            <option value="shanghai">Shanghai</option>
+            <option value="abudhabi">Abu Dhabi</option>
+          </select>
+          <small class="hint">Hold Cmd/Ctrl to select multiple</small>
+        </div>
 
-      const file = fileInput.files[0];
-      if (!file) return alert("Please upload a PDF.");
+        <div class="form-control">
+          <label class="label">Credit Load</label>
+          <div class="row gap">
+            <input id="minCredit" type="number" class="num" value="12" min="0" />
+            <span class="sep">min</span>
+            <input id="maxCredit" type="number" class="num" value="18" min="0" />
+            <span class="sep">max</span>
+            <input id="overloadCredit" type="number" class="num" value="21" min="0" />
+            <span class="sep">overload</span>
+          </div>
+          <small class="hint">Overload up to 21 credits typically requires approval.</small>
+        </div>
 
-      const formData = new FormData();
-      formData.append('transcript', file);
+        <div class="actions">
+          <button class="btn primary" type="submit">Upload & Plan</button>
+          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+      </form>
+    </section>
 
-      responseBox.textContent = 'Uploading...';
+    <!-- Results -->
+    <section id="results" class="grid two">
+      <div class="col">
+        <section class="card">
+          <div class="card-head row between center">
+            <h3>Parsed Courses</h3>
+            <span class="pill" id="parsedCount">0</span>
+          </div>
+          <div id="parsedList" class="chips"></div>
+        </section>
 
-      try {
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData
-        });
+        <section class="card">
+          <div class="card-head row between center">
+            <h3>Progress</h3>
+            <div id="progressTotals" class="muted"></div>
+          </div>
 
-        const data = await res.json();
-        responseBox.textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        responseBox.textContent = '❌ Upload failed.';
-      }
-    });
-  </script>
+          <div class="stack gap">
+            <div>
+              <h4 class="muted">Satisfied</h4>
+              <ul id="satisfiedList" class="list"></ul>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <h4 class="muted">Pending</h4>
+              <ul id="pendingList" class="list"></ul>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="card">
+          <div class="card-head row between center">
+            <h3>Plan Picks</h3>
+            <div id="planTotals" class="muted"></div>
+          </div>
+          <ul id="planPicks" class="list"></ul>
+          <div id="planNotes" class="notes"></div>
+        </section>
+
+        <section class="card">
+          <div class="card-head row between center">
+            <h3>Validation</h3>
+            <div id="validationOk" class="pill">—</div>
+          </div>
+          <div class="stack gap">
+            <div>
+              <h4 class="muted">Errors</h4>
+              <ul id="errorsList" class="list"></ul>
+            </div>
+            <div class="divider"></div>
+            <div>
+              <h4 class="muted">Warnings</h4>
+              <ul id="warningsList" class="list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <details class="card">
+          <summary>Raw JSON (debug)</summary>
+          <pre id="rawJson" class="code"></pre>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container row between center">
+      <span class="muted">© CourseFix</span>
+      <span class="muted">Connected to /api/upload</span>
+    </div>
+  </footer>
+
+  <!-- 👇 single frontend script (no app.js) -->
+  <script src="./script.js" type="module"></script>
 </body>
 </html>
