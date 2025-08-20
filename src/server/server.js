@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 import uploadHandler from './uploadHandler.js';
 import plan from './plan.js';
+import programsRouter from './programsRouter.js'; // ⬅️ NEW
 
 // --- ESM __dirname fix ---
 const __filename = fileURLToPath(import.meta.url);
@@ -32,6 +33,7 @@ app.get('/', (_req, res) => {
 // --- API routes ---
 app.use('/api', uploadHandler);   // e.g. POST /api/upload
 app.post('/api/plan', plan);      // POST body: { program, transcript, constraints? }
+app.use('/api', programsRouter);  // ⬅️ NEW: GET /api/programs
 
 // --- Health & 404 ---
 app.get('/api/health', (_req, res) => res.json({ ok: true }));

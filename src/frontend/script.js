@@ -1,56 +1,72 @@
 // src/frontend/script.js
-
-//bridges frontend with backend
-
 const $ = (sel) => document.querySelector(sel);
 
 // --------------------
-// Programs dropdown
+// Programs dropdown (from /api/programs) — no dedupe; show all
 // --------------------
 async function loadPrograms() {
   const sel = $('#programSelect');
+  const countEl = $('#programCount');
   sel.innerHTML = '<option disabled selected>Loading programs…</option>';
+  countEl.textContent = '';
+
   try {
     const res = await fetch('/api/programs');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    sel.innerHTML = '';
 
-    // group by school
-    const bySchool = new Map();
-    for (const p of data.programs || []) {
-      if (!bySchool.has(p.school)) bySchool.set(p.school, []);
-      bySchool.get(p.school).push(p.program);
-    }
-    // build optgroups
-    for (const [school, progs] of bySchool.entries()) {
-      const group = document.createElement('optgroup');
-      group.label = school;
-      progs.sort().forEach(name => {
-        const opt = document.createElement('option');
-        opt.value = name;
-        opt.textContent = name;
-        group.appendChild(opt);
-      });
-      sel.appendChild(group);
-    }
-    // preselect Interactive Media Arts (BFA) if present
-    const ima = [...sel.querySelectorAll('option')].find(o => /interactive media arts/i.test(o.value));
-    if (ima) ima.selected = true;
+    // Build a flat list of <option> so identical program names still appear (distinguished by "— School")
+    sel.innerHTML = '';
+    (data.programs || []).forEach(row => {
+      const school = row.school || 'Unknown School';
+      const name = row.program || '(Unnamed Program)';
+      const opt = document.createElement('option');
+
+      // Visible label has both program + school so duplicates stand out
+      opt.textContent = `${name} — ${school}`;
+
+      // Value sent to backend remains the raw program name your planner expects
+      opt.value = name;
+
+      // Keep unique id in case you want to debug later
+      if (row.id) opt.dataset.id = row.id;
+
+      sel.appendChild(opt);
+    });
+
+    // Prefer any option that contains "Interactive Media Arts" (any degree)
+    const anyIMA = [...sel.querySelectorAll('option')].find(
+      o => /interactive\s+media\s+arts/i.test(o.textContent)
+    );
+    if (anyIMA) anyIMA.selected = true;
+
+    // If still nothing selected, pick first option
     if (!sel.value) {
-      // fallback: pick the first option
       const first = sel.querySelector('option');
       if (first) first.selected = true;
     }
-  } catch (e) {
+
+    // badge count
+    const totalOptions = sel.querySelectorAll('option').length;
+    countEl.textContent = `Loaded ${totalOptions} programs`;
+
+  } catch (err) {
+    console.error('Failed to load /api/programs:', err);
     sel.innerHTML = '<option disabled selected>Failed to load programs</option>';
-    console.error('Failed to load /api/programs', e);
+    countEl.textContent = '';
   }
 }
 
 // --------------------
 // Render helpers
 // --------------------
-function chip(text){ const s=document.createElement('span'); s.className='chip'; s.textContent=text; return s; }
+function chip(text){
+  const s=document.createElement('span');
+  s.className='chip';
+  s.textContent=text;
+  return s;
+}
+
 function renderList(el, items, renderItem) {
   el.innerHTML = '';
   (items || []).forEach(item => {
@@ -59,6 +75,7 @@ function renderList(el, items, renderItem) {
     el.appendChild(li);
   });
 }
+
 function setPill(el, ok, warnCount, errCount) {
   el.className = 'pill';
   if (!ok && errCount > 0) el.classList.add('err');
@@ -110,10 +127,13 @@ async function submitForm(e) {
     // --- Progress
     const prog = data.progress || {};
     const summary = prog.summary || {};
-    $('#progressTotals').textContent = `Completed ${summary.completedCredits || 0} / Required ${summary.requiredCredits || 0}`;
+    $('#progressTotals').textContent =
+      `Completed ${summary.completedCredits || 0} / Required ${summary.requiredCredits || 0}`;
 
     renderList($('#satisfiedList'), prog.satisfied || [], (s) => {
-      if (s.type === 'REQUIRE') return `<b>${s.label || 'Require'}</b><div class="small">${s.course?.code || ''} — ${s.earned || 0}cr</div>`;
+      if (s.type === 'REQUIRE') {
+        return `<b>${s.label || 'Require'}</b><div class="small">${s.course?.code || ''} — ${s.earned || 0}cr</div>`;
+      }
       if (s.type === 'GROUP_SELECT') {
         const picks = (s.picks || []).map(p => p.code).join(', ');
         return `<b>${s.label || 'Selection'}</b><div class="small">${picks} — ${s.earned || 0}cr</div>`;
@@ -135,7 +155,11 @@ async function submitForm(e) {
     });
     const notesEl = $('#planNotes');
     notesEl.innerHTML = '';
-    (plan.notes || []).forEach(n => { const div = document.createElement('div'); div.textContent = `• ${n}`; notesEl.appendChild(div); });
+    (plan.notes || []).forEach(n => {
+      const div = document.createElement('div');
+      div.textContent = `• ${n}`;
+      notesEl.appendChild(div);
+    });
 
     // --- Validation
     const val = data.validation || {};
