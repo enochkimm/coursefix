@@ -4,6 +4,8 @@ node_modules/
 #json
 allCourses.json
 bulletin_links.json
+requirements_all_schools.json
+program_links.json
 
 # Environment variables
 .env
