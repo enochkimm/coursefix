@@ -13,37 +13,50 @@ const REQUIREMENTS_PATH = path.join(__dirname, '../data/requirements/requirement
 let CATALOG = {};
 try {
   CATALOG = JSON.parse(fs.readFileSync(REQUIREMENTS_PATH, 'utf-8'));
-  const schools = Object.keys(CATALOG);
-  console.log('📘 [/api/programs] catalog schools:', schools.length);
-
-  // quick visibility: how many IMA-like entries?
-  let imaCount = 0;
-  for (const s of schools) {
-    for (const name of Object.keys(CATALOG[s] || {})) {
-      if (/interactive\s+media\s+arts/i.test(name)) imaCount++;
-    }
-  }
-  console.log(`🔎 [/api/programs] found ${imaCount} "Interactive Media Arts" entries`);
+  console.log('📘 [/api/programs] catalog schools:', Object.keys(CATALOG).length);
 } catch (e) {
   console.warn('⚠️ Could not load requirements JSON for /api/programs:', e.message);
   CATALOG = {};
 }
 
+// Basic school→campus classification by school key text
+function schoolCampus(schoolName = '') {
+  const s = String(schoolName).toLowerCase();
+  if (/(abu\s*dhabi|nyu\s*abudhabi)/i.test(s)) return 'abudhabi';
+  if (/(shanghai|nyu\s*shanghai)/i.test(s)) return 'shanghai';
+  // everything else is treated as New York
+  return 'nyc';
+}
+
+function includeByCampus(school, campusFilters) {
+  if (!campusFilters || campusFilters.length === 0) return true; // no filter → include all
+  const sc = schoolCampus(school);
+  return campusFilters.includes(sc);
+}
+
 /**
  * GET /api/programs
- * Optional: ?q=substring (case-insensitive)
+ * Query:
+ *   ?q=substring      // optional text filter on program name
+ *   ?campus=nyc[,abudhabi][,shanghai] // filter by campus
  * Returns: { ok:true, programs:[{ id, school, program, url }] }
  */
 router.get('/programs', (req, res) => {
   const q = String(req.query.q || '').trim().toLowerCase();
-  const out = [];
+  const campusQ = String(req.query.campus || '').trim().toLowerCase();
+  const campusFilters = campusQ
+    ? campusQ.split(',').map(s => s.trim()).filter(Boolean)
+    : [];
 
+  const out = [];
   for (const school of Object.keys(CATALOG)) {
+    if (!includeByCampus(school, campusFilters)) continue;
+
     const progs = CATALOG[school] || {};
     for (const name of Object.keys(progs)) {
       if (!q || name.toLowerCase().includes(q)) {
         out.push({
-          id: `${school}::${name}`,   // unique ID so frontend can render duplicates distinctly
+          id: `${school}::${name}`,
           school,
           program: name,
           url: progs[name]?.url || null

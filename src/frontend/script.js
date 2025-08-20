@@ -2,6 +2,15 @@
 const $ = (sel) => document.querySelector(sel);
 
 // --------------------
+// Build campus query string from selection
+// --------------------
+function currentCampusQuery() {
+  const selected = [...document.querySelectorAll('#campusSelect option:checked')].map(o => o.value.toLowerCase());
+  if (selected.length === 0) return '';                // no filter → all
+  return `?campus=${encodeURIComponent(selected.join(','))}`;
+}
+
+// --------------------
 // Programs dropdown (from /api/programs) — no dedupe; show all
 // --------------------
 async function loadPrograms() {
@@ -11,24 +20,20 @@ async function loadPrograms() {
   countEl.textContent = '';
 
   try {
-    const res = await fetch('/api/programs');
+    const campusQS = currentCampusQuery();
+    const res = await fetch('/api/programs' + campusQS);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    // Build a flat list of <option> so identical program names still appear (distinguished by "— School")
+    // Build a flat list so identical program names still appear (distinguished by "— School")
     sel.innerHTML = '';
     (data.programs || []).forEach(row => {
       const school = row.school || 'Unknown School';
       const name = row.program || '(Unnamed Program)';
       const opt = document.createElement('option');
 
-      // Visible label has both program + school so duplicates stand out
       opt.textContent = `${name} — ${school}`;
-
-      // Value sent to backend remains the raw program name your planner expects
       opt.value = name;
-
-      // Keep unique id in case you want to debug later
       if (row.id) opt.dataset.id = row.id;
 
       sel.appendChild(opt);
@@ -197,4 +202,9 @@ function clearForm() {
 // wire up
 document.getElementById('uploadForm').addEventListener('submit', submitForm);
 document.getElementById('clearBtn').addEventListener('click', clearForm);
+
+// reload programs when campus changes
+document.getElementById('campusSelect').addEventListener('change', loadPrograms);
+
+// initial load
 loadPrograms();
