@@ -1,18 +1,19 @@
 // src/frontend/script.js
 const $ = (sel) => document.querySelector(sel);
 
-// --------------------
-// Build campus query string from selection
-// --------------------
+/* --------------------
+   Campus → querystring
+-------------------- */
 function currentCampusQuery() {
-  const selected = [...document.querySelectorAll('#campusSelect option:checked')].map(o => o.value.toLowerCase());
-  if (selected.length === 0) return '';                // no filter → all
+  const selected = [...document.querySelectorAll('#campusSelect option:checked')]
+    .map(o => o.value.toLowerCase());
+  if (selected.length === 0) return '';
   return `?campus=${encodeURIComponent(selected.join(','))}`;
 }
 
-// --------------------
-// Programs dropdown (from /api/programs) — no dedupe; show all
-// --------------------
+/* -----------------------------------------
+   Programs dropdown (alphabetical by program)
+----------------------------------------- */
 async function loadPrograms() {
   const sel = $('#programSelect');
   const countEl = $('#programCount');
@@ -25,36 +26,32 @@ async function loadPrograms() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    // Build a flat list so identical program names still appear (distinguished by "— School")
+    // Sort alphabetically by program name (case-insensitive)
+    const programs = (data.programs || []).slice().sort((a, b) =>
+      a.program.localeCompare(b.program, undefined, { sensitivity: 'base' })
+    );
+
+    // Build options
     sel.innerHTML = '';
-    (data.programs || []).forEach(row => {
-      const school = row.school || 'Unknown School';
-      const name = row.program || '(Unnamed Program)';
+
+    // placeholder (auto-selected)
+    const placeholder = document.createElement('option');
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    placeholder.textContent = 'Select Program';
+    placeholder.value = '';
+    sel.appendChild(placeholder);
+
+    programs.forEach(({ program, school, id }) => {
       const opt = document.createElement('option');
-
-      opt.textContent = `${name} — ${school}`;
-      opt.value = name;
-      if (row.id) opt.dataset.id = row.id;
-
+      opt.value = program; // we match by name on the backend
+      opt.textContent = `${program} (${school})`;
+      if (id) opt.dataset.id = id;
       sel.appendChild(opt);
     });
 
-    // Prefer any option that contains "Interactive Media Arts" (any degree)
-    const anyIMA = [...sel.querySelectorAll('option')].find(
-      o => /interactive\s+media\s+arts/i.test(o.textContent)
-    );
-    if (anyIMA) anyIMA.selected = true;
-
-    // If still nothing selected, pick first option
-    if (!sel.value) {
-      const first = sel.querySelector('option');
-      if (first) first.selected = true;
-    }
-
-    // badge count
-    const totalOptions = sel.querySelectorAll('option').length;
+    const totalOptions = Math.max(0, sel.querySelectorAll('option').length - 1); // exclude placeholder
     countEl.textContent = `Loaded ${totalOptions} programs`;
-
   } catch (err) {
     console.error('Failed to load /api/programs:', err);
     sel.innerHTML = '<option disabled selected>Failed to load programs</option>';
@@ -62,16 +59,15 @@ async function loadPrograms() {
   }
 }
 
-// --------------------
-// Render helpers
-// --------------------
-function chip(text){
-  const s=document.createElement('span');
-  s.className='chip';
-  s.textContent=text;
+/* --------------
+   Render helpers
+-------------- */
+function chip(text) {
+  const s = document.createElement('span');
+  s.className = 'chip';
+  s.textContent = text;
   return s;
 }
-
 function renderList(el, items, renderItem) {
   el.innerHTML = '';
   (items || []).forEach(item => {
@@ -80,7 +76,6 @@ function renderList(el, items, renderItem) {
     el.appendChild(li);
   });
 }
-
 function setPill(el, ok, warnCount, errCount) {
   el.className = 'pill';
   if (!ok && errCount > 0) el.classList.add('err');
@@ -89,15 +84,17 @@ function setPill(el, ok, warnCount, errCount) {
   el.textContent = ok ? (warnCount ? 'OK (warnings)' : 'OK') : 'Not OK';
 }
 
-// --------------------
-// Submit form → /api/upload
-// --------------------
+/* -----------------------
+   Submit form → /api/upload
+----------------------- */
 async function submitForm(e) {
   e.preventDefault();
   const file = $('#fileInput').files[0];
   if (!file) return alert('Please choose a transcript PDF.');
 
   const program = $('#programSelect').value;
+  if (!program) return alert('Please select a program.');
+
   const campuses = [...document.querySelectorAll('#campusSelect option:checked')].map(o => o.value);
   const min = parseInt($('#minCredit').value, 10) || 0;
   const max = parseInt($('#maxCredit').value, 10) || 0;
@@ -123,7 +120,7 @@ async function submitForm(e) {
     // re-enable
     $('#uploadForm').querySelectorAll('button, input, select').forEach(el => el.disabled = false);
 
-    // --- Parsed courses
+    // --- Parsed
     const parsedList = $('#parsedList');
     parsedList.innerHTML = '';
     (data.parsed || []).forEach(item => parsedList.appendChild(chip(item.code)));
@@ -175,7 +172,7 @@ async function submitForm(e) {
     // --- Raw JSON
     $('#rawJson').textContent = JSON.stringify(data, null, 2);
 
-    // scroll to results on success
+    // scroll to results
     document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
@@ -187,13 +184,14 @@ async function submitForm(e) {
 
 function clearForm() {
   $('#fileInput').value = '';
+  $('#programSelect').selectedIndex = 0; // reset to placeholder
   $('#parsedList').innerHTML = '';
   $('#parsedCount').textContent = '0';
   $('#satisfiedList').innerHTML = '';
   $('#pendingList').innerHTML = '';
   $('#planPicks').innerHTML = '';
   $('#planNotes').innerHTML = '';
-  const pill = $('#validationOk'); pill.className='pill'; pill.textContent='—';
+  const pill = $('#validationOk'); pill.className = 'pill'; pill.textContent = '—';
   $('#errorsList').innerHTML = '';
   $('#warningsList').innerHTML = '';
   $('#rawJson').textContent = '';
@@ -202,8 +200,6 @@ function clearForm() {
 // wire up
 document.getElementById('uploadForm').addEventListener('submit', submitForm);
 document.getElementById('clearBtn').addEventListener('click', clearForm);
-
-// reload programs when campus changes
 document.getElementById('campusSelect').addEventListener('change', loadPrograms);
 
 // initial load

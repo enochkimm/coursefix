@@ -4,42 +4,47 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import uploadHandler from './uploadHandler.js';
-import plan from './plan.js';
-import programsRouter from './programsRouter.js'; // ⬅️ NEW
+import programsRouterFactory from './programsRouter.js';
+import uploadRouterFactory from './uploadHandler.js';
+import planHandlerFactory from './plan.js';
 
-// --- ESM __dirname fix ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// --- Resolve UI folder (frontend) ---
-const publicPath = path.join(__dirname, '../frontend');
-if (!fs.existsSync(path.join(publicPath, 'index.html'))) {
-  console.warn('⚠️  Expected UI at src/frontend/index.html but not found. API will still run.');
+// --- Load catalog ONCE ---
+const REQUIREMENTS_PATH = path.join(__dirname, '../data/requirements/requirements_all_schools.json');
+let CATALOG = {};
+try {
+  CATALOG = JSON.parse(fs.readFileSync(REQUIREMENTS_PATH, 'utf-8'));
+  console.log('📘 Loaded requirements JSON (schools):', Object.keys(CATALOG).length);
+} catch (e) {
+  console.error('❌ Could not load requirements JSON:', e.message);
+  CATALOG = {};
 }
 
 const app = express();
 
-// --- Body parsers (increase limits for transcripts/PDFs) ---
+// Body parsers
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
-// --- Static UI ---
+// Static UI
+const publicPath = path.join(__dirname, '../frontend');
 app.use(express.static(publicPath));
 app.get('/', (_req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-// --- API routes ---
-app.use('/api', uploadHandler);   // e.g. POST /api/upload
-app.post('/api/plan', plan);      // POST body: { program, transcript, constraints? }
-app.use('/api', programsRouter);  // ⬅️ NEW: GET /api/programs
+// API routes (inject CATALOG so we don't re-read JSON)
+app.use('/api', programsRouterFactory(CATALOG));      // GET /api/programs
+app.use('/api', uploadRouterFactory(CATALOG));        // POST /api/upload
+app.post('/api/plan', planHandlerFactory(CATALOG));   // POST /api/plan
 
-// --- Health & 404 ---
+// Health + 404
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use((_req, res) => res.status(404).json({ ok: false, error: 'Not found' }));
 
-// --- Start server ---
+// Start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
