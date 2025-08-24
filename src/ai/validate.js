@@ -1,7 +1,10 @@
 // src/ai/validate.js
 // Strong validator: per-semester credit bounds with overloads,
 // duplicates, already-taken reuse, campus/prefix filters, bucket caps,
-// and overlap policy messages passthrough.
+// overlap messages, PLUS deterministic prereq/coreq/restriction checks
+// with tolerant course lookups.
+
+import { meetsPrereqs, coreqNeeds, checkRestrictions } from './requirements.js';
 
 const norm = (s) => String(s || "").replace(/\s+/g, " ").trim().toUpperCase();
 
@@ -13,6 +16,44 @@ function campusOf(code) {
   return null;
 }
 
+/** Generate plausible variants for a course code to tolerate formatting differences. */
+function codeVariants(raw) {
+  const c = norm(raw);
+  const variants = new Set();
+
+  // Raw, collapsed spaces, tight (no spaces)
+  variants.add(c);
+  variants.add(c.replace(/\s+/g, ' '));  // normalize internal spacing to single spaces
+  variants.add(c.replace(/\s+/g, ''));   // remove all spaces
+
+  // Collapse "-  " to "-"
+  variants.add(c.replace(/-\s+/g, '-'));
+
+  // Normalize single space between prefix and number: "IMNY-UT   400" -> "IMNY-UT 400"
+  variants.add(c.replace(/([A-Z]{2,}-[A-Z]{2,})\s+(\d)/, '$1 $2'));
+
+  // Drop trailing section letter (e.g., 400A -> 400)
+  variants.add(c.replace(/(\d)[A-Z]$/, '$1'));
+
+  return Array.from(variants);
+}
+
+/** Look up a course object in index using tolerant matching. */
+function lookupCourse(index, rawCode) {
+  if (!index) return null;
+  for (const v of codeVariants(rawCode)) {
+    if (index.has(v)) return index.get(v);
+
+    // Try a few more common normalizations:
+    const tight = v.replace(/\s+/g, '');
+    if (index.has(tight)) return index.get(tight);
+
+    const spaced = v.replace(/([A-Z]{2,}-[A-Z]{2,})(\d)/, '$1 $2'); // "IMNY-UT400" -> "IMNY-UT 400"
+    if (index.has(spaced)) return index.get(spaced);
+  }
+  return null;
+}
+
 /**
  * @typedef {Object} ValidateArgs
  * @property {Array<{code:string,credits?:number,fulfills?:string,title?:string,semester?:string}>} picks
@@ -21,11 +62,13 @@ function campusOf(code) {
  *   - campus?: string[]
  *   - allow_prefixes?: string[]
  *   - block_prefixes?: string[]
- *   - term?: string                      // planned term if picks lack semester
+ *   - term?: string
+ *   - student?: { majors?: string[], minors?: string[] }
  * @property {Array<{code:string,semester?:string}>} alreadyTaken
  * @property {Object} progress
  * @property {Object} overlap             // { messages?: string[] }
  * @property {Array<{label?:string, maxCourses?:number, maxCredits?:number}>} bucketCaps
+ * @property {Map<string, any>} courseIndex // CODE -> course object (with requirements {prerequisites, corequisites, restrictions})
  */
 
 /**
@@ -43,7 +86,8 @@ export function validatePlan({
   alreadyTaken = [],
   progress = null,
   overlap = null,
-  bucketCaps = []
+  bucketCaps = [],
+  courseIndex = new Map()
 } = {}) {
   const errors = [];
   const warnings = [];
@@ -127,7 +171,42 @@ export function validatePlan({
     }
   }
 
-  // ---------- 5) Bucket-level aggregation & caps ----------
+  // ---------- 5) Prereqs/Coreqs/Restrictions per pick (tolerant lookup) ----------
+  const withPicks = normalizedPicks.map(p => ({ code: p.code }));
+  const studentCtx = constraints.student || {};
+
+  for (const p of normalizedPicks) {
+    const course = lookupCourse(courseIndex, p.code);
+    if (!course) {
+      warnings.push(`${p.code}: not found in course catalog; prereq/coreq/restriction checks skipped.`);
+      continue;
+    }
+
+    // 5a) prereqs
+    const pre = meetsPrereqs(course, alreadyTaken, withPicks);
+    if (!pre.ok) errors.push(`${p.code}: missing prereqs → ${pre.missing.join('; ')}`);
+
+    // 5b) coreqs
+    const core = coreqNeeds(course, alreadyTaken, withPicks);
+    if (core.length) {
+      errors.push(
+        `${p.code}: needs coreq(s) → ` +
+        core.map(c =>
+          c.anyOf ? `one of (${c.anyOf.join(', ')})` :
+          c.allOf ? c.allOf.join(', ') :
+          c.choose ? `${c.choose} of (${c.of.join(', ')})` : 'coreq'
+        ).join(' + ')
+      );
+    }
+
+    // 5c) restrictions
+    const rest = checkRestrictions(course, studentCtx);
+    if (rest.blocks.length) errors.push(`${p.code}: restricted → ${rest.blocks.join(', ')}`);
+    if (rest.warnings.length) warnings.push(`${p.code}: ${rest.warnings.join('; ')}`);
+    if (rest.needs_human_review) warnings.push(`${p.code}: restrictions need human/GPT review`);
+  }
+
+  // ---------- 6) Bucket-level aggregation & caps ----------
   const byBucket = {};
   for (const p of normalizedPicks) {
     const label = p.fulfills || "Unlabeled";
@@ -147,13 +226,10 @@ export function validatePlan({
     }
   }
 
-  // ---------- 6) Per-semester load with overload policy ----------
-  // Determine a planned term label. If picks have semesters, we’ll respect them; otherwise
-  // we group all picks into a single "planned" term based on constraints.term (or "PLANNED").
+  // ---------- 7) Per-semester load with overload policy ----------
   const plannedTerm = constraints.term || constraints.semester || "PLANNED";
   const termLoad = {}; // { term: { credits, courses } }
 
-  // Group picks by semester (or plannedTerm fallback)
   for (const p of normalizedPicks) {
     const t = p.semester || plannedTerm;
     termLoad[t] = termLoad[t] || { credits: 0, courses: 0 };
@@ -161,13 +237,11 @@ export function validatePlan({
     termLoad[t].courses += 1;
   }
 
-  // Defaults (can be overridden by constraints.credit_load)
   const minPerTerm = constraints?.credit_load?.min ?? 12;
   const maxPerTerm = constraints?.credit_load?.max ?? 18;
   const overloadMax = constraints?.credit_load?.overload_max ?? 21;
-  const strictMin = !!constraints?.credit_load?.enforce_strict_min; // if true, <min becomes error
+  const strictMin = !!constraints?.credit_load?.enforce_strict_min;
 
-  // Apply per-term checks
   for (const [term, load] of Object.entries(termLoad)) {
     const c = load.credits;
 
@@ -175,24 +249,27 @@ export function validatePlan({
       const msg = `Term "${term}" planned for ${c} credits (< ${minPerTerm}). This is below full-time; verify part-time status or add courses.`;
       strictMin ? errors.push(msg) : warnings.push(msg);
     }
-
     if (c > maxPerTerm && c <= overloadMax) {
-      warnings.push(
-        `Term "${term}" planned for ${c} credits (> ${maxPerTerm}). Overload up to ${overloadMax} usually requires approval.`
-      );
+      warnings.push(`Term "${term}" planned for ${c} credits (> ${maxPerTerm}). Overload up to ${overloadMax} usually requires approval.`);
     }
-
     if (c > overloadMax) {
-      errors.push(
-        `Term "${term}" planned for ${c} credits exceeds overload limit ${overloadMax}.`
-      );
+      errors.push(`Term "${term}" planned for ${c} credits exceeds overload limit ${overloadMax}.`);
     }
   }
 
-  // ---------- 7) Overlap policy messages (as warnings by default) ----------
+  // ---------- 8) Overlap policy messages (as warnings by default) ----------
   if (overlap?.messages && Array.isArray(overlap.messages)) {
-    for (const msg of overlap.messages) {
-      warnings.push(msg);
+    for (const msg of overlap.messages) warnings.push(msg);
+  }
+
+  // ---------- Optional debug to list any missing picks in catalog ----------
+  if (process.env.DEBUG_MISSING_COURSES === '1') {
+    const missing = [];
+    for (const p of normalizedPicks) {
+      if (!lookupCourse(courseIndex, p.code)) missing.push(p.code);
+    }
+    if (missing.length) {
+      console.warn('🔎 Missing in catalog (debug):', Array.from(new Set(missing)).join(', '));
     }
   }
 

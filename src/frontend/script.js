@@ -1,19 +1,14 @@
 // src/frontend/script.js
 const $ = (sel) => document.querySelector(sel);
 
-/* --------------------
-   Campus → querystring
--------------------- */
+// ---------- Programs dropdown (filtered by campus) ----------
 function currentCampusQuery() {
   const selected = [...document.querySelectorAll('#campusSelect option:checked')]
     .map(o => o.value.toLowerCase());
-  if (selected.length === 0) return '';
+  if (!selected.length) return '';
   return `?campus=${encodeURIComponent(selected.join(','))}`;
 }
 
-/* -----------------------------------------
-   Programs dropdown (alphabetical by program)
------------------------------------------ */
 async function loadPrograms() {
   const sel = $('#programSelect');
   const countEl = $('#programCount');
@@ -21,37 +16,25 @@ async function loadPrograms() {
   countEl.textContent = '';
 
   try {
-    const campusQS = currentCampusQuery();
-    const res = await fetch('/api/programs' + campusQS);
+    const res = await fetch('/api/programs' + currentCampusQuery());
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
 
-    // Sort alphabetically by program name (case-insensitive)
-    const programs = (data.programs || []).slice().sort((a, b) =>
-      a.program.localeCompare(b.program, undefined, { sensitivity: 'base' })
-    );
-
-    // Build options
     sel.innerHTML = '';
+    const ph = document.createElement('option');
+    ph.disabled = true; ph.selected = true; ph.value = ''; ph.textContent = 'Select Program';
+    sel.appendChild(ph);
 
-    // placeholder (auto-selected)
-    const placeholder = document.createElement('option');
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    placeholder.textContent = 'Select Program';
-    placeholder.value = '';
-    sel.appendChild(placeholder);
-
-    programs.forEach(({ program, school, id }) => {
+    (data.programs || []).forEach(row => {
       const opt = document.createElement('option');
-      opt.value = program; // we match by name on the backend
-      opt.textContent = `${program} (${school})`;
-      if (id) opt.dataset.id = id;
+      opt.value = row.program;
+      opt.textContent = `${row.program} — ${row.school}`;
+      if (row.id) opt.dataset.id = row.id;
       sel.appendChild(opt);
     });
 
-    const totalOptions = Math.max(0, sel.querySelectorAll('option').length - 1); // exclude placeholder
-    countEl.textContent = `Loaded ${totalOptions} programs`;
+    const total = Math.max(0, sel.querySelectorAll('option').length - 1);
+    countEl.textContent = total ? `Loaded ${total} programs` : 'No programs found';
   } catch (err) {
     console.error('Failed to load /api/programs:', err);
     sel.innerHTML = '<option disabled selected>Failed to load programs</option>';
@@ -59,15 +42,8 @@ async function loadPrograms() {
   }
 }
 
-/* --------------
-   Render helpers
--------------- */
-function chip(text) {
-  const s = document.createElement('span');
-  s.className = 'chip';
-  s.textContent = text;
-  return s;
-}
+// ---------- Render helpers ----------
+function chip(text){ const s=document.createElement('span'); s.className='chip'; s.textContent=text; return s; }
 function renderList(el, items, renderItem) {
   el.innerHTML = '';
   (items || []).forEach(item => {
@@ -84,58 +60,55 @@ function setPill(el, ok, warnCount, errCount) {
   el.textContent = ok ? (warnCount ? 'OK (warnings)' : 'OK') : 'Not OK';
 }
 
-/* -----------------------
-   Submit form → /api/upload
------------------------ */
+// ---------- Submit form → /api/upload ----------
 async function submitForm(e) {
   e.preventDefault();
+
   const file = $('#fileInput').files[0];
-  if (!file) return alert('Please choose a transcript PDF.');
+  if (!file) { alert('Please choose a transcript PDF.'); return; }
 
   const program = $('#programSelect').value;
-  if (!program) return alert('Please select a program.');
+  if (!program) { alert('Please select a program.'); return; }
 
+  // optional constraints; wire campus selections if you want them enforced server-side
   const campuses = [...document.querySelectorAll('#campusSelect option:checked')].map(o => o.value);
-  const min = parseInt($('#minCredit').value, 10) || 0;
-  const max = parseInt($('#maxCredit').value, 10) || 0;
-  const overload = parseInt($('#overloadCredit').value, 10) || 0;
-
-  const constraints = {
-    campus: campuses,
-    credit_load: { min, max, overload_max: overload }
-  };
+  const constraints = { campus: campuses, credit_load: { min: 12, max: 18, overload_max: 21 } };
 
   const form = new FormData();
   form.append('transcript', file);
   form.append('program', program);
   form.append('constraints', JSON.stringify(constraints));
 
-  // disable UI during upload
   $('#uploadForm').querySelectorAll('button, input, select').forEach(el => el.disabled = true);
 
   try {
-    const res = await fetch('/api/upload', { method: 'POST', body: form });
-    const data = await res.json();
+    const resp = await fetch('/api/upload', { method: 'POST', body: form });
+    const data = await resp.json();
 
-    // re-enable
     $('#uploadForm').querySelectorAll('button, input, select').forEach(el => el.disabled = false);
 
-    // --- Parsed
-    const parsedList = $('#parsedList');
-    parsedList.innerHTML = '';
-    (data.parsed || []).forEach(item => parsedList.appendChild(chip(item.code)));
-    $('#parsedCount').textContent = (data.parsed || []).length;
+    if (!resp.ok || !data.ok) {
+      console.error('Upload failed:', data);
+      alert(data.error || 'Upload failed');
+      return;
+    }
 
-    // --- Progress
-    const prog = data.progress || {};
-    const summary = prog.summary || {};
-    $('#progressTotals').textContent =
-      `Completed ${summary.completedCredits || 0} / Required ${summary.requiredCredits || 0}`;
+    // --- Parsed
+    const parsed = data.parsed || [];
+    const list = $('#parsedList'); list.innerHTML = '';
+    parsed.forEach(item => list.appendChild(chip(item.code)));
+    $('#parsedCount').textContent = parsed.length;
+
+    // The planning payload is under data.plan
+    const out = data.plan || {};
+    const prog = out.progress || {};
+    const sum = prog.summary || {};
+
+    // --- Progress render
+    $('#progressTotals').textContent = `Completed ${sum.completedCredits || 0} / Required ${sum.requiredCredits || 0}`;
 
     renderList($('#satisfiedList'), prog.satisfied || [], (s) => {
-      if (s.type === 'REQUIRE') {
-        return `<b>${s.label || 'Require'}</b><div class="small">${s.course?.code || ''} — ${s.earned || 0}cr</div>`;
-      }
+      if (s.type === 'REQUIRE') return `<b>${s.label || 'Require'}</b><div class="small">${s.course?.code || ''} — ${s.earned || 0}cr</div>`;
       if (s.type === 'GROUP_SELECT') {
         const picks = (s.picks || []).map(p => p.code).join(', ');
         return `<b>${s.label || 'Selection'}</b><div class="small">${picks} — ${s.earned || 0}cr</div>`;
@@ -148,23 +121,18 @@ async function submitForm(e) {
       return `<b>${p.label || p.type}</b><div class="small">Needs ${p.needCredits || 0}cr${hits ? ` — you have: ${hits}` : ''}</div>`;
     });
 
-    // --- Plan
-    const plan = data.plan || {};
+    // --- Plan render
+    const plan = out.plan || {};
     $('#planTotals').textContent = `Picks ${plan.picks?.length || 0} • ${plan.totalCredits || 0}cr`;
     renderList($('#planPicks'), plan.picks || [], (p) => {
       const tag = p.fulfills ? `<span class="pill">${p.fulfills}</span>` : '';
       return `<b>${p.code}</b> — ${p.title || ''} • ${p.credits || 0}cr ${tag}`;
     });
-    const notesEl = $('#planNotes');
-    notesEl.innerHTML = '';
-    (plan.notes || []).forEach(n => {
-      const div = document.createElement('div');
-      div.textContent = `• ${n}`;
-      notesEl.appendChild(div);
-    });
+    const notesEl = $('#planNotes'); notesEl.innerHTML = '';
+    (plan.notes || []).forEach(n => { const div = document.createElement('div'); div.textContent = `• ${n}`; notesEl.appendChild(div); });
 
-    // --- Validation
-    const val = data.validation || {};
+    // --- Validation render
+    const val = out.validation || {};
     setPill($('#validationOk'), !!val.ok, (val.warnings || []).length, (val.errors || []).length);
     renderList($('#errorsList'), val.errors || [], (t) => t);
     renderList($('#warningsList'), val.warnings || [], (t) => t);
@@ -173,28 +141,34 @@ async function submitForm(e) {
     $('#rawJson').textContent = JSON.stringify(data, null, 2);
 
     // scroll to results
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('progressTotals').scrollIntoView({ behavior: 'smooth' });
 
   } catch (err) {
     $('#uploadForm').querySelectorAll('button, input, select').forEach(el => el.disabled = false);
-    alert('Upload failed. See console for details.');
-    console.error(err);
+    console.error('Fetch error:', err);
+    alert('Upload failed (network/JS error). See console.');
   }
 }
 
 function clearForm() {
   $('#fileInput').value = '';
-  $('#programSelect').selectedIndex = 0; // reset to placeholder
+  $('#programSelect').selectedIndex = 0;
   $('#parsedList').innerHTML = '';
   $('#parsedCount').textContent = '0';
+
+  $('#progressTotals').textContent = '—';
   $('#satisfiedList').innerHTML = '';
   $('#pendingList').innerHTML = '';
+
+  $('#planTotals').textContent = '—';
   $('#planPicks').innerHTML = '';
   $('#planNotes').innerHTML = '';
-  const pill = $('#validationOk'); pill.className = 'pill'; pill.textContent = '—';
+
+  const pill = $('#validationOk'); pill.className='pill'; pill.textContent='—';
   $('#errorsList').innerHTML = '';
   $('#warningsList').innerHTML = '';
-  $('#rawJson').textContent = '';
+
+  $('#rawJson').textContent = '{}';
 }
 
 // wire up

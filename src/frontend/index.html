@@ -4,138 +4,109 @@
   <meta charset="utf-8" />
   <title>CourseFix — Planner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; background:#0b1220; color:#e6edf3; }
+    .wrap { max-width: 1200px; margin: 32px auto; padding: 0 20px; }
+    h1 { font-size: 28px; margin: 0 0 16px; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card { background:#0f1629; border:1px solid #1f2a44; border-radius: 12px; padding:16px; }
+    .form-control { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+    .form-actions { display:flex; gap:8px; margin-top:8px; }
+    .btn { padding:10px 14px; border-radius:10px; background:#2563eb; border:0; color:white; cursor:pointer; }
+    .btn.secondary { background:#334155; }
+    select, input[type="file"] { padding:10px; background:#0b1220; color:#e6edf3; border:1px solid #1f2a44; border-radius:8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip { background:#111a33; border:1px solid #223058; color:#b3c1e2; padding:6px 10px; border-radius:999px; font-size:13px; }
+    ul { list-style:none; padding:0; margin:8px 0 0; display:flex; flex-direction:column; gap:8px; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; background:#1f2937; }
+    .pill.ok { background:#064e3b; }
+    .pill.warn { background:#7c2d12; }
+    .pill.err { background:#7f1d1d; }
+    .small { opacity:.8; font-size:12px; }
+    .muted { opacity:.75; }
+    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    pre { background:#0b1220; border:1px solid #1f2a44; padding:12px; border-radius:8px; overflow:auto; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container row between center">
-      <h1>CourseFix</h1>
-      <nav class="tagline">NYU Planner (alpha)</nav>
-    </div>
-  </header>
+  <div class="wrap">
+    <h1>CourseFix — Planner</h1>
 
-  <main class="container">
-    <!-- Upload + Controls -->
-    <section class="card">
-      <h2>Upload Transcript & Plan</h2>
-      <form id="uploadForm" class="form-grid">
-        <div class="form-control">
-          <label class="label">Transcript (PDF)</label>
-          <input id="fileInput" type="file" accept="application/pdf" required />
-        </div>
-
-        <div class="form-control">
-          <label class="label">Program</label>
-          <select id="programSelect">
-            <option disabled selected>Loading programs…</option>
-          </select>
-          <small class="hint" id="programCount"></small>
-        </div>
-
-        <div class="form-control">
-          <label class="label">Campus</label>
-          <select id="campusSelect" multiple>
-            <option value="nyc" selected>NYC</option>
-            <option value="shanghai">Shanghai</option>
-            <option value="abudhabi">Abu Dhabi</option>
-          </select>
-          <small class="hint">Hold Cmd/Ctrl to select multiple</small>
-        </div>
-
-        <div class="form-control">
-          <label class="label">Credit Load</label>
-          <div class="row gap">
-            <input id="minCredit" type="number" class="num" value="12" min="0" />
-            <span class="sep">min</span>
-            <input id="maxCredit" type="number" class="num" value="18" min="0" />
-            <span class="sep">max</span>
-            <input id="overloadCredit" type="number" class="num" value="21" min="0" />
-            <span class="sep">overload</span>
-          </div>
-          <small class="hint">Overload up to 21 credits typically requires approval.</small>
-        </div>
-
-        <div class="actions">
-          <button class="btn primary" type="submit">Upload & Plan</button>
-          <button class="btn ghost" id="clearBtn" type="button">Clear</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- Results -->
-    <section id="results" class="grid two">
-      <div class="col">
-        <section class="card">
-          <div class="card-head row between center">
-            <h3>Parsed Courses</h3>
-            <span class="pill" id="parsedCount">0</span>
-          </div>
-          <div id="parsedList" class="chips"></div>
-        </section>
-
-        <section class="card">
-          <div class="card-head row between center">
-            <h3>Progress</h3>
-            <div id="progressTotals" class="muted"></div>
+    <div class="grid">
+      <div class="card">
+        <form id="uploadForm" enctype="multipart/form-data">
+          <div class="form-control">
+            <label class="label">Campus Filter</label>
+            <select id="campusSelect" multiple>
+              <option value="nyc" selected>New York</option>
+              <option value="abudhabi">Abu Dhabi</option>
+              <option value="shanghai">Shanghai</option>
+            </select>
           </div>
 
-          <div class="stack gap">
-            <div>
-              <h4 class="muted">Satisfied</h4>
-              <ul id="satisfiedList" class="list"></ul>
-            </div>
-            <div class="divider"></div>
-            <div>
-              <h4 class="muted">Pending</h4>
-              <ul id="pendingList" class="list"></ul>
-            </div>
+          <div class="form-control">
+            <label class="label">Program <span id="programCount" class="small muted"></span></label>
+            <select id="programSelect">
+              <option disabled selected value="">Select Program</option>
+            </select>
           </div>
-        </section>
+
+          <div class="form-control">
+            <label class="label">Transcript (PDF)</label>
+            <input id="fileInput" type="file" accept="application/pdf" />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn" type="submit" id="uploadBtn">Upload</button>
+            <button class="btn secondary" type="button" id="clearBtn">Clear</button>
+          </div>
+        </form>
       </div>
 
-      <div class="col">
-        <section class="card">
-          <div class="card-head row between center">
-            <h3>Plan Picks</h3>
-            <div id="planTotals" class="muted"></div>
-          </div>
-          <ul id="planPicks" class="list"></ul>
-          <div id="planNotes" class="notes"></div>
-        </section>
-
-        <section class="card">
-          <div class="card-head row between center">
-            <h3>Validation</h3>
-            <div id="validationOk" class="pill">—</div>
-          </div>
-          <div class="stack gap">
-            <div>
-              <h4 class="muted">Errors</h4>
-              <ul id="errorsList" class="list"></ul>
-            </div>
-            <div class="divider"></div>
-            <div>
-              <h4 class="muted">Warnings</h4>
-              <ul id="warningsList" class="list"></ul>
-            </div>
-          </div>
-        </section>
-
-        <details class="card">
-          <summary>Raw JSON (debug)</summary>
-          <pre id="rawJson" class="code"></pre>
-        </details>
+      <div class="card">
+        <h2>Parsed Courses <small id="parsedCount">0</small></h2>
+        <div id="parsedList" class="chips"></div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container row between center">
-      <span class="muted">© CourseFix</span>
-      <span class="muted">Connected to /api/upload</span>
     </div>
-  </footer>
 
-  <script src="./script.js" type="module"></script>
+    <div class="grid" style="margin-top:16px">
+      <div class="card">
+        <h2>Progress</h2>
+        <div id="progressTotals" class="small muted">—</div>
+        <h3>Satisfied</h3>
+        <ul id="satisfiedList"></ul>
+        <h3>Pending</h3>
+        <ul id="pendingList"></ul>
+      </div>
+
+      <div class="card">
+        <h2>Plan</h2>
+        <div id="planTotals" class="small muted">—</div>
+        <ul id="planPicks"></ul>
+        <div id="planNotes" class="small muted" style="margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>Validation <span id="validationOk" class="pill">—</span></h2>
+      <div class="row">
+        <div>
+          <h3>Errors</h3>
+          <ul id="errorsList"></ul>
+        </div>
+        <div>
+          <h3>Warnings</h3>
+          <ul id="warningsList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>Raw Response</h2>
+      <pre id="rawJson" class="small muted">{}</pre>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
 </body>
 </html>
