@@ -1,41 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8" />
-  <title>CourseFix — Planner</title>
+  <title>CourseFix — Planner & Prereq Checker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; background:#0b1220; color:#e6edf3; }
-    .wrap { max-width: 1200px; margin: 32px auto; padding: 0 20px; }
-    h1 { font-size: 28px; margin: 0 0 16px; }
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .card { background:#0f1629; border:1px solid #1f2a44; border-radius: 12px; padding:16px; }
-    .form-control { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
-    .form-actions { display:flex; gap:8px; margin-top:8px; }
-    .btn { padding:10px 14px; border-radius:10px; background:#2563eb; border:0; color:white; cursor:pointer; }
-    .btn.secondary { background:#334155; }
-    select, input[type="file"] { padding:10px; background:#0b1220; color:#e6edf3; border:1px solid #1f2a44; border-radius:8px; }
-    .chips { display:flex; flex-wrap:wrap; gap:8px; }
-    .chip { background:#111a33; border:1px solid #223058; color:#b3c1e2; padding:6px 10px; border-radius:999px; font-size:13px; }
-    ul { list-style:none; padding:0; margin:8px 0 0; display:flex; flex-direction:column; gap:8px; }
-    .pill { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; background:#1f2937; }
-    .pill.ok { background:#064e3b; }
-    .pill.warn { background:#7c2d12; }
-    .pill.err { background:#7f1d1d; }
-    .small { opacity:.8; font-size:12px; }
-    .muted { opacity:.75; }
-    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-    pre { background:#0b1220; border:1px solid #1f2a44; padding:12px; border-radius:8px; overflow:auto; }
+    :root { --bg:#0b0d12; --card:#121622; --muted:#9aa3b2; --fg:#e8edf4; --accent:#6ca0ff; --ok:#2ecc71; --warn:#f1c40f; --err:#e74c3c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 20px; margin: 0 0 16px; }
+    h3 { font-size: 16px; margin: 14px 0 8px; }
+    .muted { color: var(--muted); }
+    .card { background: var(--card); border: 1px solid #23283a; border-radius: 12px; padding: 16px; margin: 14px 0; }
+    .form-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: end; }
+    .form-control { grid-column: span 12; }
+    @media (min-width: 750px) {
+      .form-control.span6 { grid-column: span 6; }
+      .form-control.span4 { grid-column: span 4; }
+      .form-control.span3 { grid-column: span 3; }
+      .form-control.span2 { grid-column: span 2; }
+    }
+    input, select, button, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #2b3148; background: #0f1320; color: var(--fg); }
+    label.label { display:block; margin-bottom:6px; font-weight:600; }
+    button { background: #1c2440; cursor: pointer; }
+    button.primary { background: var(--accent); color: #0b0d12; font-weight: 700; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .chip { display:inline-block; padding: 4px 8px; background: #0e1322; border: 1px solid #273051; border-radius: 999px; margin: 4px 6px 0 0; font-size: 12px; }
+    ul { list-style: none; padding-left: 0; margin: 8px 0; }
+    li { padding: 6px 0; border-bottom: 1px dashed #252a3d; }
+    pre { padding: 10px; background: #0a0f1a; border: 1px solid #23283a; border-radius: 8px; overflow:auto; }
+    .pill { display:inline-block; padding: 2px 8px; border-radius: 999px; background: #19223b; }
+    .pill.ok { background: #0e2b1b; color: #baf7d0; }
+    .pill.warn { background: #2a2612; color: #ffe28a; }
+    .pill.err { background: #321414; color: #ffb0a8; }
+    .kv { display: grid; grid-template-columns: 150px 1fr; gap: 10px; padding: 6px 0; border-bottom: 1px dashed #252a3d; }
+    .result-block { margin-top: 12px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .small { font-size: 13px; }
+    /* Suggest list */
+    .suggest-list { margin-top: 6px; border:1px solid #2b3148; border-radius: 8px; background:#0f1320; max-height:180px; overflow:auto; }
+    .suggest-item { padding: 8px 10px; border-bottom: 1px solid #1b2136; cursor:pointer; }
+    .suggest-item:last-child { border-bottom: 0; }
+    .suggest-item:hover { background:#121a32; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>CourseFix — Planner</h1>
+  <div class="container">
+    <h1>CourseFix — NYU Planner</h1>
+    <div class="muted">Upload an NYU transcript PDF, pick a program, get a plan. Now with a Prereq Checker.</div>
 
-    <div class="grid">
-      <div class="card">
-        <form id="uploadForm" enctype="multipart/form-data">
-          <div class="form-control">
+    <!-- Upload / Controls -->
+    <div class="card">
+      <h2>Upload Transcript</h2>
+      <form id="uploadForm">
+        <div class="form-grid">
+          <div class="form-control span6">
+            <label class="label">Transcript PDF</label>
+            <input id="fileInput" type="file" accept="application/pdf" />
+          </div>
+
+          <div class="form-control span6">
+            <label class="label">Program <span id="programCount" class="muted"></span></label>
+            <select id="programSelect">
+              <option disabled selected value="">Select Program</option>
+            </select>
+          </div>
+
+          <div class="form-control span6">
             <label class="label">Campus Filter</label>
             <select id="campusSelect" multiple>
               <option value="nyc" selected>New York</option>
@@ -44,66 +77,98 @@
             </select>
           </div>
 
-          <div class="form-control">
-            <label class="label">Program <span id="programCount" class="small muted"></span></label>
-            <select id="programSelect">
-              <option disabled selected value="">Select Program</option>
-            </select>
+          <div class="form-control span2">
+            <label class="label">Min Credits</label>
+            <input id="minCredit" type="number" value="12" />
+          </div>
+          <div class="form-control span2">
+            <label class="label">Max Credits</label>
+            <input id="maxCredit" type="number" value="18" />
+          </div>
+          <div class="form-control span2">
+            <label class="label">Overload Max</label>
+            <input id="overloadCredit" type="number" value="21" />
           </div>
 
-          <div class="form-control">
-            <label class="label">Transcript (PDF)</label>
-            <input id="fileInput" type="file" accept="application/pdf" />
+          <div class="form-control span6">
+            <button class="primary" type="submit">Upload & Plan</button>
           </div>
+          <div class="form-control span6">
+            <button id="clearBtn" type="button">Clear</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-          <div class="form-actions">
-            <button class="btn" type="submit" id="uploadBtn">Upload</button>
-            <button class="btn secondary" type="button" id="clearBtn">Clear</button>
-          </div>
-        </form>
+    <!-- Prereq Checker -->
+    <div class="card">
+      <h2>Prereq Checker</h2>
+      <div class="form-grid">
+        <div class="form-control span6">
+          <label class="label">Course Code</label>
+          <input id="courseCodeInput" placeholder="e.g., DS-UA 301 or IMNY-UT 400" />
+          <small id="courseSuggestHelp" class="muted">Type at least 3 characters to see suggestions.</small>
+          <div id="courseSuggestList" class="suggest-list"></div>
+        </div>
+        <div class="form-control span3">
+          <label class="label">&nbsp;</label>
+          <button id="checkBtn" type="button">Check Requirements</button>
+        </div>
       </div>
 
-      <div class="card">
-        <h2>Parsed Courses <small id="parsedCount">0</small></h2>
-        <div id="parsedList" class="chips"></div>
+      <div id="courseResult" class="result-block" style="display:none;">
+        <div class="kv"><span>Code</span><b id="cCode">—</b></div>
+        <div class="kv"><span>Title</span><b id="cTitle">—</b></div>
+        <div class="kv"><span>Credits</span><b id="cCredits">—</b></div>
+        <div class="kv"><span>Campus</span><b id="cCampus">—</b></div>
+        <div class="kv"><span>Department</span><b id="cDept">—</b></div>
+        <div class="kv"><span>Bulletin</span><b id="cUrl">—</b></div>
+
+        <h3>Prerequisites</h3>
+        <div id="cPrereqs" class="mono small muted">—</div>
+
+        <h3>Corequisites</h3>
+        <div id="cCoreqs" class="mono small muted">—</div>
+
+        <h3>Restrictions</h3>
+        <div id="cRestrict" class="mono small muted">—</div>
       </div>
     </div>
 
-    <div class="grid" style="margin-top:16px">
-      <div class="card">
-        <h2>Progress</h2>
-        <div id="progressTotals" class="small muted">—</div>
-        <h3>Satisfied</h3>
-        <ul id="satisfiedList"></ul>
-        <h3>Pending</h3>
-        <ul id="pendingList"></ul>
-      </div>
-
-      <div class="card">
-        <h2>Plan</h2>
-        <div id="planTotals" class="small muted">—</div>
-        <ul id="planPicks"></ul>
-        <div id="planNotes" class="small muted" style="margin-top:8px"></div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:16px">
-      <h2>Validation <span id="validationOk" class="pill">—</span></h2>
+    <!-- Results -->
+    <div id="results" class="card">
+      <h2>Results</h2>
       <div class="row">
         <div>
-          <h3>Errors</h3>
-          <ul id="errorsList"></ul>
+          <h3>Parsed Courses <span class="muted" id="parsedCount">0</span></h3>
+          <div id="parsedList"></div>
         </div>
         <div>
-          <h3>Warnings</h3>
+          <h3>Progress <span class="muted" id="progressTotals">—</span></h3>
+          <h3>Satisfied</h3>
+          <ul id="satisfiedList"></ul>
+          <h3>Pending</h3>
+          <ul id="pendingList"></ul>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px;">
+        <div>
+          <h3>Proposed Plan <span class="muted" id="planTotals">—</span></h3>
+          <ul id="planPicks"></ul>
+          <div id="planNotes" class="small muted"></div>
+        </div>
+        <div>
+          <h3>Validation <span id="validationOk" class="pill">—</span></h3>
+          <div class="small">Errors</div>
+          <ul id="errorsList"></ul>
+          <div class="small">Warnings</div>
           <ul id="warningsList"></ul>
         </div>
       </div>
-    </div>
 
-    <div class="card" style="margin-top:16px">
-      <h2>Raw Response</h2>
-      <pre id="rawJson" class="small muted">{}</pre>
+      <h3>Raw JSON</h3>
+      <pre id="rawJson"></pre>
     </div>
   </div>
 

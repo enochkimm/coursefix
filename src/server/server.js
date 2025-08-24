@@ -4,21 +4,22 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import programsRouter from './programsRouter.js'; // GET /api/programs
-import uploadHandler from './uploadHandler.js';    // POST /api/upload
-import planRouter from './plan.js';                // optional: /api/plan, /api/plan-upload
+import uploadHandler from './uploadHandler.js';
+import plan from './plan.js';
+import programsRouter from './programsRouter.js';
+import courseRouter from './courseRouter.js'; // ← NEW
 
+// ESM __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Serve the frontend from src/frontend
 const publicPath = path.join(__dirname, '../frontend');
 if (!fs.existsSync(path.join(publicPath, 'index.html'))) {
   console.warn('⚠️  Expected UI at src/frontend/index.html but not found. API will still run.');
 }
 
 const app = express();
-
-// Body parsers
 app.use(express.json({ limit: '15mb' }));
 app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 
@@ -26,12 +27,13 @@ app.use(express.urlencoded({ extended: true, limit: '15mb' }));
 app.use(express.static(publicPath));
 app.get('/', (_req, res) => res.sendFile(path.join(publicPath, 'index.html')));
 
-// ✅ Mount routers (use(), not post())
+// APIs
 app.use('/api', programsRouter);
+app.use('/api', courseRouter);   // ← NEW
 app.use('/api', uploadHandler);
-app.use('/api', planRouter); // optional; leave mounted if you use it
+app.post('/api/plan', plan);
 
-// Health + 404
+// Health & 404
 app.get('/api/health', (_req, res) => res.json({ ok: true }));
 app.use((_req, res) => res.status(404).json({ ok: false, error: 'Not found' }));
 
