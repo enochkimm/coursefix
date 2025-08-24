@@ -1,0 +1,39 @@
+src/ai
+	overlap.js - prevents double-counting a course in multiple places.
+	planner.js - chooses what courses to take to fill missing requirements.
+	progress.js - checks which requirements are done and which are still pending.
+	requirements.js - knows how to read prereqs, coreqs, restrictions for a course.
+	validate.js - makes sure a plan is valid (credits in range, no duplicates, prereqs/coreqs met, etc).
+
+src/data
+	/courseScraper
+		allCourses.json - big list of courses.
+		bulletin_links.json - list of bulletin URLs for each school.
+		bulletinsLinkScraper.js - finds all bulletin links.
+		courseScraper.js - scrapes courses into JSON (codes, titles, prereqs, etc).
+
+	/requirements
+		credits_rules.js - rules for figuring out how many credits a course is.
+		curriculum_scraper.js - scrapes program requirement pages.
+		program_links.json - list of requirement page URLs.
+		requirements_all_schools.json - final program requirements file (used by planner).
+		requirementsLinkScraper.js - finds program requirement links.
+
+src/frontend 
+	index.html - main webpage (upload transcript, pick program, see results).
+	script.js - logic for the webpage: loads program list, uploads transcript, shows plan & prereqs.
+	styles.css - styles (dark theme, layout, chips/pills).
+
+src/server
+	courseRouter.js - API for looking up courses + prereqs.
+	plan.js - runs progress → planner → validate to build a plan.
+	programsRouter.js - API for program list (with campus filters).
+	server.js - starts the backend, serves the website + APIs (main).
+	uploadHandler.js - handles transcript upload, parsing, and returns the plan.
+
+src/transcriptReader
+	index.js - reads text from transcript PDF and finds course codes/semesters.
+	matcher.js - matches parsed courses to catalog courses (helps with fuzzy cases).
+
+src/utils
+	pdfToText.js - extracts raw text from transcript PDFs.

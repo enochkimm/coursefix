@@ -1,7 +1,0 @@
-1. Course Scraping 
-    run bulletinsLinkScraper.js to scrape bulletin links
-    run courseScraper.js to scrape courses
-2. Transcript Upload + Parsing
-    npm start index.html
-    open local host
-

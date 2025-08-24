@@ -1,0 +1,17 @@
+Running the Program
+1. run the server
+    node src/server/server.js
+2. open local host
+    http://localhost:3000/
+
+Using the Scrapers (don't use for now)
+    Course Scraper (~ 1 hour to scrape)
+        1. Run the course bulletins link scraper 
+            node src/data/courseScraper/bulletinsLinkScraper.js
+        2. Run the course scraper
+            node src/data/courseScraper/courseScraper.js
+    Program Scraper (~ 1 hour to scrape)
+        1. Run the curriculum bulletins link scraper 
+            node src/data/requirements/requirementsLinkScraper.js
+        2. Run the curriculum scraper
+            node src/data/requirements/curriculumScraper.js
