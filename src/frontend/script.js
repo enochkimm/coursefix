@@ -1,3 +1,4 @@
+// src/frontend/script.js
 const $ = (sel) => document.querySelector(sel);
 
 // --------------------
@@ -214,7 +215,7 @@ async function suggestCourses(q) {
   const box = $('#courseSuggestList');
   if (!q || q.length < 3) { box.innerHTML = ''; return; }
   try {
-    const res = await fetch('/api/courses/suggest?q=' + encodeURIComponent(q));
+    const res = await fetch('/api/courses/suggest?q=' + encodeURIComponent(q)); // ✅ already correct
     const data = await res.json();
     box.innerHTML = '';
     (data.results || []).forEach(r => {
@@ -236,7 +237,7 @@ async function checkCourse() {
   const code = $('#courseCodeInput').value.trim();
   if (!code) return alert('Enter a course code.');
   try {
-    const res = await fetch('/api/course?code=' + encodeURIComponent(code));
+    const res = await fetch('/api/courses/course?code=' + encodeURIComponent(code)); // ✅ fixed
     const data = await res.json();
     const show = (ok=true)=>{ $('#courseResult').style.display = ok ? 'block' : 'none'; };
 

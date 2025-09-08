@@ -4,6 +4,22 @@
 
 const norm = (s) => String(s || '').replace(/\s+/g, ' ').trim().toUpperCase();
 
+// ========== NEW ==========
+/**
+ * Build a fast lookup index from the flat allCourses.json
+ * @param {Array} courseList - array of courses { code, title, credits, requirements }
+ * @returns {Map<string, object>}
+ */
+export function buildCourseIndex(courseList = []) {
+  const map = new Map();
+  for (const c of courseList) {
+    if (!c?.code) continue;
+    map.set(norm(c.code), c);
+  }
+  return map;
+}
+// ==========================
+
 function toCodeSet(courses) {
   const set = new Set();
   for (const c of courses || []) {
@@ -15,7 +31,6 @@ function toCodeSet(courses) {
 
 // ----- logic evaluation -----
 function evalNode(node, haveSet) {
-  // returns { ok:boolean, missing:string[] }
   if (!node) return { ok: true, missing: [] };
 
   if (typeof node === 'string') {
@@ -37,7 +52,7 @@ function evalNode(node, haveSet) {
     return { ok: false, missing: [`${needed} of (${pool.join(', ')})`] };
   }
 
-  return { ok: true, missing: [] }; // unknown → treat as ok; validator can warn later
+  return { ok: true, missing: [] }; 
 }
 
 function evalAll(nodes, haveSet) {
@@ -72,7 +87,7 @@ export function coreqNeeds(course, have = [], withPicks = []) {
       }
     }
   }
-  return unmet; // array of unmet coreq clauses
+  return unmet;
 }
 
 // Basic restriction cues
