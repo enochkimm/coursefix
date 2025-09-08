@@ -1,20 +1,16 @@
-// src/frontend/script.js
 const $ = (sel) => document.querySelector(sel);
 
 // --------------------
 // Campus → querystring for /api/programs
 // --------------------
 function currentCampusQuery() {
-  const selected = [...document.querySelectorAll('#campusSelect option:checked')]
-    .map(o => o.value.toLowerCase());
-
-  // ✅ Default to NYU if nothing selected
-  if (selected.length === 0) return '?campus=nyu';
+  const selected = [...document.querySelectorAll('#campusSelect option:checked')].map(o => o.value.toLowerCase());
+  if (selected.length === 0) return '';
   return `?campus=${encodeURIComponent(selected.join(','))}`;
 }
 
 // --------------------
-// Programs dropdown (with placeholder + count)
+// Programs dropdown (using program_name)
 // --------------------
 async function loadPrograms() {
   const sel = $('#programSelect');
@@ -38,16 +34,16 @@ async function loadPrograms() {
     placeholder.value = '';
     sel.appendChild(placeholder);
 
-    // options (alphabetical by program_name, school appended)
+    // options (alphabetical by program_name)
     const items = (data || []).map(row => ({
       label: `${row.program_name} — ${row.school}`,
       value: row.program_name
     })).sort((a, b) => a.label.localeCompare(b.label));
 
-    items.forEach(({ label, value }) => {
+    items.forEach(({label, value}) => {
       const opt = document.createElement('option');
       opt.textContent = label;
-      opt.value = value;
+      opt.value = value; // backend expects program_name
       sel.appendChild(opt);
     });
 
@@ -104,7 +100,7 @@ async function submitForm(e) {
 
   const form = new FormData();
   form.append('transcript', file);
-  form.append('program', program);
+  form.append('program', program); // uses program_name
   form.append('constraints', JSON.stringify(constraints));
 
   $('#uploadForm').querySelectorAll('button, input, select').forEach(el => el.disabled = true);
@@ -202,12 +198,11 @@ function renderLogic(node) {
 
   if (node.anyOf) return '(' + node.anyOf.map(renderLogic).join(' OR ') + ')';
   if (node.allOf) return '(' + node.allOf.map(renderLogic).join(' AND ') + ')';
-  if (node.choose && node.of) return `Choose ${node.choose} of (${node.of.map(renderLogic).join(', ')})`;
-
-  const parts = [];
-  for (const k of Object.keys(node)) {
-    parts.push(`${k}: ${renderLogic(node[k])}`);
+  if (node.choose && node.of) {
+    return `Choose ${node.choose} of (${node.of.map(renderLogic).join(', ')})`;
   }
+  const parts = [];
+  for (const k of Object.keys(node)) parts.push(`${k}: ${renderLogic(node[k])}`);
   return parts.join('; ');
 }
 
@@ -215,13 +210,13 @@ async function suggestCourses(q) {
   const box = $('#courseSuggestList');
   if (!q || q.length < 3) { box.innerHTML = ''; return; }
   try {
-    const res = await fetch('/api/courses/suggest?q=' + encodeURIComponent(q)); // ✅ already correct
+    const res = await fetch('/api/courses/suggest?q=' + encodeURIComponent(q));
     const data = await res.json();
     box.innerHTML = '';
     (data.results || []).forEach(r => {
       const item = document.createElement('div');
       item.className = 'suggest-item';
-      item.textContent = `${r.code} — ${r.title || ''}`;
+      item.textContent = `${r.code} — ${r.title || r.name || ''}`;
       item.addEventListener('click', () => {
         $('#courseCodeInput').value = r.code;
         box.innerHTML = '';
@@ -237,7 +232,7 @@ async function checkCourse() {
   const code = $('#courseCodeInput').value.trim();
   if (!code) return alert('Enter a course code.');
   try {
-    const res = await fetch('/api/courses/course?code=' + encodeURIComponent(code)); // ✅ fixed
+    const res = await fetch('/api/courses/course?code=' + encodeURIComponent(code));
     const data = await res.json();
     const show = (ok=true)=>{ $('#courseResult').style.display = ok ? 'block' : 'none'; };
 
@@ -258,7 +253,7 @@ async function checkCourse() {
     const c = data.course || {};
     show(true);
     $('#cCode').textContent = c.code || code;
-    $('#cTitle').textContent = c.title || '—';
+    $('#cTitle').textContent = c.title || c.name || '—';
     $('#cCredits').textContent = c.credits ?? '—';
     $('#cCampus').textContent = c.campus || '—';
     $('#cDept').textContent = c.department || '—';
@@ -282,9 +277,7 @@ async function checkCourse() {
   }
 }
 
-// =====================
 // Wire up
-// =====================
 document.getElementById('uploadForm').addEventListener('submit', submitForm);
 document.getElementById('clearBtn').addEventListener('click', clearForm);
 document.getElementById('campusSelect').addEventListener('change', loadPrograms);
@@ -295,16 +288,5 @@ document.getElementById('courseCodeInput').addEventListener('input', (e) => {
 });
 document.getElementById('checkBtn').addEventListener('click', checkCourse);
 
-// =====================
-// Initial load (NYU default)
-// =====================
-document.addEventListener('DOMContentLoaded', () => {
-  const campusSelect = document.getElementById('campusSelect');
-  if (campusSelect) {
-    // ✅ Force NYU selected on load
-    [...campusSelect.options].forEach(opt => {
-      opt.selected = opt.value.toLowerCase() === 'nyu';
-    });
-  }
-  loadPrograms();
-});
+// initial load
+loadPrograms();

@@ -22,7 +22,6 @@ router.get("/", (req, res) => {
 
     // Default to NYC if nothing given
     if (!campus) campus = "nyc";
-
     const campuses = campus.split(",").map((c) => c.trim().toLowerCase());
 
     const filtered = programs.filter((p) => {
@@ -37,16 +36,18 @@ router.get("/", (req, res) => {
       if (campuses.includes("nyc")) {
         if (!isAbu && !isShanghai) return true;
       }
-
       return false;
     });
 
-    const metadataOnly = filtered.map((p) => ({
-      school: p.school,
-      program_name: p.program_name,
-      degree: p.degree,
-      url: p.url,
-    }));
+    // return only metadata for dropdown
+    const metadataOnly = filtered
+      .map((p) => ({
+        school: p.school,
+        program_name: p.program_name,
+        degree: p.degree,
+        url: p.url,
+      }))
+      .sort((a, b) => a.program_name.localeCompare(b.program_name));
 
     res.json(metadataOnly);
   } catch (err) {
