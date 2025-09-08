@@ -1,79 +1,84 @@
-// src/server/programsRouter.js
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import express from "express";
+import fs from "fs";
+import path from "path";
 
 const router = express.Router();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// 👉 Adjust if your file is elsewhere
-const REQUIREMENTS_PATH = path.join(
-  __dirname,
-  '../data/requirements/requirements_all_schools.json'
+// Path to v8 JSON
+const requirementsPath = path.join(
+  process.cwd(),
+  "src/data/requirements/requirements_all_schools.json"
 );
 
-let CATALOG = {};
-try {
-  const raw = fs.readFileSync(REQUIREMENTS_PATH, 'utf-8');
-  CATALOG = JSON.parse(raw);
-  console.log('📘 [/api/programs] catalog schools:', Object.keys(CATALOG || {}).length);
-} catch (e) {
-  console.warn('⚠️ Could not load requirements JSON for /api/programs:', e.message);
-  CATALOG = {};
+function loadPrograms() {
+  const raw = fs.readFileSync(requirementsPath, "utf-8");
+  return JSON.parse(raw);
 }
 
-function schoolCampus(s = '') {
-  const t = s.toLowerCase();
-  if (t.includes('abu dhabi') || t.includes('nyu abu dhabi')) return 'abudhabi';
-  if (t.includes('shanghai') || t.includes('nyu shanghai')) return 'shanghai';
-  return 'nyc';
-}
-function includeByCampus(school, filters) {
-  if (!filters || !filters.length) return true;
-  return filters.includes(schoolCampus(school));
-}
-
-/**
- * GET /api/programs
- * ?q=substring
- * ?campus=nyc[,abudhabi][,shanghai]
- */
-router.get('/programs', (req, res) => {
+router.get("/", (req, res) => {
   try {
-    const q = String(req.query.q || '').trim().toLowerCase();
-    const filters = String(req.query.campus || '')
-      .toLowerCase()
-      .split(',')
-      .map(s => s.trim())
-      .filter(Boolean);
+    let { campus } = req.query;
+    const programs = loadPrograms();
 
-    const out = [];
-    for (const school of Object.keys(CATALOG || {})) {
-      if (!includeByCampus(school, filters)) continue;
-      const progs = CATALOG[school] || {};
-      for (const name of Object.keys(progs)) {
-        if (!q || name.toLowerCase().includes(q)) {
-          out.push({
-            id: `${school}::${name}`,
-            school,
-            program: name,
-            url: progs[name]?.url || null
-          });
-        }
+    // Default to NYC if nothing given
+    if (!campus) campus = "nyc";
+
+    const campuses = campus.split(",").map((c) => c.trim().toLowerCase());
+
+    const filtered = programs.filter((p) => {
+      const name = (p.program_name || "").toLowerCase();
+      const school = (p.school || "").toLowerCase();
+
+      const isAbu = name.includes("abu dhabi") || school.includes("abu dhabi");
+      const isShanghai = name.includes("shanghai") || school.includes("shanghai");
+
+      if (campuses.includes("abudhabi") && isAbu) return true;
+      if (campuses.includes("shanghai") && isShanghai) return true;
+      if (campuses.includes("nyc")) {
+        if (!isAbu && !isShanghai) return true;
       }
+
+      return false;
+    });
+
+    const metadataOnly = filtered.map((p) => ({
+      school: p.school,
+      program_name: p.program_name,
+      degree: p.degree,
+      url: p.url,
+    }));
+
+    res.json(metadataOnly);
+  } catch (err) {
+    console.error("Error loading programs:", err);
+    res.status(500).json({ error: "Failed to load program list" });
+  }
+});
+
+router.get("/:name", (req, res) => {
+  try {
+    const { name } = req.params;
+    const { school, degree } = req.query;
+
+    const programs = loadPrograms();
+    const program = programs.find((p) => {
+      if (name && !p.program_name.toLowerCase().includes(name.toLowerCase()))
+        return false;
+      if (school && !p.school.toLowerCase().includes(school.toLowerCase()))
+        return false;
+      if (degree && !p.degree.toLowerCase().includes(degree.toLowerCase()))
+        return false;
+      return true;
+    });
+
+    if (!program) {
+      return res.status(404).json({ error: "Program not found" });
     }
 
-    // A→Z by program name
-    out.sort((a, b) => a.program.localeCompare(b.program, 'en'));
-
-    console.log(`🔎 /api/programs → ${out.length} programs (filters=${filters.join('|') || 'none'})`);
-    return res.json({ ok: true, programs: out });
+    res.json(program);
   } catch (err) {
-    console.error('❌ /api/programs error:', err);
-    return res.status(500).json({ ok: false, error: 'Failed to load programs' });
+    console.error("Error finding program:", err);
+    res.status(500).json({ error: "Failed to find program" });
   }
 });
 
