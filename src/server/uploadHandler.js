@@ -1,3 +1,4 @@
+// src/server/uploadHandler.js
 import express from "express";
 import multer from "multer";
 import fs from "fs";
@@ -73,21 +74,32 @@ try {
   COURSE_INDEX = new Map();
 }
 
-// ── Find program in v8 flat structure ───
+// ── Program finder ─────────────────────
+function normalizeName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")   // collapse spaces
+    .replace(/[()]/g, "")   // strip parentheses
+    .trim();
+}
+
 function findProgram(programName) {
   if (!programName) return null;
-  const q = String(programName).toLowerCase();
+  const q = normalizeName(programName);
 
-  // exact match
-  let match = CATALOG.find(
-    (p) => (p.program_name || "").toLowerCase() === q
-  );
+  // exact normalized match
+  let match = CATALOG.find((p) => normalizeName(p.program_name) === q);
   if (match) return match;
 
-  // fuzzy match
-  return CATALOG.find((p) =>
-    (p.program_name || "").toLowerCase().includes(q)
-  );
+  // fuzzy contains
+  match = CATALOG.find((p) => normalizeName(p.program_name).includes(q));
+  if (match) return match;
+
+  // fuzzy reversed
+  match = CATALOG.find((p) => q.includes(normalizeName(p.program_name)));
+  if (match) return match;
+
+  return null;
 }
 
 // ── Route: POST /api/upload ────────────
@@ -130,6 +142,12 @@ router.post("/upload", upload.single("transcript"), async (req, res) => {
     } catch {
       constraints = {};
     }
+
+    console.log("🔍 Looking for program:", program);
+    console.log(
+      "📑 Sample CATALOG names:",
+      CATALOG.slice(0, 5).map((p) => p.program_name)
+    );
 
     const match = findProgram(program);
     if (!match || !Array.isArray(match.rules)) {
