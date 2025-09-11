@@ -1,0 +1,33 @@
+You are validating a student’s degree progress.
+
+INPUT:
+- Student transcript courses (codes, titles, credits).
+- Corrected curriculum JSON (from Curriculum GPT).
+- Current deterministic progress JSON (may have errors).
+
+TASK:
+- Verify which requirements are met according to curriculum JSON.
+- Fix any incorrect credit totals.
+- Remove double-counted or inflated credits.
+- Flag missing requirements.
+
+OUTPUT:
+Return strict JSON:
+
+{
+  "verified_progress": {
+    "credits_earned": 64,
+    "credits_required": 128,
+    "requirements_met": ["Expository Writing", "Creative Coding"],
+    "requirements_missing": ["Capstone Project", "Advanced Studio Electives"]
+  },
+  "corrections": [
+    "STAT-UB 14 was miscounted as 21 credits → fixed to 4",
+    "Capstone requirement still unmet"
+  ]
+}
+
+RULES:
+- Curriculum JSON is the single source of truth.
+- Never grant credit for courses not listed in the curriculum.
+- Do not inflate credits.
